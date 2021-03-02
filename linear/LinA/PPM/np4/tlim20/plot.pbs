@@ -1,0 +1,14 @@
+#PBS -W group_list=s2336
+#PBS -q devel
+#PBS -N plot_growth
+#PBS -l select=1:ncpus=0:model=san
+#PBS -l walltime=01:00:00
+#PBS -m abe
+
+echo ----------------------------------------
+echo Job started on `date`
+echo ----------------------------------------
+
+python plot_growth.py
+
+# -end of script-
