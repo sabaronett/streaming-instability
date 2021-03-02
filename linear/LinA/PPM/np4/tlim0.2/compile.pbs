@@ -16,6 +16,6 @@ ____________________________________________________________________
 
 python configure.py --cxx icpc -mpi --mpiccmd "icpc -lmpi++ -lmpi" -hdf5 --prob=streaming_instability -p --eos=isothermal --nghost=3 -h5double
 make clean
-make -j 16 > logs/make.out
+make -j 16
 
 # -end of script-
