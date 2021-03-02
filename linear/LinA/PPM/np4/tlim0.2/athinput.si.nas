@@ -44,8 +44,8 @@ ox3_bc = periodic	                # Outer-X3 boundary condition flag
 num_threads = 1                     # maximum number of OMP threads
 
 <meshblock>
-nx1 = 64
-nx2 = 64
+nx1 = 32
+nx2 = 32
 nx3 = 1
 
 <hydro>

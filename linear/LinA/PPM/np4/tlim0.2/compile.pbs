@@ -4,10 +4,6 @@
 #PBS -l select=1:ncpus=16:mpiprocs=16:model=san
 #PBS -l walltime=01:00:00
 #PBS -m abe
-
-module purge
-module load comp-intel/2018.3.222 python3 mpi-sgi/mpt hdf5/1.8.18_mpt
-
 ____________________________________________________________________
 echo Job started on `date`
 cd /home6/sbaronet/athena-dust
@@ -19,3 +15,21 @@ make clean
 make -j 16
 
 # -end of script-
+
+
+# These commands are executed when starting an interactive non-login shell.
+
+# Add your commands here to extend your PATH, etc.
+PATH=$PATH:$HOME/bin                    # Add private commands to PATH
+
+# Load Software Modules
+source /usr/local/lib/global.profile
+module load comp-intel/2018.3.222 python3 mpi-sgi/mpt hdf5/1.8.18_mpt visit pkgsrc
+
+# Aliases
+alias ls='ls -lh'
+alias ll='ls -lh'
+
+# Athena++
+export ATHENA=~/athena-public-version/bin/athena
+export ATHENA_DUST=~/athena-dust/bin/athena
