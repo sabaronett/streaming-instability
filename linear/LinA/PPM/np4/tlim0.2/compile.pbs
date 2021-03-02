@@ -5,19 +5,17 @@
 #PBS -l walltime=01:00:00
 #PBS -m abe
 
+module purge
 module load comp-intel/2018.3.222 python3 mpi-sgi/mpt hdf5/1.8.18_mpt
 
-echo ----
+____________________________________________________________________
 echo Job started on `date`
-echo Working on compute node `cat $PBS_NODEFILE`
 cd /home6/sbaronet/athena-dust
 echo pwd is `pwd`
-echo ----
+____________________________________________________________________
 
 python configure.py --cxx icpc -mpi --mpiccmd "icpc -lmpi++ -lmpi" -hdf5 --prob=streaming_instability -p --eos=isothermal --nghost=3 -h5double
 make clean
-make -j 8
+make -j 16 > logs/make.out
 
-echo ----
-echo Job ended at `date`
-exit 0
+# -end of script-
