@@ -1,0 +1,23 @@
+#PBS -W group_list=s2336
+#PBS -q devel
+#PBS -N compile_si
+#PBS -l select=1:ncpus=16:mpiprocs=16:model=san
+#PBS -l walltime=01:00:00
+#PBS -m abe
+
+module load comp-intel/2018.3.222 python3 mpi-sgi/mpt hdf5/1.8.18_mpt
+
+echo ----
+echo Job started on `date`
+echo Working on compute node `cat $PBS_NODEFILE`
+cd /home6/sbaronet/athena-dust
+echo pwd is `pwd`
+echo ----
+
+python configure.py --cxx icpc -mpi --mpiccmd "icpc -lmpi++ -lmpi" -hdf5 --prob=streaming_instability -p --eos=isothermal --nghost=3 -h5double
+make clean
+make -j 8
+
+echo ----
+echo Job ended at `date`
+exit 0
