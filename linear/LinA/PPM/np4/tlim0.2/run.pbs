@@ -9,6 +9,6 @@ echo ----------------------------------------
 echo Job started on `date`
 echo ----------------------------------------
 
-mpiexec -n 16 $ATHENA_DUST -i athinput.si.nas > log
+mpiexec -n 16 $ATHENA_DUST -i athinput.si.nas > logs/log.txt
 
 # -end of script-
