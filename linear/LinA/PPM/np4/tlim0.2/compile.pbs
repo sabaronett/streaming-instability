@@ -4,11 +4,12 @@
 #PBS -l select=1:ncpus=16:mpiprocs=16:model=san
 #PBS -l walltime=01:00:00
 #PBS -m abe
-____________________________________________________________________
+
+echo --------------------
 echo Job started on `date`
 cd /home6/sbaronet/athena-dust
 echo pwd is `pwd`
-____________________________________________________________________
+echo --------------------
 
 python configure.py --cxx icpc -mpi --mpiccmd "icpc -lmpi++ -lmpi" -hdf5 --prob=streaming_instability -p --eos=isothermal --nghost=3 -h5double
 make clean
