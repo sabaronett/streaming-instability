@@ -7,8 +7,6 @@
 
 echo --------------------
 echo Job started on `date`
-cd /home6/sbaronet/athena-dust
-echo pwd is `pwd`
 echo --------------------
 
 make clean
