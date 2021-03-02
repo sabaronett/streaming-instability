@@ -1,21 +1,14 @@
 #PBS -W group_list=s2336
 #PBS -q devel
-#PBS -N ath_tlim20
+#PBS -N LinA_t0.2
 #PBS -l select=1:ncpus=16:mpiprocs=16:model=san
 #PBS -l walltime=01:00:00
 #PBS -m abe
 
-module load comp-intel/2018.3.222 python3 mpi-sgi/mpt hdf5/1.8.18_mpt
-
-echo ----
+echo ----------------------------------------
 echo Job started on `date`
-echo Working on compute node `cat $PBS_NODEFILE`
-cd $PBS_O_WORKDIR
-echo PBS_O_WORKDIR is `pwd`
-echo ----
+echo ----------------------------------------
 
-#mpiexec -n 16 $ATHENA_DUST -i athinput.si > log
+mpiexec -n 16 $ATHENA_DUST -i athinput.si.nas > log
 
-echo ----
-echo Job ended at `date`
-exit 0
+# -end of script-
