@@ -1,0 +1,22 @@
+#PBS -W group_list=s2336
+#PBS -q devel
+#PBS -N t20_start
+#PBS -l select=1:ncpus=16:mpiprocs=16:model=san
+#PBS -l walltime=01:00:00
+#PBS -m abe
+
+echo ----------------------------------------
+echo Job started on `date`
+echo ----------------------------------------
+
+mpiexec -n 16 $ATHENA_DUST -t 00:50:00 -i athinput.si.nas
+
+FILE=$PBS_O_WORKDIR/SI.out1.20000.athdf
+
+if [[ -f "$FILE" ]]; then
+    echo "LinA (tlim=20) COMPLETE."
+else
+    qsub -j oe -o logs/ restartA.pbs
+fi
+
+# -end of script-
