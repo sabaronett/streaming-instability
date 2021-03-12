@@ -1,4 +1,15 @@
-# Athena++ Output related
+# Misc.
+*.sh
+
+# Data Analysis
+*.pdf
+*.npz
+*.mp4
+
+# VS Code
+.vscode/
+
+# Athena++ Output
 *.athdf
 *.xdmf
 
