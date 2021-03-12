@@ -1,5 +1,6 @@
 # Misc.
 *.sh
+*.txt
 
 # Data Analysis
 *.pdf
@@ -10,8 +11,10 @@
 .vscode/
 
 # Athena++ Output
+*.hst
 *.athdf
 *.xdmf
+*.rst
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
