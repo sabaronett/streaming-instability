@@ -62,7 +62,7 @@ pfeXX:~> vncserver -kill :XX
 where `XX` is the ID of the server initiated earlier.
 
 ### [Batch Jobs](https://www.nas.nasa.gov/hecc/support/kb/sample-pbs-script-for-pleiades_190.html)
-See [`sample.pbs`](/sample.pbs).
+See [`sample.pbs`](/nas/sample.pbs).
 
 
 ## [Athena++](https://github.com/PrincetonUniversity/athena-public-version/wiki)
