@@ -1,20 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
-sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
+sys.path.insert(0, '/home/stanley/github/sabaronett/local/athena/athena-dust/vis/python')
 import athena_read
 
 # linA
 epsilon = 3.0 # average density ratio of particles to gas in background state
 
 # retrieve max densities across outputs
-times = np.zeros(20001)
-rhomax = np.zeros(20001)
-rhomin = np.zeros(20001)
-rhopmax = np.zeros(20001)
-rhopmin = np.zeros(20001)
+times = np.zeros(201)
+rhomax = np.zeros(201)
+rhomin = np.zeros(201)
+rhopmax = np.zeros(201)
+rhopmin = np.zeros(201)
 
-for i in range(20001):
+for i in range(201):
     fname = 'athdf/SI.out1.' + str(i).zfill(5) + '.athdf'
     data = athena_read.athdf(fname)
     times[i] = data['Time']
@@ -46,4 +46,4 @@ axs[1,1].semilogy(times, rhopmin)
 for i,ax in enumerate(axs.flat):
     ax.grid()
 
-plt.savefig('LinA_growth.pdf', bbox_inches='tight')
+plt.savefig('growth.pdf', bbox_inches='tight')
