@@ -1,5 +1,5 @@
 #PBS -j oe
-#PBS -l select=1:ncpus=1:mem=1GB
+#PBS -l select=1:ncpus=1:model=san
 #PBS -l walltime=00:01:00
 #PBS -m abe
 #PBS -N anim_rhog0.2

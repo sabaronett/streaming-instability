@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 
 # Collect .athdf outputs, init sim consts. and grid
-athinput = athena_read.athinput('../athinput.si')
+athinput = athena_read.athinput('../athinput.si.nas')
 outputs = sorted(list(Path('../athdf').glob(athinput["job"]["problem_id"] +
                                         '.out1.*.athdf')))
 c_s = athinput['hydro']['iso_sound_speed'] # sound speed
