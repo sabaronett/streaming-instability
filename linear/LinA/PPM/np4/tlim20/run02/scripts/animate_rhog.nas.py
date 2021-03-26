@@ -60,5 +60,6 @@ def animate(i):
 anim = animation.FuncAnimation(fig, animate, frames=len(times),
                                 repeat=False)
 metadata = dict(title='Gas Density', artist='Stanley A. Baronett')
+plt.rcParams['animation.ffmpeg_path'] = '/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=30, metadata=metadata, bitrate=14500)
 anim.save('../movies/rhog.nas.mp4', writer=writer)
