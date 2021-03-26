@@ -3,7 +3,7 @@
 #PBS -l walltime=00:01:00
 #PBS -m abe
 #PBS -N anim_rhog0.2
-#PBS -q ldan
+#PBS -q devel
 #PBS -W group_list=s2336
 
 echo ----------------------------------------
