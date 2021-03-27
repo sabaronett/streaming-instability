@@ -1,4 +1,4 @@
-"""Compile and export animations of Athena++ simulation variables.
+"""Animate Athena++ simulation variables.
 
 Leave one blank line.  The rest of this docstring should contain an
 overall description of the module or program.  Optionally, it may also
@@ -39,7 +39,7 @@ for output in outputs:               # load all data into memory
 # Initialize first frame
 fig, ax = plt.subplots(dpi=200)
 ax.set_aspect('equal')
-ax.set_title('$t={:.3f}$'.format(times[0]))
+ax.set_title('$t = {:.3f}$ / $T$'.format(times[0]))
 ax.set_xlabel('$x$ / $H_g$')
 ax.set_ylabel('$z$ / $H_g$')
 img = ax.pcolormesh(xf, zf, rhops[0])
