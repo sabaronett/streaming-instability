@@ -1,9 +1,8 @@
 #PBS -j oe
-#PBS -l select=1:ncpus=1:mem=5GB
-#PBS -l walltime=01:00:00
+#PBS -l select=1:ncpus=1:model=san
+#PBS -l walltime=10:00:00
 #PBS -m abe
 #PBS -N animate_rhog
-#PBS -q ldan
 #PBS -W group_list=s2336
 
 echo ----------------------------------------
