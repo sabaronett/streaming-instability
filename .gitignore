@@ -1,6 +1,9 @@
 # Misc.
 *.sh
 *.txt
+logs/
+old/
+*.local.py
 
 # Data Analysis
 *.pdf
