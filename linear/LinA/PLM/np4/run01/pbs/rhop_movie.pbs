@@ -1,0 +1,14 @@
+#PBS -j oe
+#PBS -l select=1:ncpus=1:model=san
+#PBS -l walltime=2:00:00
+#PBS -m abe
+#PBS -N rhop_mov
+#PBS -W group_list=s2336
+
+echo ----------------------------------------
+echo Job started on `date`
+echo ----------------------------------------
+
+python ../scripts/rhop_mov.nas.py
+
+# -end of script-
