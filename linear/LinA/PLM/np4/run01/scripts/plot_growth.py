@@ -18,7 +18,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Collect .athdf outputs, init sim consts. and grid
-athinput = athena_read.athinput('../athinput.si.nas')
+athinput = athena_read.athinput('../athinput.si')
 outputs = sorted(list(Path('../athdf').glob(athinput['job']['problem_id'] +
                                         '.out1.*.athdf')))
 Omega = athinput['problem']['omega']       # local Keplerian angular frequency
