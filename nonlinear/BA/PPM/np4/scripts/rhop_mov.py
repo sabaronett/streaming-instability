@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 
 # Collect .athdf outputs, init sim consts. and grid
-athinput = athena_read.athinput('../athinput.si.nas')
+athinput = athena_read.athinput('../athinput.si')
 outputs = sorted(list(Path('../athdf').glob(athinput["job"]["problem_id"] +
                                         '.out1.*.athdf')))
 c_s = athinput['hydro']['iso_sound_speed'] # sound speed
@@ -29,22 +29,22 @@ T = 2*np.pi/Omega                          # orbital period
 data = athena_read.athdf(outputs[0])
 xf, zf = data['x1f'] / H, data['x2f'] / H
 times = []                                 # sim output times
-rhos = []                                 # particle density
+rhops = []                                 # particle density
 
 for output in outputs:               # load all data into memory
     data = athena_read.athdf(output)
     times.append(data['Time'] / T)
-    rhos.append(data['rho'][0])    # [0] effectively flattens 3D array
+    rhops.append(data['rhop'][0])    # [0] effectively flattens 3D array
 
 # Initialize first frame
-fig, ax = plt.subplots(dpi=200)
+fig, ax = plt.subplots(dpi=225)
 ax.set_aspect('equal')
 ax.set_title('$t = {:.3f}$ / $T$'.format(times[0]))
 ax.set_xlabel('$x$ / $H_g$')
 ax.set_ylabel('$z$ / $H_g$')
-img = ax.pcolormesh(xf, zf, rhos[0])
+img = ax.pcolormesh(xf, zf, rhops[0])
 cb = plt.colorbar(img)
-cb.set_label(r'$\rho_g$ / $\rho_0$')
+cb.set_label(r'$\rho_p$ / $\rho_0$')
 
 def animate(i):
     """Update frame.
@@ -53,12 +53,12 @@ def animate(i):
         i: Frame number.
     """
     ax.set_title('$t={:.3f}$'.format(times[i]))
-    img.set_array(rhos[i].ravel()) # flatten 2D array to 1D array
-    img.set_clim(rhos[i].min(), rhos[i].max())
+    img.set_array(rhops[i].ravel()) # flatten 2D array to 1D array
+    img.set_clim(rhops[i].min(), rhops[i].max())
 
 # Compile and save animation
 anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
-metadata = dict(title='Gas Density', artist='Stanley A. Baronett')
+metadata = dict(title='Dust Density', artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path'] = '/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=30, metadata=metadata, bitrate=14500)
-anim.save('../movies/rhog.nas.mp4', writer=writer)
+anim.save('../movies/rhop.mp4', writer=writer)
