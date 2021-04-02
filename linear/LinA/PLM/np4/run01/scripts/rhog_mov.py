@@ -37,7 +37,7 @@ for output in outputs:               # load all data into memory
     rhos.append(data['rho'][0])    # [0] effectively flattens 3D array
 
 # Initialize first frame
-fig, ax = plt.subplots(dpi=200)
+fig, ax = plt.subplots(dpi=225)
 ax.set_aspect('equal')
 ax.set_title('$t = {:.3f}$ / $T$'.format(times[0]))
 ax.set_xlabel('$x$ / $H_g$')
@@ -61,4 +61,4 @@ anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
 metadata = dict(title='Gas Density', artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path'] = '/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=30, metadata=metadata, bitrate=14500)
-anim.save('../movies/rhog.nas.mp4', writer=writer)
+anim.save('../movies/rhog.mp4', writer=writer)
