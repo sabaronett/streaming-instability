@@ -2,6 +2,7 @@
 *.txt
 logs/
 old/
+*.old.*
 *.local.py
 
 # Data Analysis
