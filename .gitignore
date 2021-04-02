@@ -5,7 +5,6 @@ old/
 *.local.py
 
 # Data Analysis
-*.pdf
 *.npz
 *.mp4
 
