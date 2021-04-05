@@ -23,7 +23,7 @@ lfeX:~> shiftc --hosts=8 --create-tar /nobackup/[username]/../athdf/ ./athdf.tar
 ### [Secure Unattended Proxy (SUP)](https://www.nas.nasa.gov/hecc/support/kb/entry/145)
 1. Start SUP on local (remote) host:
 ```bash
-$ eval `sup -s bash -u sbaronet -ols=--color=always`
+$ eval `sup -s bash -u [username] -ols=--color=always`
 ```
 2. Authorize front end (FE) host:
 ```bash
