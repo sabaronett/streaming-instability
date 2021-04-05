@@ -1,0 +1,33 @@
+Job 10853465.pbspl1.nas.nasa.gov started on Fri Mar 26 17:32:47 PDT 2021
+The job requested the following resources:
+    ncpus=1
+    place=scatter:excl
+    walltime=10:00:00
+
+PBS set the following environment variables:
+        FORT_BUFFERED = 1
+                   TZ = PST8PDT
+
+On r325i1n3:
+Current directory is /nobackup/sbaronet/tlim20/run02/pbs
+Current directory is /nobackup/sbaronet/tlim20/run02/pbs
+----------------------------------------
+Job started on Fri Mar 26 17:32:53 PDT 2021
+----------------------------------------
+
+____________________________________________________________________
+Job Resource Usage Summary for 10853465.pbspl1.nas.nasa.gov
+
+    CPU Time Used            : 01:57:36
+    Real Memory Used         : 3359448kb
+    Walltime Used            : 01:29:16
+    Exit Status              : 0
+
+    Number of CPUs Requested : 1
+    Walltime Requested       : 10:00:00
+
+    Execution Queue          : long
+    Charged To               : s2336
+
+    Job Stopped              : Fri Mar 26 19:02:11 2021
+____________________________________________________________________
