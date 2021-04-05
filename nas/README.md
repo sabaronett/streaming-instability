@@ -16,7 +16,7 @@ lfeX:~> shiftc --hosts=8 /nobackup/[username]/dir ~/
 ```
 For large directories (> 1 GB), archive first:
 ```bash
-lfeX:~> shiftc --hosts=8 --create-tar ./athdf/ ./athdf.tar
+lfeX:~> shiftc --hosts=8 --create-tar /nobackup/[username]/../athdf/ ./athdf.tar
 ```
 
 
