@@ -12,11 +12,11 @@ $ ./scripts/lou
 ## File Transfers
 ### Intra-enclave (NAS HEC) with [Shift Transfer Tool](https://www.nas.nasa.gov/hecc/support/kb/shift-transfer-tool-overview_300.html)
 ```bash
-lfeX:~> shiftc --hosts=8 /nobackup/user/dir ~/
+lfeX:~> shiftc --hosts=8 /nobackup/[username]/dir ~/
 ```
 For large directories (> 1 GB), archive first:
 ```bash
-lfeX:~> shiftc --hosts=8 --create-tar /nobackup/user/dir ./dir.tar
+lfeX:~> shiftc --hosts=8 --create-tar ./athdf/ ./athdf.tar
 ```
 
 
@@ -31,11 +31,11 @@ pfeXX:~> touch ~/.meshrc
 ```
 3. Authorize writable directories:
 ```bash
-pfeXX:~> echo /nobackup/[u] >> ~/.meshrc
+pfeXX:~> echo /nobackup/[username] >> ~/.meshrc
 ```
 4. Execute local commands:
 ```bash
-$ sup shiftc pfeXX:/nobackup/[u]
+$ sup shiftc -r lfeX:/u/[username]/dir ~/sup/
 ```
 
 ## [PBS](https://www.nas.nasa.gov/hecc/support/kb/running-jobs-with-pbs-121/)
