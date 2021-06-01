@@ -1,14 +1,5 @@
 """Plot max. & min., dust & gas, density growth over time.
 
-Leave one blank line.  The rest of this docstring should contain an
-overall description of the module or program.  Optionally, it may also
-contain a brief description of exported classes and functions and/or usage
-examples.
-
-  Typical usage example:
-
-  foo = ClassFoo()
-  bar = foo.FunctionBar()
 """
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -63,4 +54,4 @@ axs[1,1].semilogy(times, rhogmin)
 for i,ax in enumerate(axs.flat):
     ax.grid()
 
-plt.savefig('../plots/density_growth.pdf', bbox_inches='tight')
+plt.savefig('../plots/density_all_growth.pdf', bbox_inches='tight')
