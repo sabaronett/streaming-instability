@@ -1,14 +1,6 @@
-"""Animate Athena++ simulation variables.
+"""Animate Dust Density.
 
-Leave one blank line.  The rest of this docstring should contain an
-overall description of the module or program.  Optionally, it may also
-contain a brief description of exported classes and functions and/or usage
-examples.
-
-  Typical usage example:
-
-  foo = ClassFoo()
-  bar = foo.FunctionBar()
+Compiles and saves an MPEG-4 animation of the dust particle density.
 """
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -21,20 +13,20 @@ from matplotlib import animation
 # Collect .athdf outputs, init sim consts. and grid
 athinput = athena_read.athinput('../athinput.si')
 outputs = sorted(list(Path('../athdf').glob(athinput["job"]["problem_id"] +
-                                        '.out1.*.athdf')))
+                                        '.out2.*.athdf')))
 c_s = athinput['hydro']['iso_sound_speed'] # sound speed
 Omega = athinput['problem']['omega']       # local Keplerian angular frequency
-H = c_s / Omega                            # gas scale height
+H = c_s/Omega                              # gas scale height
 T = 2*np.pi/Omega                          # orbital period
 data = athena_read.athdf(outputs[0])
-xf, zf = data['x1f'] / H, data['x2f'] / H
+xf, zf = data['x1f']/H, data['x2f']/H
 times = []                                 # sim output times
 rhops = []                                 # particle density
 
-for output in outputs:               # load all data into memory
+for output in outputs:                     # load all data into memory
     data = athena_read.athdf(output)
-    times.append(data['Time'] / T)
-    rhops.append(data['rhop'][0])    # [0] effectively flattens 3D array
+    times.append(data['Time']/T)
+    rhops.append(data['rhop'][0])          # [0] effectively flattens 3D array
 
 # Initialize first frame
 fig, ax = plt.subplots(dpi=225)
@@ -60,5 +52,5 @@ def animate(i):
 anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
 metadata = dict(title='Dust Density', artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path'] = '/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
-writer = animation.FFMpegWriter(fps=30, metadata=metadata, bitrate=14500)
-anim.save('../movies/rhop.mp4', writer=writer)
+writer = animation.FFMpegWriter(fps=60, metadata=metadata, bitrate=14500)
+anim.save('../movies/rhop_full.mp4', writer=writer)
