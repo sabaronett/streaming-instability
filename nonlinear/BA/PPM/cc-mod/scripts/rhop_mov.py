@@ -31,7 +31,7 @@ for output in outputs:                     # load all data into memory
 # Initialize first frame
 fig, ax = plt.subplots(dpi=225)
 ax.set_aspect('equal')
-ax.set_title('$t = {:.3f}$ / $T$'.format(times[0]))
+ax.set_title('$t = {:.2f}$ / $T$'.format(times[0]))
 ax.set_xlabel('$x$ / $H_g$')
 ax.set_ylabel('$z$ / $H_g$')
 img = ax.pcolormesh(xf, zf, rhops[0])
@@ -45,7 +45,7 @@ def animate(i):
         i: Frame number.
     """
     ax.set_title('$t={:.3f}$'.format(times[i]))
-    img.set_array(rhops[i].ravel()) # flatten 2D array to 1D array
+    img.set_array(rhops[i].ravel())        # flatten 2D array to 1D array
     img.set_clim(rhops[i].min(), rhops[i].max())
 
 # Compile and save animation
