@@ -1,6 +1,6 @@
 #PBS -j oe
 #PBS -l select=4:ncpus=16:mpiprocs=16:model=san
-#PBS -l walltime=4:00:00
+#PBS -l walltime=1:30:00
 #PBS -m abe
 #PBS -N BA_np4
 #PBS -W group_list=s2336
@@ -9,6 +9,6 @@ echo ----------------------------------------
 echo Job started on `date`
 echo ----------------------------------------
 
-mpiexec -n 64 $ATHENA_DUST -t 3:50:00 -i athinput.si
+mpiexec -n 64 $ATHENA_DUST -t 1:20:00 -i athinput.si
 
 # -end of script-
