@@ -28,7 +28,7 @@ cfl_number = 0.4            # The Courant, Friedrichs, & Lewy (CFL) Number
 nlim       = -1             # cycle limit
 tlim       = 80             # time limit / T (orbital period)
 integrator = vl2            # time integration algorithm
-ncycle_out = 2000           # std out timestep
+ncycle_out = 50             # std out timestep
 xorder = 3                  # spatial reconstruction (2=PLM, 3=PPM)
 
 <mesh>
