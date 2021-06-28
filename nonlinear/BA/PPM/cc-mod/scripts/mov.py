@@ -14,7 +14,7 @@ from pathlib import Path
 from scipy import integrate
 
 # Collect Athena++ inputs & outputs
-athinput = athena_read.athinput('../athinput.si.nas')
+athinput = athena_read.athinput('../athinput.si')
 tlim = athinput['time']['tlim']            # max. simulation time
 nx1 = athinput['mesh']['nx1']              # num. radial zones
 nx2 = athinput['mesh']['nx2']              # num. vertical zones
