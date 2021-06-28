@@ -41,7 +41,7 @@ for output in outputs:                     # load all data into memory
     rhopmaxs.append(np.amax(data['rhop']))
 
 # Calc time-avg rhopmax during saturated state & set cmap log min/max
-t_sat = 0.1                                # determined graphically
+t_sat = 20                                 # determined graphically
 i_sat = floor(len(times)*t_sat/tlim)
 vmin = epsilon/Np                          # quantized minimum
 vmax = integrate.simpson(rhopmaxs[i_sat:], times[i_sat:])/(tlim-t_sat)
