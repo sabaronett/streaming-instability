@@ -29,7 +29,7 @@ epsilon = athinput['problem']['epsilon']   # avg. dust/gas ρ-ratio in BG state
 H = c_s/Omega                              # gas scale height
 T = 2*np.pi/Omega                          # orbital period
 outputs = sorted(list(Path('../athdf').glob(athinput["job"]["problem_id"] +
-                                        '.out1.*.athdf')))
+                                        '.out2.*.athdf')))
 data = athena_read.athdf(outputs[0])
 xf, zf = data['x1f']/H, data['x2f']/H
 times, rhops, rhopmaxs = [], [], []        # times, dust densities & maximums
