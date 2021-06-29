@@ -44,7 +44,7 @@ for output in outputs:                     # load all data into memory
 t_sat = 20                                 # determined graphically
 i_sat = floor(len(times)*t_sat/tlim)
 vmin = epsilon/Np                          # quantized minimum
-vmax = integrate.simpson(rhopmaxs[i_sat:], times[i_sat:])/(tlim-t_sat)
+vmax = integrate.simps(rhopmaxs[i_sat:], times[i_sat:])/(tlim-t_sat)
 
 # Initialize first frame
 clipped = np.clip(rhops[0], vmin, vmax)
