@@ -40,11 +40,9 @@ for output in outputs:                     # load all data into memory
     rhops.append(data['rhop'][0])          # [0] flattens 3D array
     rhopmaxs.append(np.amax(data['rhop']))
 
-# Calc time-avg rhopmax during saturated state & set cmap log min/max
-t_sat = 15                                 # determined graphically
-i_sat = floor(len(times)*t_sat/tlim)
-vmin = epsilon/Np                          # quantized minimum
-vmax = integrate.simps(rhopmaxs[i_sat:], times[i_sat:])/(tlim-t_sat)
+# Set cmap log min/max
+vmin = 0.03
+vmax = 30.
 
 # Initialize first frame
 clipped = np.clip(rhops[0], vmin, vmax)
@@ -53,7 +51,8 @@ ax.set_aspect('equal')
 ax.set_title('$t={:.2f}$ / $T$'.format(times[0]))
 ax.set_xlabel('$x$ / $H_g$')
 ax.set_ylabel('$z$ / $H_g$')
-img = ax.pcolormesh(xf, zf, clipped, norm=colors.LogNorm(vmin, vmax))
+img = ax.pcolormesh(xf, zf, clipped/epsilon,
+                    norm=colors.LogNorm(vmin/epsilon, vmax/epsilon))
 cb = plt.colorbar(img)
 cb.set_label(r'$\rho_p$ / $\rho_0$')
 
