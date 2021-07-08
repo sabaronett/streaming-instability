@@ -5,19 +5,10 @@ configure = --prob=streaming_instability -p --eos=isothermal --nghost=3 -hdf5 -h
 <job>
 problem_id = SI             # problem ID: basename of output filenames
 
-<output1>
-file_type = hdf5            # HDF5 data dump
-variable  = prim            # variables to be output
-dt        = 0.5             # time increment between outputs
-
-<output2>
-file_type = hst             # history data dump
-dt        = 0.05            # time increment between outputs
-
 <time>
 cfl_number = 0.4            # The Courant, Friedrichs, & Lewy (CFL) Number
 nlim       = -1             # cycle limit
-tlim       = 0.5            # time limit / T (orbital period)
+tlim       = 5              # time limit / T (orbital period)
 integrator = vl2            # time integration algorithm
 ncycle_out = 50             # std out timestep
 xorder = 3                  # spatial reconstruction (2=PLM, 3=PPM)
