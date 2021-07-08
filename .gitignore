@@ -4,6 +4,7 @@ logs/
 old/
 *.old.*
 *.local.py
+*.code-workspace
 
 # Data Analysis
 *.npz
