@@ -1,0 +1,230 @@
+Job 11376294.pbspl1.nas.nasa.gov started on Fri Jul 09 09:17:01 PDT 2021
+The job requested the following resources:
+    ncpus=80
+    place=scatter:excl
+    walltime=00:01:00
+
+PBS set the following environment variables:
+        FORT_BUFFERED = 1
+                   TZ = PST8PDT
+
+On r137i7n4:
+Current directory is /nobackup/sbaronet/nonlinear/BA/PPM/perf/sky_ele
+Current directory is /nobackup/sbaronet/nonlinear/BA/PPM/perf/sky_ele
+MPT: libxmpi.so 'HPE MPT 2.23  09/13/20 02:53:53'
+MPT: libmpi_mt.so  'HPE MPT 2.23  09/13/20 02:52:52'
+	MPT Environmental Settings
+MPT: MPI_ADJUST_ALLGATHER (default: 0) : 0
+MPT: MPI_ADJUST_ALLGATHERV (default: 0) : 0
+MPT: MPI_ADJUST_ALLREDUCE (default: 0) : 0
+MPT: MPI_ADJUST_ALLTOALL (default: 0) : 0
+MPT: MPI_ADJUST_ALLTOALLV (default: 0) : 0
+MPT: MPI_ADJUST_ALLTOALLW (default: 0) : 0
+MPT: MPI_ADJUST_BARRIER (default: 0) : 0
+MPT: MPI_ADJUST_BCAST (default: 0) : 0
+MPT: MPI_ADJUST_EXSCAN (default: 0) : 0
+MPT: MPI_ADJUST_GATHER (default: 0) : 0
+MPT: MPI_ADJUST_GATHERV (default: 0) : 0
+MPT: MPI_ADJUST_REDUCE_SCATTER (default: 0) : 0
+MPT: MPI_ADJUST_REDUCE (default: 0) : 0
+MPT: MPI_ADJUST_SCAN (default: 0) : 0
+MPT: MPI_ADJUST_SCATTER (default: 0) : 0
+MPT: MPI_ADJUST_SCATTERV (default: 0) : 0
+MPT: MPI_ARRAY (default: ) : 
+MPT: MPI_ASYNC_PROGRESS (default: disabled) : disabled
+MPT: MPI_BUFFER_MAX (default: 1024) : 1024
+MPT: MPI_BUFS_LIMIT (default: 32) : 32
+MPT: MPI_BUFS_PER_PROC (default: 128) : 128
+MPT: MPI_CHECK_ARGS (default: disabled) : disabled
+MPT: MPI_CLOCKSOURCE (default: ) : 
+MPT: MPI_KCOPY_ENABLED (default: enabled) : enabled
+MPT: MPI_COLL_A2A_FRAG (default: 2097152) : 2097152
+MPT: MPI_COLL_CLUSTER_OPT (default: enabled) : enabled
+MPT: MPI_COLL_GATHERV (default: 65536) : 65536
+MPT: MPI_COLL_LEADERS (default: enabled) : enabled
+MPT: MPI_COLL_NUMA_THRESHOLD (default: 4) : 4
+MPT: MPI_COLL_OPT (default: enabled) : enabled
+MPT: MPI_COLL_OPT_VERBOSE (default: disabled) : disabled
+MPT: MPI_COLL_PREREG (default: enabled) : enabled
+MPT: MPI_COLL_RED_RB_MIN (default: 16384) : 16384
+MPT: MPI_COLL_REPRODUCIBLE (default: disabled) : disabled
+MPT: MPI_COLL_SYNC (default: not set) : not set
+MPT: MPI_COMM_MAX (default: 256) : 256
+MPT: MPI_CONTEXT_MULTIPLE (default: disabled) : disabled
+MPT: MPI_COREDUMP (default: FIRST) : FIRST
+MPT: MPI_COREDUMP_DEBUGGER (default: gdb) : gdb
+MPT: MPI_CUDA_BUFFER_MAX (default: 4096) : 4096
+MPT: MPI_DEFAULT_SINGLE_COPY_BUFFER_MAX (default: 2000) : 2000
+MPT: MPI_DEFAULT_SINGLE_COPY_OFF (default: 0) : 0
+MPT: MPI_DIR (default: ) : 
+MPT: MPI_DISPLAY_SETTINGS (default: disabled) : enabled
+MPT: MPI_DSM_CPULIST (default: not set) : not set
+MPT: MPI_DSM_DISTRIBUTE (default: enabled) : enabled
+MPT: MPI_DSM_OFF (default: disabled) : disabled
+MPT: MPI_DSM_VERBOSE (default: disabled) : disabled
+MPT: MPI_GATHER_RANKS (default: enabled) : enabled
+MPT: MPI_GRAPH_OPTIMIZATIONS (default: 5000) : 5000
+MPT: MPI_GROUP_MAX (default: 32) : 32
+MPT: MPI_INIT_LATE (default: disabled) : disabled
+MPT: MPI_LAUNCH_TIMEOUT (default: 20) : 20
+MPT: MPI_MAPPED_HEAP_SIZE (default: 137438953472) : 137438953472
+MPT: MPI_MAPPED_STACK_SIZE (default: not set) : not set
+MPT: MPI_MEM_ALIGN (default: 0) : 0
+MPT: MPI_MEMMAP_OFF (default: disabled) : disabled
+MPT: MPI_MEMORY_REPORT (default: 0) : 0
+MPT: MPI_MEMORY_REPORT_FILE (default: ) : 
+MPT: MPI_MSG_MEM (default: not set) : not set
+MPT: MPI_NAP (default: not set) : not set
+MPT: MPI_NUM_QUICKS (default: 8) : 8
+MPT: MPI_OMP_NUM_THREADS (default: ) : 
+MPT: MPI_OPENMP_INTEROP (default: disabled) : disabled
+MPT: MPI_PMIX (default: disabled) : disabled
+MPT: MPI_PREFAULT_HEAP (default: 0) : 0
+MPT: MPI_QUERYABLE (default: disabled) : disabled
+MPT: MPI_REQUEST_DEBUG (default: disabled) : disabled
+MPT: MPI_REQUEST_MAX (default: 16384) : 16384
+MPT: MPI_RESET_PATH (default: ) : 
+MPT: MPI_SHEPHERD (default: disabled) : disabled
+MPT: MPI_SIGTRAP (default: disabled) : disabled
+MPT: MPI_STATS (default: disabled) : disabled
+MPT: MPI_STATS_FILE (default: ) : 
+MPT: MPI_STATUS_SIGNAL (default: not set) : not set
+MPT: MPI_SYNC_THRESHOLD (default: 0) : 0
+MPT: MPI_SYSLOG_COPY (default: disabled) : enabled
+MPT: MPI_TYPE_DEPTH (default: 14) : 14
+MPT: MPI_TYPE_MAX (default: 8192) : 8192
+MPT: MPI_UNBUFFERED_STDIO (default: disabled) : disabled
+MPT: MPI_UNIVERSE (default: ) : 
+MPT: MPI_UNIVERSE_SIZE (default: 0) : 0
+MPT: MPI_UNWEIGHTED_OLD (default: disabled) : disabled
+MPT: MPI_USE_CUDA (default: disabled) : disabled
+MPT: MPI_USE_XPMEM (default: disabled) : disabled
+MPT: MPI_USING_VTUNE (default: disabled) : disabled
+MPT: MPI_VERBOSE (default: disabled) : enabled
+MPT: MPI_VERBOSE2 (default: disabled) : disabled
+MPT: MPI_WATCHDOG_TIMER (default: 10) : 720
+MPT: MPI_WILDCARDS (default: disabled) : disabled
+MPT: MPI_WIN_MODE (default: DEFAULT) : DEFAULT
+MPT: MPI_WORLD_MAP (default: ) : 
+MPT: MPI_XPMEM_ENABLED (default: enabled) : enabled
+MPT: MPI_COLL_HCOLL (default: disabled) : disabled
+MPT: MPI_CONNECTIONS_THRESHOLD (default: 1025) : 1025
+MPT: MPI_IB_ACCELERATE_AHS (default: disabled) : disabled
+MPT: MPI_IB_ADAPTIVE_ROUTING (default: disabled) : disabled
+MPT: MPI_IB_CONGESTED (default: disabled) : disabled
+MPT: MPI_IB_DCIS (default: 8) : 8
+MPT: MPI_IB_DEVS (default: ) : 
+MPT: MPI_IB_DEVS0 (default: ) : 
+MPT: MPI_IB_DEVS1 (default: ) : 
+MPT: MPI_IB_FAILOVER (default: 32) : 127
+MPT: MPI_IB_FAILOVER_RESET (default: enabled) : enabled
+MPT: MPI_IB_HYPER_LAZY (default: enabled) : enabled
+MPT: MPI_IB_IMM_THRESHOLD (default: 1024) : 1024
+MPT: MPI_IB_IMM_UPGRADE (default: enabled) : enabled
+MPT: MPI_IB_INTRA_SIZE (default: 10737418240) : 10737418240
+MPT: MPI_IB_MAX_RDMAS (default: 4) : 4
+MPT: MPI_IB_MAX_TAGS (default: 32) : 32
+MPT: MPI_IB_MTU (default: 4096) : 4096
+MPT: MPI_IB_NUM_QPS (default: not set) : not set
+MPT: MPI_IB_PAYLOAD (default: 16512) : 16512
+MPT: MPI_IB_PORT_HEURISTIC (default: 2) : 2
+MPT: MPI_IB_PRE_CACHE (default: 0) : 0
+MPT: MPI_IB_QP_REALLOC (default: disabled) : disabled
+MPT: MPI_IB_RAIL0 (default: ) : 
+MPT: MPI_IB_RAIL1 (default: ) : 
+MPT: MPI_IB_RAILS (default: 1) : 1+
+MPT: MPI_IB_RAILS_FLEXIBLE (default: disabled) : disabled
+MPT: MPI_IB_RECV_MSGS (default: 512) : 1024
+MPT: MPI_IB_RNR_TIMER (default: 14) : 26
+MPT: MPI_IB_SERVICE_LEVEL (default: 0) : 0
+MPT: MPI_IB_SINGLE_COPY_BUFFER_MAX (default: 32767) : 32767
+MPT: MPI_IB_SOCKET_DIRECT (default: 1) : 1
+MPT: MPI_IB_TIMEOUT (default: 18) : 20
+MPT: MPI_IB_TM (default: disabled) : disabled
+MPT: MPI_IB_UPGRADE_SENDS (default: 0) : 0
+MPT: MPI_IB_XRC (default: enabled) : enabled
+MPT: MPI_MEMORY_REGION_LIMIT (default: 2507686144) : 2507686144
+MPT: MPI_NUM_MEMORY_REGIONS (default: 1024) : 1024
+MPT: MPI_OPA_DEVS (default: ) : 
+MPT: MPI_OPA_FINALIZE_TIMEOUT (default: 1) : 1
+MPT: MPI_OPA_MAX_RDMA (default: 16) : 16
+MPT: MPI_OPA_NB_EAGER_MAX (default: 2147483647) : 2147483647
+MPT: MPI_OPA_PAYLOAD (default: 512) : 512
+MPT: MPI_OPA_RAIL0 (default: ) : 
+MPT: MPI_OPA_RAILS (default: 1) : 1
+MPT: MPI_OPA_SBUFS (default: 1024) : 1024
+MPT: MPI_OPA_SERVICE_LEVEL (default: 0) : 0
+MPT: MPI_OPA_SINGLE_COPY_BUFFER_LIMIT (default: 16777216) : 16777216
+MPT: MPI_OPA_SINGLE_COPY_BUFFER_MAX (default: 32767) : 32767
+MPT: MPI_OPA_VERBOSE (default: disabled) : disabled
+MPT: MPI_OPA_VERBOSE3 (default: disabled) : disabled
+MPT: MPI_UD_ACK_TIMEOUT (default: 1) : 1
+MPT: MPI_UD_CODEL_DEBUG (default: disabled) : disabled
+MPT: MPI_UD_FINALIZE_TIMEOUT (default: 2) : 2
+MPT: MPI_UD_RECV_MSGS (default: 800) : 2048
+MPT: MPI_UD_SEND_BUFFERS (default: 400) : 400
+MPT: MPI_UD_TIMEOUT (default: 20) : 40
+MPT: MPI_IB_QTIME (default: 0) : 0
+MPT: MPI_TRANSFER_MAX (default: 33554432) : 33554432
+MPT: MPI_USE_IB (default: disabled) : disabled
+MPT: MPI_USE_OPA (default: disabled) : disabled
+MPT: MPI_USE_TCP (default: disabled) : disabled
+MPT: MPI_USE_UD (default: disabled) : disabled
+MPT: MPIO_DIRECT_READ (default: disabled) : disabled
+MPT: MPIO_DIRECT_WRITE (default: disabled) : disabled
+MPT: MPIO_DIRECT_READ_CHUNK_SIZE (default: 0) : 0
+MPT: MPIO_DIRECT_WRITE_CHUNK_SIZE (default: 0) : 0
+MPT: MPIO_LUSTRE_WRITE_AGGMETHOD (default: 0) : 0
+MPT: MPIO_LUSTRE_GCYC_MIN_ITER (default: 0) : 1
+MPT: Using the InfiniBand RC interconnect on fabrics 0x6 and 0x7
+MPT: Using the InfiniBand UD interconnect on fabrics 0x6 and 0x7
+MPT: Loaded libmpi_lustre.so for Lustre acceleration
+
+Setup complete, entering main loop...
+
+cycle=0 time=0.0000000000000000e+00 dt=4.9331562645353740e-04
+cycle=50 time=2.4658935312922112e-02 dt=4.9306426775186710e-04
+cycle=100 time=4.9307963340919178e-02 dt=4.9290321839954405e-04
+cycle=150 time=7.3949861477816112e-02 dt=4.9277695450930829e-04
+cycle=200 time=9.8586702039112212e-02 dt=4.9270198471611270e-04
+cycle=250 time=1.2322015057424662e-01 dt=4.9264295245144286e-04
+cycle=300 time=1.4785228140440995e-01 dt=4.9263327753888122e-04
+cycle=350 time=1.7248427192877788e-01 dt=4.9264402780156951e-04
+cycle=400 time=1.9711676731516406e-01 dt=4.9265377832559268e-04
+cycle=450 time=2.2174924327813028e-01 dt=4.9266048931887938e-04
+cycle=500 time=2.4638185674554966e-01 dt=4.9265179099773789e-04
+cycle=550 time=2.7101429380479330e-01 dt=4.9263685885122990e-04
+cycle=600 time=2.9564602922522537e-01 dt=4.9261892920065740e-04
+cycle=650 time=3.2027678199205883e-01 dt=4.9260879480684855e-04
+cycle=700 time=3.4490604051540302e-01 dt=4.9254474522262030e-04
+cycle=750 time=3.6953101568387997e-01 dt=4.9244942588457538e-04
+cycle=800 time=3.9415098451023600e-01 dt=4.9235207957576410e-04
+cycle=850 time=4.1876672489983419e-01 dt=4.9225474641729301e-04
+cycle=900 time=4.4337811267484351e-01 dt=4.9221094856872973e-04
+cycle=950 time=4.6798613809873624e-01 dt=4.9212928703347544e-04
+cycle=1000 time=4.9259193638272281e-01 dt=4.9209854866828664e-04
+
+Terminating on time limit
+time=5.0000000000000000e-01 cycle=1016
+tlim=5.0000000000000000e-01 nlim=-1
+
+zone-cycles = 66584576
+cpu time used  = 3.0509290000000000e+00
+zone-cycles/cpu_second = 2.1824361038883567e+07
+
+____________________________________________________________________
+Job Resource Usage Summary for 11376294.pbspl1.nas.nasa.gov
+
+    CPU Time Used            : 00:02:20
+    Real Memory Used         : 3096kb
+    Walltime Used            : 00:00:05
+    Exit Status              : 0
+
+    Number of CPUs Requested : 80
+    Walltime Requested       : 00:01:00
+
+    Execution Queue          : devel
+    Charged To               : s2259
+
+    Job Stopped              : Fri Jul  9 09:17:25 2021
+____________________________________________________________________
