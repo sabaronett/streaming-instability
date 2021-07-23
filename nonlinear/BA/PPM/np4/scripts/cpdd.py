@@ -29,7 +29,7 @@ def writetxt(x, y, path='data.txt'):
             f.write('{:.16e}\t{:.16e}\n'.format(x[i], y[i]))
 
 # Collect .athdf inputs, outputs; init sim consts. & grid
-athinput = athena_read.athinput('athinput/np4.athinput.si')
+athinput = athena_read.athinput('../athinput.si')
 nx1 = athinput['mesh']['nx1']                # num. radial zones
 nx2 = athinput['mesh']['nx2']                # num. vertical zones
 nx3 = athinput['mesh']['nx3']                # num. azimuthal zones
@@ -79,5 +79,6 @@ ax.legend()
 ax.grid()
 
 # Save figure and plotting data
-plt.savefig('plots/CPDD.pdf', bbox_inches='tight', pad_inches=0.01)
-writetxt(cut_rhops, cdf)
+plt.savefig('plots/CPDD_np{:.0f}.pdf'.format(Np), bbox_inches='tight',
+            pad_inches=0.01)
+writetxt(cut_rhops, cdf, 'CPDD_np{:.0f}.txt'.format(Np))
