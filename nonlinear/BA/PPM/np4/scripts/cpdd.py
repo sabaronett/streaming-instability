@@ -48,19 +48,18 @@ outputs = sorted(list(Path('../athdf').glob(athinput["job"]["problem_id"] +
                                         '.out2.*.athdf')))
 data = athena_read.athdf(outputs[0])
 xf, zf = data['x1f'] / H, data['x2f'] / H
-times, rhops = [], []                        # times, dust densities
+rhops = []                                   # dust densities
 
-# Load & process data into memory
-for output in outputs:
+# Load & process saturated-state data into memory
+i_sat = 375                                  # 1st index of sat. state
+sat_outputs = outputs[i_sat:]
+for output in sat_outputs:
     data = athena_read.athdf(output)
-    times.append(data['Time'] / T)
-    temp = data['rhop'].flatten() / epsilon # flatten & convert
-    rhops.append(np.sort(temp))             # sort
+    temp = data['rhop'].flatten() / epsilon  # flatten & convert
+    rhops.append(np.sort(temp))              # sort
 
-# Average sorted particle densities only over saturated state
-i_sat = 375
-sat_rhops = rhops[i_sat:]
-avg_rhops = np.sum(sat_rhops, axis=0) / sat_rhops.size
+# Average sorted particle densities
+avg_rhops = np.sum(rhops, axis=0) / len(rhops)
 cut_rhops = np.extract(avg_rhops>=0.1, avg_rhops) # remove values < 0.1
 cdf = np.arange(cut_rhops.size-1, -1, -1) / cut_rhops.size # construct cdf
 
