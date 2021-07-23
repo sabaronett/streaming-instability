@@ -44,8 +44,8 @@ Np_tot = athinput['problem']['npx1']\
 Np = Np_tot/nx1/nx2/nx3                      # theo avg num particles per cell
 H = c_s / Omega                              # gas scale height
 T = 2*np.pi/Omega                            # orbital period
-outputs = sorted(list(Path('athdf/').glob(athinput["job"]["problem_id"]+
-                                          '.out2.*.athdf')))
+outputs = sorted(list(Path('../athdf').glob(athinput["job"]["problem_id"] +
+                                        '.out2.*.athdf')))
 data = athena_read.athdf(outputs[0])
 xf, zf = data['x1f'] / H, data['x2f'] / H
 times, rhops = [], []                        # times, dust densities
