@@ -78,6 +78,6 @@ ax.legend()
 ax.grid()
 
 # Save figure and plotting data
-plt.savefig('plots/CPDD_np{:.0f}.pdf'.format(Np), bbox_inches='tight',
+plt.savefig('../plots/CPDD_np{:.0f}.pdf'.format(Np), bbox_inches='tight',
             pad_inches=0.01)
-writetxt(cut_rhops, cdf, 'CPDD_np{:.0f}.txt'.format(Np))
+writetxt(cut_rhops, cdf, '../plots/CPDD_np{:.0f}.txt'.format(Np))
