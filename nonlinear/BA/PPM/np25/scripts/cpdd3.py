@@ -65,10 +65,7 @@ avg_rhops = np.average(rhops, axis=0)
 
 # Find std. dev. computed in log space
 lnrhops = np.log(rhops)
-mus = np.average(lnrhops, axis=0)
-sigmas = np.std(lnrhops, axis=0)
-logstd_rhops = np.exp(mus + 0.5*np.square(sigmas))\
-    *np.sqrt(np.exp(np.square(sigmas)) - 1)
+sigmas = np.exp(np.std(lnrhops, axis=0))
 cdf = np.linspace(1, 0 , min_rhops.size, endpoint=False)
 
 # CPDD
@@ -77,10 +74,10 @@ fig, ax = plt.subplots(figsize=(6,5))
 ax.set_title('Cumulative Particle-Density Distributions', size='x-large')
 ax.set_xlabel(r'$\rho_p$ / $\langle \rho_p \rangle$', size='large')
 ax.set_ylabel(r'P$(>\rho_p)$', size='large')
-ax.loglog(avg_rhops, cdf, label='Average')
+ax.loglog(avg_rhops, cdf, label=r'$\mu$')
 ax.fill_betweenx(cdf, min_rhops, max_rhops, alpha=0.2, label='Min./Max.')
-ax.fill_betweenx(cdf, avg_rhops-logstd_rhops, avg_rhops+logstd_rhops, alpha=0.4,
-                 label=r'$\pm\sigma$')
+ax.fill_betweenx(cdf, avg_rhops/sigmas, avg_rhops*sigmas, alpha=0.4,
+                 label=r'$[\sigma^{-1}\mu,\,\sigma\mu]$')
 ax.plot([1e-2, 1e3], [1e-1, 1e-1], '--', color='black')
 ax.set_xlim(0.1, 1000)
 ax.set_ylim(1e-5, 1)
@@ -88,9 +85,9 @@ ax.legend(loc='lower left')
 ax.grid()
 
 # Save figure and plotting data
-plt.savefig('../plots/CPDD2_np{:.0f}.pdf'.format(Np), bbox_inches='tight',
+plt.savefig('../plots/CPDD3_np{:.0f}.pdf'.format(Np), bbox_inches='tight',
             pad_inches=0.01)
 writetxt(min_rhops, cdf, '../plots/CPDD_np{:.0f}_min.txt'.format(Np))
 writetxt(max_rhops, cdf, '../plots/CPDD_np{:.0f}_max.txt'.format(Np))
 writetxt(avg_rhops, cdf, '../plots/CPDD_np{:.0f}_avg.txt'.format(Np))
-writetxt(logstd_rhops, cdf, '../plots/CPDD_np{:.0f}_logstd.txt'.format(Np))
+writetxt(sigmas, cdf, '../plots/CPDD_np{:.0f}_sigma.txt'.format(Np))
