@@ -92,9 +92,9 @@ ax.grid()
 
 # Save figure and plotting data
 makesubdir('../plots') # create file output directory
-plt.savefig('../plots/cpdd.pdf'.format(Np), bbox_inches='tight',
+plt.savefig('../plots/cpdd.pdf', bbox_inches='tight',
             pad_inches=0.01)
-writetxt(min_rhops, cdf, '../plots/cpdd_min.txt'.format(Np))
-writetxt(max_rhops, cdf, '../plots/cpdd_max.txt'.format(Np))
-writetxt(avg_rhops, cdf, '../plots/cpdd_avg.txt'.format(Np))
-writetxt(sigmas, cdf, '../plots/cpdd_std.txt'.format(Np))
+writetxt(min_rhops, cdf, '../plots/cpdd_min.txt')
+writetxt(max_rhops, cdf, '../plots/cpdd_max.txt')
+writetxt(avg_rhops, cdf, '../plots/cpdd_avg.txt')
+writetxt(sigmas, cdf, '../plots/cpdd_std.txt')
