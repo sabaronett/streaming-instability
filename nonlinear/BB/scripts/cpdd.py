@@ -18,9 +18,9 @@ def writetxt(x, y, path='data.txt'):
         
     Parameters
     ----------
-    x : numpy.ndarray
+    x : array_like
         Array to be written out to the first column of the data file.
-    y : numpy.ndarray
+    y : array_like
         Array to be written out to the second column of the data file.
     path : str
         Path and filename of the data file to be outputted.
