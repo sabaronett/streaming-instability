@@ -71,6 +71,6 @@ npx1 = 512                   # Number of particles in X1-direction
 npx2 = 512                   # Number of particles in X2-direction
 npx3 = 1                     # Number of particles in X3-direction
 omega = 6.28318530717958648  # local Keplerian angular frequency (2π)
-epsilon = 0.2                # dust-to-gas density ratio
+epsilon = 1.0                # dust-to-gas density ratio
 duy0 = 0.05                  # reduction in radial gas velocity, Π / sound speed
 randparpos = true
