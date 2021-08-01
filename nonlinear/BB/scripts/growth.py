@@ -53,7 +53,7 @@ fig, ax = plt.subplots(figsize=(6,5))
 ax.set_title('Maximum Particle Density Evolution \n'\
              +r'($\tau_s={:.1f},\,\epsilon={:.1f}$)'
              .format(tau_s, epsilon), size='x-large')
-ax.set_ylabel(r'$\rho_{p,max} / \rho_{g0}$', size='large')
+ax.set_ylabel(r'$\rho_{p,max}$ / $\rho_{g0}$', size='large')
 ax.set_xlabel(r'$t$ / $T$', size='large')
 ax.semilogy(times, rhopmax)
 ax.grid()
