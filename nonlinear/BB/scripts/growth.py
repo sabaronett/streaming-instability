@@ -16,9 +16,9 @@ def writetxt(x, y, path='data.txt'):
         
     Parameters
     ----------
-    x : array_like
+    x : numpy.ndarray
         Array to be written out to the first column of the data file.
-    y : array_like
+    y : numpy.ndarray
         Array to be written out to the second column of the data file.
     path : str
         Path and filename of the data file to be outputted.
@@ -62,4 +62,4 @@ ax.grid()
 makesubdir('../plots') # create file output directory
 plt.savefig('../plots/growth.pdf', bbox_inches='tight',
             pad_inches=0.01)
-writetxt(times, rhopmax, '../plots/growth.txt')
+writetxt(np.asarray(times), np.asarray(rhopmax), '../plots/growth.txt')
