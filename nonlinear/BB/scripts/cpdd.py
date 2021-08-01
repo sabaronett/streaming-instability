@@ -36,24 +36,11 @@ def makesubdir(name):
 
 # Collect .athdf inputs, outputs; init sim consts. & grid
 athinput = athena_read.athinput('../athinput.si')
-nx1 = athinput['mesh']['nx1']                # num. radial zones
-nx2 = athinput['mesh']['nx2']                # num. vertical zones
-nx3 = athinput['mesh']['nx3']                # num. azimuthal zones
-zones = nx1*nx2*nx3                          # total num. of zones
-c_s = athinput['hydro']['iso_sound_speed']   # sound speed
-Omega = athinput['problem']['omega']         # local Keplerian angular frequency
+Omega = athinput['problem']['omega']         # local Keplerian ang. freq.
 tau_s = athinput['particles']['taus0']*Omega # dimensionless stopping time
-epsilon = athinput['problem']['epsilon']     # avg. dust/gas ρ-ratio in BG state
-Np_tot = athinput['problem']['npx1']\
-    *athinput['problem']['npx2']\
-    *athinput['problem']['npx3']             # total number of particles
-Np = Np_tot/nx1/nx2/nx3                      # theo avg num particles per cell
-H = c_s / Omega                              # gas scale height
-T = 2*np.pi/Omega                            # orbital period
+epsilon = athinput['problem']['epsilon']     # avg. BG dust/gas ρ-ratio
 outputs = sorted(list(Path('../athdf').glob(athinput["job"]["problem_id"] +
-                                        '.out2.*.athdf')))
-data = athena_read.athdf(outputs[0])
-xf, zf = data['x1f'] / H, data['x2f'] / H
+                                            '.out2.*.athdf')))
 rhops = []                                   # dust densities
 
 # Load & process saturated-state data into memory
