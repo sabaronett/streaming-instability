@@ -13,7 +13,6 @@ old/
 .vscode/
 
 # Athena++ Output
-*.hst
 *.athdf
 *.xdmf
 *.rst
