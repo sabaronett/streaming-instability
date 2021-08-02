@@ -2,7 +2,7 @@
 #PBS -l select=1:ncpus=1:model=san
 #PBS -l walltime=00:30:00
 #PBS -m abe
-#PBS -N BA_cpdd
+#PBS -N BC_cpdd
 #PBS -q devel
 
 python ../scripts/cpdd.py
