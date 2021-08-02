@@ -1,5 +1,4 @@
 # Misc.
-*.txt
 logs/
 old/
 *.old.*
