@@ -2,6 +2,7 @@
 logs/
 bad/
 old/
+scratch.txt
 *.old.*
 *.local.py
 *.code-workspace
