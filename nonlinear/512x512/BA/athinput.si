@@ -8,20 +8,20 @@ problem_id = SI              # problem ID: basename of output filenames
 <output1>
 file_type = hdf5             # HDF5 data dump
 variable  = prim             # variables to be output
-dt        = 0.8              # time increment between outputs
+dt        = 0.8              # time increment between 100 outputs
 
 <output2>
 file_type = hdf5             # HDF5 data dump
 variable  = rhop             # variables to be output
-dt        = 0.04             # time increment between outputs
+dt        = 0.04             # time increment between 2000 outputs
 
 <output3>
 file_type = hst              # history data dump
-dt        = 0.08             # time increment between outputs
+dt        = 0.08             # time increment between 1000 outputs
 
 <output4>
 file_type = rst              # restart file
-dt        = 40               # time increment between outputs
+dt        = 8                # time increment between 10 outputs
 
 <time>
 cfl_number = 0.4             # The Courant, Friedrichs, & Lewy (CFL) Number
