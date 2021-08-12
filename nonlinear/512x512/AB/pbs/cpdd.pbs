@@ -3,6 +3,5 @@
 #PBS -l walltime=03:00:00
 #PBS -m abe
 #PBS -N AB-512_cpdd
-#PBS -q devel
 
 python ../scripts/cpdd.py
