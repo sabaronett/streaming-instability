@@ -12,18 +12,18 @@ $ ./scripts/lou
 ## File Transfers
 ### Intra-enclave (NAS HEC) with [Shift Transfer Tool](https://www.nas.nasa.gov/hecc/support/kb/shift-transfer-tool-overview_300.html)
 ```bash
-lfeX:~> shiftc --hosts=8 /nobackup/[username]/dir ~/
+lfeX:~> shiftc --hosts=8 /nobackup/$USERNAME/dir ~/
 ```
 For large directories (> 1 GB), archive first:
 ```bash
-lfeX:~> shiftc --hosts=8 --create-tar /nobackup/[username]/../athdf/ ./athdf.tar
+lfeX:~> shiftc --hosts=8 --create-tar /nobackup/$USERNAME/../athdf/ ./athdf.tar
 ```
 
 
 ### [Secure Unattended Proxy (SUP)](https://www.nas.nasa.gov/hecc/support/kb/entry/145)
 1. Start SUP on local (remote) host:
 ```bash
-$ eval `sup -s bash -u [username] -ols=--color=always`
+$ eval `sup -s bash -u $USERNAME -ols=--color=always`
 ```
 2. Authorize front end (FE) host:
 ```bash
@@ -31,11 +31,11 @@ pfeXX:~> touch ~/.meshrc
 ```
 3. Authorize writable directories:
 ```bash
-pfeXX:~> echo /nobackup/[username] >> ~/.meshrc
+pfeXX:~> echo /nobackup/$USERNAME >> ~/.meshrc
 ```
 4. Execute local commands:
 ```bash
-$ sup shiftc -r lfeX:/u/[username]/dir ~/sup/
+$ sup shiftc -r lfeX:/u/$USERNAME/dir ~/sup/
 ```
 
 ## [PBS](https://www.nas.nasa.gov/hecc/support/kb/running-jobs-with-pbs-121/)
