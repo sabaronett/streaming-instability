@@ -44,7 +44,7 @@ outputs = sorted(list(Path('../athdf').glob(athinput["job"]["problem_id"] +
 rhops = []                                   # dust densities
 
 # Load & process saturated-state data into memory
-i_sat = 1000                                 # 1st index of sat. state
+i_sat = 375                                  # 1st index of sat. state
 sat_outputs = outputs[i_sat:]
 for output in sat_outputs:
     data = athena_read.athdf(output)
