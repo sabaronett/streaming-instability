@@ -1,0 +1,36 @@
+Job 11560393.pbspl1.nas.nasa.gov started on Thu Aug 12 13:53:49 PDT 2021
+The job requested the following resources:
+    ncpus=280
+    place=scatter:excl
+    walltime=30:00:00
+
+PBS set the following environment variables:
+        FORT_BUFFERED = 1
+                   TZ = PST8PDT
+
+On r619i4n15:
+Current directory is /nobackup/sbaronet/github/sabaronett/streaming-instability/nonlinear/512x512/BB
+Current directory is /nobackup/sbaronet/github/sabaronett/streaming-instability/nonlinear/512x512/BB
+MPT: libxmpi.so 'HPE MPT 2.23  09/13/20 02:53:53'
+MPT: Launcher network accept (MPI_LAUNCH_TIMEOUT) timed out
+MPT: Launcher on r619i4n15 failed to receive connection(s) from: r621i1n11
+MPT ERROR: could not launch executable
+	(HPE MPT 2.23  09/13/20 02:53:53)
+/var/spool/pbs/mom_priv/jobs/11560393.pbspl1.nas.nasa.gov.SC: line 12: 90793 Killed                  mpiexec -n 256 $ATHENA_DUST -t 29:45:00 -r SI.final.rst
+
+____________________________________________________________________
+Job Resource Usage Summary for 11560393.pbspl1.nas.nasa.gov
+
+    CPU Time Used            : 00:00:04
+    Real Memory Used         : 13344kb
+    Walltime Used            : 00:02:59
+    Exit Status              : 137
+
+    Number of CPUs Requested : 280
+    Walltime Requested       : 30:00:00
+
+    Execution Queue          : long
+    Charged To               : s2259
+
+    Job Stopped              : Thu Aug 12 13:57:03 2021
+____________________________________________________________________
