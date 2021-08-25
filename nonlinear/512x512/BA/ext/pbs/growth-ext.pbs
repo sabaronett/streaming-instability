@@ -3,6 +3,5 @@
 #PBS -l walltime=05:00:00
 #PBS -m abe
 #PBS -N BA-512-ext_growth
-#PBS -q devel
 
 python ../scripts/growth-ext.py
