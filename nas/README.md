@@ -38,7 +38,7 @@ pfeXX:~> echo /nobackup/$USERNAME >> ~/.meshrc
 $ sup shiftc -r lfeX:/u/$USERNAME/dir ~/sup/
 ```
 
-## Archiving `nobackup/` on Lou
+## Archiving `nobackup/` to Lou
 1. [Create local tar](https://www.nas.nasa.gov/hecc/support/kb/using-shift-for-local-transfers-and-tar-operations_512.html):
 ```bash
 $ cd /nobackup/$USERNAME
