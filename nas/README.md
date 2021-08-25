@@ -10,7 +10,7 @@ $ ./scripts/lou
 ```
 
 ## File Transfers
-### Intra-enclave (NAS HEC) with [Shift Transfer Tool](https://www.nas.nasa.gov/hecc/support/kb/shift-transfer-tool-overview_300.html)
+### Intra-enclave (between two NAS hosts) with [Shift Transfer Tool](https://www.nas.nasa.gov/hecc/support/kb/shift-transfer-tool-overview_300.html)
 ```bash
 lfeX:~> shiftc --hosts=8 /nobackup/$USERNAME/dir ~/
 ```
@@ -36,6 +36,18 @@ pfeXX:~> echo /nobackup/$USERNAME >> ~/.meshrc
 4. Execute local commands:
 ```bash
 $ sup shiftc -r lfeX:/u/$USERNAME/dir ~/sup/
+```
+
+## Archiving `nobackup/` on Lou
+1. [Create local tar](https://www.nas.nasa.gov/hecc/support/kb/using-shift-for-local-transfers-and-tar-operations_512.html):
+```bash
+$ cd /nobackup/$USERNAME
+$ mkdir $(date +"%Y-%m-%d")
+$ shiftc --hosts=8 --create-tar --index-tar github/ $(date +"%Y-%m-%d")/github.tar
+```
+2. [Shift transfer to Lou](https://www.nas.nasa.gov/hecc/support/kb/using-shift-for-transfers-and-tar-operations-between-two-nas-hosts_513.html):
+```bash
+$ shiftc -r --hosts=8 $(date +"%Y-%m-%d")/ lfe:
 ```
 
 ## [PBS](https://www.nas.nasa.gov/hecc/support/kb/running-jobs-with-pbs-121/)
