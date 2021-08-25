@@ -1,0 +1,8 @@
+#PBS -j oe
+#PBS -l select=1:ncpus=1:model=san
+#PBS -l walltime=05:00:00
+#PBS -m abe
+#PBS -N BA_cpdd5
+#PBS -q devel
+
+python ../scripts/cpdd5.py
