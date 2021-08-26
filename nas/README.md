@@ -38,17 +38,23 @@ pfeXX:~> echo /nobackup/$USERNAME >> ~/.meshrc
 $ sup shiftc -r lfeX:/u/$USERNAME/dir ~/sup/
 ```
 
+
 ## Archiving `nobackup/` to Lou
-1. [Create local tar](https://www.nas.nasa.gov/hecc/support/kb/using-shift-for-local-transfers-and-tar-operations_512.html):
+1. Check quota status:
+```bash
+lfs quota -h -u $USERNAME /nobackupp12
+```
+2. [Create local tar](https://www.nas.nasa.gov/hecc/support/kb/using-shift-for-local-transfers-and-tar-operations_512.html):
 ```bash
 $ cd /nobackup/$USERNAME
 $ mkdir $(date +"%Y-%m-%d")
 $ shiftc --hosts=8 --create-tar --index-tar github/ $(date +"%Y-%m-%d")/github.tar
 ```
-2. [Shift transfer to Lou](https://www.nas.nasa.gov/hecc/support/kb/using-shift-for-transfers-and-tar-operations-between-two-nas-hosts_513.html):
+3. [Shift transfer to Lou](https://www.nas.nasa.gov/hecc/support/kb/using-shift-for-transfers-and-tar-operations-between-two-nas-hosts_513.html):
 ```bash
 $ shiftc -r --hosts=8 $(date +"%Y-%m-%d")/ lfe:
 ```
+
 
 ## [PBS](https://www.nas.nasa.gov/hecc/support/kb/running-jobs-with-pbs-121/)
 ### Interactive Jobs
