@@ -23,6 +23,5 @@ for output in outputs:                       # load all data into memory
     times.append(data['Time'] / T)
     rhopmax.append(np.amax(data['rhop']))
 
-np.savez_compressed('../output/growth',
-                    times=np.asarray(times),
+np.savez_compressed('../output/growth', times=np.asarray(times),
                     rhopmax=np.asarray(rhopmax))
