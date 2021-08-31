@@ -4,6 +4,7 @@ echo "***START ORGANIZATION***"
 mkdir athdf
 mkdir output
 mkdir rst
+mkdir video
 mkdir xdmf
 mv -v *.athdf athdf/
 mv -v *.o* output/
