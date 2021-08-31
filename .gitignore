@@ -1,14 +1,14 @@
 # Misc.
-logs/
 bad/
+logs/
 old/
+test/
 scratch.txt
 *.old.*
 *.local.py
 *.code-workspace
 
 # Data Analysis
-*.npz
 *.mp4
 
 # VS Code
