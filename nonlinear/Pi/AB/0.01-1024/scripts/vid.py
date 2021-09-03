@@ -36,8 +36,8 @@ for output in outputs:                     # load all data into memory
     rhops.append(data['rhop'][0])          # [0] flattens 3D array
 
 # Set cmap log min/max
-vmin = 0.01
-vmax = 10
+vmin = 0.3
+vmax = 3
 
 # Initialize first frame
 clipped = np.clip(rhops[0], vmin, vmax)
