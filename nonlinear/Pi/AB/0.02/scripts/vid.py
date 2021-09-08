@@ -57,6 +57,7 @@ def animate(i):
     clipped = np.clip(rhops[i].ravel(), vmin, vmax) # flattens, clips array
     img.set_array(clipped)
     img.set_clim(vmin, vmax)
+    print('Frame {:5d}'.format(i))
 
 # Compile and save animation
 anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
