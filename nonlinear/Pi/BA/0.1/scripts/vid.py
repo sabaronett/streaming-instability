@@ -13,9 +13,9 @@ from matplotlib import animation
 import os
 from pathlib import Path
 
-def makesubdir(name):
-    if not os.path.exists(name):
-        os.makedirs(name)
+# Set cmap log min/max
+vmin = 0.01
+vmax = 10
 
 # Collect Athena++ inputs & outputs
 athinput = athena_read.athinput('../athinput.si')
@@ -34,10 +34,6 @@ for output in outputs:                     # load all data into memory
     data = athena_read.athdf(output)
     times.append(data['Time']/T)
     rhops.append(data['rhop'][0])          # [0] flattens 3D array
-
-# Set cmap log min/max
-vmin = 0.01
-vmax = 10
 
 # Initialize first frame
 clipped = np.clip(rhops[0], vmin, vmax)
@@ -61,11 +57,11 @@ def animate(i):
     clipped = np.clip(rhops[i].ravel(), vmin, vmax) # flattens, clips array
     img.set_array(clipped)
     img.set_clim(vmin, vmax)
+    print('Frame {:5d}'.format(i))
 
 # Compile and save animation
 anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
 metadata = dict(title='Dust Density', artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path'] = '/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=60, metadata=metadata, bitrate=14500)
-makesubdir('../movies')
-anim.save('../movies/rhop.mp4', writer=writer)
+anim.save('../video/rhop.mp4', writer=writer)
