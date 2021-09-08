@@ -31,6 +31,7 @@ for output in sat_outputs:
     data = athena_read.athdf(output)
     temp = data['rhop'].flatten() / epsilon  # flatten & convert
     rhops.append(np.sort(temp))              # sort
+    print('{:3.1f}% done.'.format(100*len(rhops)/len(sat_outputs)))
 
 # Find min., max., avg. of each ordered rhop over saturated state
 mins = np.amin(rhops, axis=0)
