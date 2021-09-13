@@ -43,7 +43,6 @@ time_text = ax.text(-.9, -.9, '', color='white')
 img = ax.pcolormesh(xf, zf, clipped/epsilon, cmap='afmhot',
                     norm=colors.LogNorm(vmin/epsilon, vmax/epsilon))
 ax.tight_layout(pad=0)
-# ax.patch.set_facecolor('black')
 # fig.patch.set_facecolor('black')
 
 def init():
@@ -68,4 +67,4 @@ anim = animation.FuncAnimation(fig, animate, init_func=init, frames=len(times),
 metadata = dict(title='Dust Density', artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path']='/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=30, metadata=metadata, bitrate=14500)
-anim.save('../video/sc21_test5.mp4', writer=writer)
+anim.save('../video/sc21.mp4', writer=writer)
