@@ -42,8 +42,8 @@ ax.set(aspect='equal', xticks=[], yticks=[], frame_on=False)
 time_text = ax.text(-.9, -.9, '', color='white')
 img = ax.pcolormesh(xf, zf, clipped/epsilon, cmap='afmhot',
                     norm=colors.LogNorm(vmin/epsilon, vmax/epsilon))
-ax.tight_layout(pad=0)
-# fig.patch.set_facecolor('black')
+fig.tight_layout(pad=0)
+# fig.patch.set_facecolor('black') # not working
 
 def init():
     time_text.set_text('{:.2f} years'.format(times[0]))
