@@ -40,11 +40,16 @@ for output in outputs[:180:2]:             # load all data into memory
 clipped = np.clip(rhops[0], vmin, vmax)
 fig, ax = plt.subplots(dpi=450)
 ax.set(aspect='equal', xticks=[], yticks=[], frame_on=False)
-ax.text(-.9, -.9, '{:.2f} years'.format(times[0]), color='white')
+time_text = ax.text(-.9, -.9, '', color='white')
 img = ax.pcolormesh(xf, zf, clipped/epsilon, cmap='afmhot',
                     norm=colors.LogNorm(vmin/epsilon, vmax/epsilon))
 fig.tight_layout(pad=0)
+ax.patch.set_facecolor('black')
 fig.patch.set_facecolor('black')
+
+def init():
+    time_text.set_text('{:.2f} years'.format(times[0]))
+    return time_text
 
 def animate(i):
     """Update frame.
@@ -52,15 +57,16 @@ def animate(i):
     Args:
         i: Frame number.
     """
-    ax.text(-.9, -.9, '{:.2f} years'.format(times[i]), color='white')
+    time_text.set_text('{:.2f} years'.format(times[i]))
     clipped = np.clip(rhops[i].ravel(), vmin, vmax) # flattens, clips array
     img.set_array(clipped)
     img.set_clim(vmin, vmax)
     print('Frame {:5d}'.format(i))
 
 # Compile and save animation
-anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
+anim = animation.FuncAnimation(fig, animate, init_func=init, frames=len(times),
+                               repeat=False)
 metadata = dict(title='Dust Density', artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path']='/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=30, metadata=metadata, bitrate=14500)
-anim.save('../video/sc21_test4.mp4', writer=writer)
+anim.save('../video/sc21_test5.mp4', writer=writer)
