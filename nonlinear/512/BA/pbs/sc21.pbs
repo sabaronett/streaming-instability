@@ -2,7 +2,7 @@
 #PBS -l select=1:ncpus=1:model=bro_ele
 #PBS -l walltime=00:02:00
 #PBS -m abe
-#PBS -N BA-512_SC21_test3
+#PBS -N BA-512_SC21_test4
 #PBS -q devel
 
 python ../scripts/sc21.py
