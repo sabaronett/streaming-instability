@@ -3,5 +3,6 @@
 #PBS -l walltime=8:00:00
 #PBS -m abe
 #PBS -N BA-Pi0.01-1024_rst
+#PBS -q long
 
 mpiexec -n 1024 $ATHENA_DUST -t 7:00:00 -r SI.00012.rst time/tlim=120
