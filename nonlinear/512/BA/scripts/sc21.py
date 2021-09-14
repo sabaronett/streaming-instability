@@ -30,8 +30,7 @@ data = athena_read.athdf(outputs[0])
 xf, zf = data['x1f']/H, data['x2f']/H
 times, rhops = [], []                      # times, dust densities
 
-for output in outputs[:180:2]:            # load all data into memory
-# for output in outputs[:1800:2]:            # load all data into memory
+for output in outputs[:1800:2]:            # load all data into memory
     data = athena_read.athdf(output)
     times.append(data['Time']/T)
     rhops.append(data['rhop'][0])          # [0] flattens 3D array
