@@ -41,7 +41,7 @@ clipped = np.clip(rhops[0], vmin, vmax)
 fig, ax = plt.subplots(dpi=240, figsize=(16,9))
 img = ax.pcolormesh(xf, zf, clipped/epsilon, cmap='afmhot',
                     norm=colors.LogNorm(vmin/epsilon, vmax/epsilon))
-ax.set(aspect='equal', xticks=[], yticks=[], frame_on=False)
+ax.set(ylim=(-0.5625, 0.5625), xticks=[], yticks=[], frame_on=False)
 time_text = ax.text(-.94, -0.5, '', color='white', fontsize=32)
 fig.tight_layout(pad=0)
 fig.patch.set_facecolor('black')
