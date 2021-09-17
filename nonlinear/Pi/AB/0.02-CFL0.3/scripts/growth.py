@@ -22,7 +22,7 @@ for output in outputs:                       # load all data into memory
     data = athena_read.athdf(output)
     times.append(data['Time'] / T)
     rhopmax.append(np.amax(data['rhop']))
-    print('{:3.1f}% done.'.format(100*len(rhopmax)/len(outputs)))
+    print('{:3.1f} percent done.'.format(100*len(rhopmax)/len(outputs)))
 
 np.savez_compressed('../output/growth', times=np.asarray(times),
                     rhopmax=np.asarray(rhopmax))
