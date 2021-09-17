@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N AB-Pi0.02_vid_dyn
 
-python ../scripts/vid.py
+python ../scripts/vid_dyn.py
