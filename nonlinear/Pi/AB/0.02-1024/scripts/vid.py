@@ -21,7 +21,6 @@ vmax = 50
 athinput = athena_read.athinput('../athinput.si')
 c_s = athinput['hydro']['iso_sound_speed'] # sound speed
 Omega = athinput['problem']['omega']       # local Keplerian angular frequency
-epsilon = athinput['problem']['epsilon']   # avg. dust/gas ρ-ratio in BG state
 H = c_s/Omega                              # gas scale height
 T = 2*np.pi/Omega                          # orbital period
 outputs = sorted(list(Path('../athdf').glob(athinput["job"]["problem_id"] +
@@ -42,8 +41,7 @@ ax.set_aspect('equal')
 ax.set_title('$t={:.2f}$ / $T$'.format(times[0]))
 ax.set_xlabel('$x$ / $H$')
 ax.set_ylabel('$z$ / $H$')
-img = ax.pcolormesh(xf, zf, clipped/epsilon,
-                    norm=colors.LogNorm(vmin/epsilon, vmax/epsilon))
+img = ax.pcolormesh(xf, zf, clipped, norm=colors.LogNorm(vmin, vmax))
 cb = plt.colorbar(img)
 cb.set_label(r'$\rho_p$ / $\rho_{g0}$')
 
