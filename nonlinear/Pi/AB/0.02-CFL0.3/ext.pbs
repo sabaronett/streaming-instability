@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N AB-Pi0.02-CFL0.3_ext
 
-mpiexec -n 256 $ATHENA_DUST -t 7:00:00 -r SI.final.rst time/tlim=40
+mpiexec -n 256 $ATHENA_DUST -t 7:30:00 -r SI.final.rst time/tlim=80
