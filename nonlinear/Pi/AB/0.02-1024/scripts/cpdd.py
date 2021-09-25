@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 
 # Set earliest simulation time of saturated state
-t_sat = 105                                  # / T
+t_sat = 6                                    # / T
 
 # Collect .athdf inputs, outputs, sim consts.
 athinput = athena_read.athinput('../athinput.si')
