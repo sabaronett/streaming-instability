@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 
 # Set earliest simulation time of saturated state
-t_sat = 20                                   # / T
+t_sat = 40                                   # / T
 
 # Collect .athdf inputs, outputs, sim consts.
 athinput = athena_read.athinput('../athinput.si')
@@ -31,7 +31,7 @@ for output in sat_outputs:
     data = athena_read.athdf(output)
     temp = data['rhop'].flatten() / epsilon  # flatten & convert
     rhops.append(np.sort(temp))              # sort
-    print('{:3.1f} %% done.'.format(100*len(rhops)/len(sat_outputs)))
+    print('{:3.1f}%% done.'.format(100*len(rhops)/len(sat_outputs)))
 
 # Find min., max., avg. of each ordered rhop over saturated state
 mins = np.amin(rhops, axis=0)
