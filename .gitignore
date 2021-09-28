@@ -10,6 +10,7 @@ scratch.txt
 
 # Data Analysis
 *.mp4
+*.npz
 
 # VS Code
 .vscode/
