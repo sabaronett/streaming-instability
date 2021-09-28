@@ -39,20 +39,22 @@ $ sup shiftc -r lfeX:/u/$USERNAME/dir ~/sup/
 ```
 
 
-## Archiving `nobackup/` to Lou
-1. Check quota status:
+## [Archiving to Lou](https://www.nas.nasa.gov/hecc/support/kb/using-shift-for-transfers-and-tar-operations-between-two-nas-hosts_513.html)
+- Check quota status:
 ```bash
 lfs quota -h -u $USERNAME /nobackupp12
 ```
-2. [Create local tar](https://www.nas.nasa.gov/hecc/support/kb/using-shift-for-local-transfers-and-tar-operations_512.html):
+- Snapshotting:
 ```bash
-$ cd /nobackup/$USERNAME
-$ mkdir $(date +"%Y-%m-%d")
-$ shiftc --hosts=8 --create-tar --index-tar github/ $(date +"%Y-%m-%d")/github.tar
+lfeX:~$ mkdir snapshots/$(date +"%Y-%m-%d")
+lfeX:~$ cd /nobackup/$USERNAME
+lfeX:/nobackup/$USERNAME$ shiftc --hosts=8 --create-tar --index-tar github lfe:~/snapshots/$(date +"%Y-%m-%d")/github.tar
 ```
-3. [Shift transfer to Lou](https://www.nas.nasa.gov/hecc/support/kb/using-shift-for-transfers-and-tar-operations-between-two-nas-hosts_513.html):
+- Archiving:
 ```bash
-$ shiftc -r --hosts=8 $(date +"%Y-%m-%d")/ lfe:
+lfeX:~$ mkdir archives/.../dir
+lfeX:~$ cd /nobackup/$USERNAME
+lfeX:/nobackup/$USERNAME$ shiftc --hosts=8 --create-tar --index-tar github/.../dir lfe:~/archives/.../dir/dir.$(date +"%Y-%m-%d").tar
 ```
 
 
