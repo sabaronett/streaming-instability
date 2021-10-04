@@ -1,7 +1,8 @@
 #PBS -j oe
 #PBS -l select=1:ncpus=1:model=bro_ele
-#PBS -l walltime=8:00:00
+#PBS -l walltime=2:00:00
 #PBS -m abe
 #PBS -N SC21-HD
+#PBS -q devel
 
 python ../scripts/sc21.py
