@@ -55,8 +55,8 @@ def animate(i):
         i: Frame number.
     """
     time_text.set_text('{:.2f} years'.format(times[i]))
-    clipped = np.clip(rhops[i].ravel(), vmin, vmax) # flattens, clips array
-    img.set_array(clipped[4:1084,:])
+    clipped = np.clip(rhops[i][4:1084,:].ravel(), vmin, vmax) # flattens, clips array
+    img.set_array(clipped)
     img.set_clim(vmin, vmax)
     print('Frame {:3d}'.format(i))
 
