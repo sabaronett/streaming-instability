@@ -15,7 +15,7 @@ athinput = athena_read.athinput('../athinput.si')
 Omega = athinput['problem']['omega']         # local Keplerian ang. freq.
 T = 2*np.pi/Omega                            # orbital period
 outputs = sorted(list(Path('../athdf').glob(athinput['job']['problem_id'] +
-                                            '.out2.*.athdf')))
+                                            '.out1.*.athdf')))
 times, rhopmax = [], []                      # sim out times, max dust dens.
 
 for output in outputs:                       # load all data into memory
