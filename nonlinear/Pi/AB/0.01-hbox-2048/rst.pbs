@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N AB-Pi0.01-hbox-2048_rst
 
-mpiexec -n 4096 $ATHENA_DUST -t 3:50:00 -r SI.00003.rst time/tlim=8
+mpiexec -n 4096 $ATHENA_DUST -t 3:54:00 -r SI.final.rst time/tlim=8
