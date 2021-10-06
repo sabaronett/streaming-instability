@@ -3,6 +3,6 @@
 #PBS -l walltime=2:00:00
 #PBS -m abe
 #PBS -N SC21-HD
-#PBS -q devel
+#PBS -q debug
 
 python ../scripts/sc21.py

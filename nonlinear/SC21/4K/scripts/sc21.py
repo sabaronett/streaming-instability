@@ -14,8 +14,8 @@ import os
 from pathlib import Path
 
 # Set cmap log min/max
-vmin = 0.03
-vmax = 30
+vmin = 0.04
+vmax = 40
 
 # Collect Athena++ inputs & outputs
 athinput = athena_read.athinput('../athinput.si')
@@ -37,7 +37,7 @@ for output in outputs:                     # load all data into memory
 # Initialize first frame
 clipped = np.clip(rhops[0], vmin, vmax)
 fig, ax = plt.subplots(dpi=240, figsize=(16,9))
-img = ax.pcolormesh(xf, zf[4:1084], clipped[4:1084,:], cmap='afmhot',
+img = ax.pcolormesh(xf, zf[8:2168], clipped[8:2168,:], cmap='afmhot',
                     norm=colors.LogNorm(vmin, vmax), shading='auto')
 ax.set(xticks=[], yticks=[], frame_on=False)
 time_text = ax.text(-.94, -0.5, '', color='white', fontsize=32)
@@ -55,7 +55,7 @@ def animate(i):
         i: Frame number.
     """
     time_text.set_text('{:.2f} years'.format(times[i]))
-    clipped = np.clip(rhops[i][4:1084,:].ravel(), vmin, vmax) # flattens, clips array
+    clipped = np.clip(rhops[i][8:2168,:].ravel(), vmin, vmax) # flattens, clips array
     img.set_array(clipped)
     img.set_clim(vmin, vmax)
     print('Frame {:3d}'.format(i))
@@ -66,4 +66,4 @@ anim = animation.FuncAnimation(fig, animate, init_func=init, frames=len(times),
 metadata = dict(title='Dust Density', artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path']='/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=30, metadata=metadata, bitrate=-1)
-anim.save('../video/SC21-HD.mp4', writer=writer, savefig_kwargs={'facecolor':'black'})
+anim.save('../video/SC21-4K.mp4', writer=writer, savefig_kwargs={'facecolor':'black'})
