@@ -32,7 +32,9 @@ times, rhops = [], []                      # times, dust densities
 for output in outputs:                     # load all data into memory
     data = athena_read.athdf(output)
     times.append(data['Time']/T)
+    times.append(data['Time']/T)           # double each frame
     rhops.append(data['rhop'][0])          # [0] flattens 3D array
+    rhops.append(data['rhop'][0])          # half effective fps
 
 # Initialize first frame
 clipped = np.clip(rhops[0], vmin, vmax)
@@ -55,8 +57,7 @@ def animate(i):
     print('Frame {:3d}'.format(i))
 
 # Compile and save animation
-anim = animation.FuncAnimation(fig, animate, frames=len(times), interval=0.067,
-                               repeat=False)
+anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
 metadata = dict(title='Dust Density', artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path']='/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=30, metadata=metadata, bitrate=-1)
