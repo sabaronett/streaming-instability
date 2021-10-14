@@ -40,21 +40,21 @@ fig, ax = plt.subplots(dpi=240, figsize=(16,9))
 img = ax.pcolormesh(xf, zf[8:2168], clipped[8:2168,:], cmap='afmhot',
                     norm=colors.LogNorm(vmin, vmax), shading='auto')
 ax.set(xticks=[], yticks=[], frame_on=False)
-time_text = ax.text(-.94, -0.5, '', color='white', fontsize=32)
-ax.arrow(-.78, .5, -0.15, 0, width=0.01, length_includes_head=True,
+time_text = ax.text(0.93, -0.5, '', color='white', fontsize=24, ha='right')
+ax.arrow(-0.78, 0.5, -0.15, 0, width=0.01, length_includes_head=True,
          shape='right', fc='white', ec='None')
-ax.text(-.89, .45, 'star', color='white', size=24)
-ax.arrow(-.93, -.5, 0.15, 0, width=0.01, length_includes_head=True,
+ax.text(-0.89, 0.45, 'star', color='white', size=24)
+ax.arrow(-0.93, -0.5, 0.15, 0, width=0.01, length_includes_head=True,
          shape='right', fc='white', ec='None')
-ax.text(-.83, -.47, r'$r$', color='white', size=24)
-ax.arrow(-.93, -.5, 0, 0.15, width=0.01, length_includes_head=True,
+ax.text(-0.83, -0.47, r'$r$', color='white', size=24)
+ax.arrow(-0.93, -0.5, 0, 0.15, width=0.01, length_includes_head=True,
          shape='left', fc='white', ec='None')
-ax.text(-.905, -.39, r'$z$', color='white', size=24)
+ax.text(-0.905, -0.39, r'$z$', color='white', size=24)
 fig.tight_layout(pad=0)
 fig.patch.set_facecolor('black')
 
 def init():
-    time_text.set_text('{:.2f} years'.format(times[0]))
+    time_text.set_text('{:2.0f} years'.format(times[0]))
     return time_text
 
 def animate(i):
@@ -63,16 +63,16 @@ def animate(i):
     Args:
         i: Frame number.
     """
-    time_text.set_text('{:.2f} years'.format(times[i]))
-    ax.arrow(-.78, .5, -0.15, 0, width=0.01, length_includes_head=True,
+    time_text.set_text('{:2.0f} years'.format(times[i]))
+    ax.arrow(-0.78, 0.5, -0.15, 0, width=0.01, length_includes_head=True,
          shape='right', fc='white', ec='None')
-    ax.text(-.89, .45, 'star', color='white', size=24)
-    ax.arrow(-.93, -.5, 0.15, 0, width=0.01, length_includes_head=True,
+    ax.text(-0.89, 0.45, 'star', color='white', size=24)
+    ax.arrow(-0.93, -0.5, 0.15, 0, width=0.01, length_includes_head=True,
             shape='right', fc='white', ec='None')
-    ax.text(-.83, -.47, r'$r$', color='white', size=24)
-    ax.arrow(-.93, -.5, 0, 0.15, width=0.01, length_includes_head=True,
+    ax.text(-0.83, -0.47, r'$r$', color='white', size=24)
+    ax.arrow(-0.93, -0.5, 0, 0.15, width=0.01, length_includes_head=True,
             shape='left', fc='white', ec='None')
-    ax.text(-.905, -.39, r'$z$', color='white', size=24)
+    ax.text(-0.905, -0.39, r'$z$', color='white', size=24)
     clipped = np.clip(rhops[i][8:2168,:].ravel(), vmin, vmax) # flattens, clips array
     img.set_array(clipped)
     img.set_clim(vmin, vmax)
