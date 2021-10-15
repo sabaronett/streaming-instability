@@ -1,7 +1,8 @@
 #PBS -j oe
 #PBS -l select=10:ncpus=28:mpiprocs=28:model=sky_ele
-#PBS -l walltime=3:00:00
+#PBS -l walltime=1:00:00
 #PBS -m abe
 #PBS -N AB-Pi0.02-qbox-512_rst
+#PBS -q devel
 
 mpiexec -n 256 $ATHENA_DUST -t 2:54:00 -r SI.final.rst
