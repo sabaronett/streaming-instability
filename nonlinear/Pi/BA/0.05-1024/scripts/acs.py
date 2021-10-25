@@ -17,8 +17,8 @@ data = athena_read.athdf(outputs[0])
 stack = np.zeros_like(data['rhop'][0])
 
 for output in outputs:
-    dataFT = fft.fft2(data['rhop'][0])
-    dataAC = fft.ifft2(dataFT*np.conjugate(dataFT)).real
+    dataFT = fft.fft2(data['rhop'][0], workers=16)
+    dataAC = fft.ifft2(dataFT*np.conjugate(dataFT), workers=16).real
     shifted = fft.fftshift(dataAC)
     stack = np.add(stack, shifted)
 
