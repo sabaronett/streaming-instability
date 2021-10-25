@@ -12,7 +12,7 @@ from scipy import fftpack
 # Collect .athdf outputs, init sim consts.
 athinput = athena_read.athinput('../athinput.si')
 outputs = sorted(list(Path('../athdf').glob(athinput['job']['problem_id'] +
-                                            '.out2.019*.athdf')))
+                                            '.out2.01[8-9]*.athdf')))
 data = athena_read.athdf(outputs[0])
 stack = np.zeros_like(data['rhop'][0])
 
