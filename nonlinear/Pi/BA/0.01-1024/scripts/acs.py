@@ -22,4 +22,4 @@ for output in outputs:
     shifted = fftpack.fftshift(dataAC)
     stack = np.add(stack, shifted)
 
-np.savez_compressed('autocorrelation/acs-{:d}'.format(len(outputs)),acs=stack)
+np.savez_compressed('../output/acs-{:d}'.format(len(outputs)),acs=stack)
