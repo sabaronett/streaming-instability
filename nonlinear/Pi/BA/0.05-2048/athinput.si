@@ -1,0 +1,82 @@
+<comment>
+problem    = streaming_instability
+reference  = 
+configure  = --prob=streaming_instability -p --eos=isothermal --nghost=3 -hdf5 -h5double -mpi
+
+<job>
+problem_id = SI    # problem ID: basename of output filenames
+
+<outputp>
+file_type  = bin   # binary data dump
+dt         = 0.1   # time increment between 1000 outputs
+
+<output1>
+file_type  = hdf5  # HDF5 data dump
+variable   = prim  # output variables
+dt         = 1.0   # time increment between 100 outputs
+
+<output2>
+file_type  = hdf5  # HDF5 data dump
+variable   = rhop  # output variables
+dt         = 0.05  # time increment between 2000 outputs
+
+<output3>
+file_type  = hst   # history data dump
+dt         = 0.1   # time increment between 1000 outputs
+
+<output4>
+file_type  = rst   # restart file
+dt         = 10.0  # time increment between 10 outputs
+
+<time>
+cfl_number = 0.4   # The Courant, Friedrichs, & Lewy (CFL) Number
+nlim       = -1    # cycle limit
+tlim       = 100   # time limit / T (orbital period)
+integrator = vl2   # time integration algorithm
+ncycle_out = 50    # std out timestep
+xorder     = 3     # spatial reconstruction (2=PLM, 3=PPM)
+
+<mesh>
+nx1    = 2048      # Number of zones in X1-direction (x or radial)
+x1min  = -1.0      # minimum value of X1
+x1max  =  1.0      # maximum value of X1
+ix1_bc = periodic  # Inner-X1 boundary condition flag
+ox1_bc = periodic  # Outer-X1 boundary condition flag
+
+nx2    = 2048      # Number of zones in X2-direction (z or vertical)
+x2min  = -1.0      # minimum value of X2
+x2max  =  1.0      # maximum value of X2
+ix2_bc = periodic  # Inner-X2 boundary condition flag
+ox2_bc = periodic  # Outer-X2 boundary condition flag
+
+nx3    = 1         # Number of zones in X3-direction (y or azimuthal)
+x3min  = -1.0      # minimum value of X3
+x3max  =  1.0      # maximum value of X3
+ix3_bc = periodic  # Inner-X3 boundary condition flag
+ox3_bc = periodic  # Outer-X3 boundary condition flag
+
+num_threads = 1    # maximum number of OMP threads
+
+<meshblock>
+nx1 = 32
+nx2 = 32
+nx3 = 1
+
+<hydro>
+iso_sound_speed = 6.28318530717958648  # isothermal sound speed
+nu2mesh         = 0.02                 # mesh hyper-diffusion coefficient
+
+<particles>
+cfl_par         = 0.2
+variable_taus   = false
+taus0           = 0.159154943091895336 # friction time, τ_f
+backreaction    = true                 # back reaction to the gas drag
+
+<problem>
+npx1            = 4096                 # Number of particles in X1-dir
+npx2            = 4096                 # Number of particles in X2-dir
+npx3            = 1                    # Number of particles in X3-dir
+omega           = 6.28318530717958648  # local Keplerian angular frequency
+epsilon         = 0.2                  # dust-to-gas density ratio
+duy0            = 0.05                 # radial pressure gradient, Π
+randparpos      = true
