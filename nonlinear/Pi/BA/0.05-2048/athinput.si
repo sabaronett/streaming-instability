@@ -8,7 +8,7 @@ problem_id = SI    # problem ID: basename of output filenames
 
 <outputp>
 file_type  = bin   # binary data dump
-dt         = 0.1   # time increment between 1000 outputs
+dt         = 1.0   # time increment between 100 outputs
 
 <output1>
 file_type  = hdf5  # HDF5 data dump
