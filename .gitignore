@@ -1,3 +1,14 @@
+# Athena++ Output
+*.athdf
+*.dat
+*.rst
+*.xdmf
+
+# Data Analysis
+*.mp4
+*.npz
+*.pdf
+
 # Misc.
 ipynb/autocorrelation/*
 bad/
@@ -9,17 +20,9 @@ scratch.txt
 *.local.py
 *.code-workspace
 
-# Data Analysis
-*.mp4
-*.npz
-
 # VS Code
 .vscode/
 
-# Athena++ Output
-*.athdf
-*.xdmf
-*.rst
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
