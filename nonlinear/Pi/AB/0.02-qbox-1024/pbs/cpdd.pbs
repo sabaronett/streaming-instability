@@ -1,8 +1,0 @@
-#PBS -j oe
-#PBS -l select=1:ncpus=1:model=bro_ele
-#PBS -l walltime=02:00:00
-#PBS -m abe
-#PBS -N AB-Pi0.02-qbox-1024_cpdd
-#PBS -q debug
-
-python ../scripts/cpdd.py

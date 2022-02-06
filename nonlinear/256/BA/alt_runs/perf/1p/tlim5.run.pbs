@@ -1,8 +1,0 @@
-#PBS -j oe
-#PBS -l select=3:ncpus=28:mpiprocs=28:model=bro
-#PBS -l walltime=0:05:00
-#PBS -m abe
-#PBS -N 1p_perf5
-#PBS -q devel
-
-mpiexec -n 64 $ATHENA_DUST -i tlim5.athinput.si

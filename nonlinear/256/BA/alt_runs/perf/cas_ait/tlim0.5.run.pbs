@@ -1,8 +1,0 @@
-#PBS -j oe
-#PBS -l select=2:ncpus=40:mpiprocs=40:model=cas_ait
-#PBS -l walltime=0:01:00
-#PBS -m abe
-#PBS -N BA_cas_perf0.5
-#PBS -q devel
-
-mpiexec -n 64 $ATHENA_DUST -i tlim0.5.athinput.si

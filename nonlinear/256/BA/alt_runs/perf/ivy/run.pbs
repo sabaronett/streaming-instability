@@ -1,8 +1,0 @@
-#PBS -j oe
-#PBS -l select=4:ncpus=20:mpiprocs=20:model=ivy
-#PBS -l walltime=0:10:00
-#PBS -m abe
-#PBS -N BA_ivy_perf
-#PBS -q devel
-
-mpiexec -n 64 $ATHENA_DUST -i athinput.si

@@ -1,7 +1,0 @@
-#PBS -j oe
-#PBS -l select=1:ncpus=1:model=bro_ele
-#PBS -l walltime=04:00:00
-#PBS -m abe
-#PBS -N BA-Pi0.01-hbox-1024_cpdd
-
-python ../scripts/cpdd.py

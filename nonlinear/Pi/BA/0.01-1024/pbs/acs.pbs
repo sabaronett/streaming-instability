@@ -1,7 +1,0 @@
-#PBS -j oe
-#PBS -l select=1:ncpus=1:model=bro_ele
-#PBS -l walltime=00:01:00
-#PBS -m abe
-#PBS -N BA-Pi0.01-1024_acs-50
-
-python ../scripts/acs.py

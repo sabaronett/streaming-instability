@@ -1,8 +1,0 @@
-#PBS -j oe
-#PBS -l select=1:ncpus=1:model=san
-#PBS -l walltime=0:15:00
-#PBS -m abe
-#PBS -N cpdd3_np25
-#PBS -q devel
-
-python ../scripts/cpdd3.py
