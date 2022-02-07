@@ -57,7 +57,7 @@ then
     mkdir video
 fi
 
-if [[ -f *.xdmf]]
+if [[ -f *.xdmf ]]
 then
     if [[ ! -d xdmf ]]
     then
