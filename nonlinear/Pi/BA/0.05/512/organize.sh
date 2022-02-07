@@ -29,12 +29,15 @@ then
     mv -v *.dat dat/
 fi
 
-if [[ ! -d output ]]
+if [[ -f *.o* ]]
 then
-    mkdir output
+    if [[ ! -d output ]]
+    then
+        mkdir output
+    fi
+    cp -v *.hst output/
+    mv -v *.o* output/
 fi
-cp -v SI.hst output/
-mv -v *.o* output/
 
 if [[ -f *.rst ]]
 then
