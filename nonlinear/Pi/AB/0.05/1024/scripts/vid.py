@@ -63,8 +63,15 @@ def animate(i):
     print('Frame {:5d}'.format(i))
 
 # Compile and save animation
+res = athinput['mesh']['nx1']
+Pi = athinput['problem']['duy0']
+epsilon = athinput['problem']['epsilon']
+run = 'BA'
+if epsilon == 1.0:
+    run = 'AB'
+title = '%s-Pi%s-%s Dust Density'%(run, Pi, res)
 anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
-metadata = dict(title='Dust Density', artist='Stanley A. Baronett')
+metadata = dict(title=title, artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path'] = '/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=60, metadata=metadata, bitrate=-1)
 anim.save('../video/rhop.mp4', writer=writer)
