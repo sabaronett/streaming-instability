@@ -96,3 +96,10 @@ pfeXX:~> ./configure.py --prob=streaming_instability -p --eos=isothermal --nghos
 ```bash
 $ make -j 2
 ```
+
+## Local Commands
+### Visit
+- In local directory
+  ```bash
+  visit -np 4 -sessionfile <fname>
+  ```
