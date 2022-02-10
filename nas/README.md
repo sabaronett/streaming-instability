@@ -35,7 +35,7 @@ pfeXX:~> echo /nobackup/$USERNAME >> ~/.meshrc
 ```
 4. Execute local commands:
 ```bash
-$ sup shiftc -r lfeX:/u/$USERNAME/dir ~/sup/
+$ sup shiftc -r lfe:/nobackup/ /mnt/c/Users/xzele/Downloads/sup/
 ```
 
 
