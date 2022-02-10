@@ -1,0 +1,7 @@
+#PBS -j oe
+#PBS -l select=1:ncpus=1:model=bro_ele
+#PBS -l walltime=6:00:00
+#PBS -m abe
+#PBS -N AB-Pi0.02-2048_vid
+
+python ../../../../scripts/vid.py
