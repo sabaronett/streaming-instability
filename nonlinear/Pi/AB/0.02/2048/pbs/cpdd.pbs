@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N AB-Pi0.02-2048_cpdd
 
-python ../../../../scripts/cpdd.py ../AB/0.02/2048 2
+python ../../../../scripts/cpdd.py 2

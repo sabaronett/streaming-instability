@@ -17,7 +17,6 @@ import numpy as np
 from pathlib import Path
 
 # Passed arguments
-# path = sys.argv[1]                           # Relative path to run
 t_sat = float(sys.argv[1])                   # / T
 
 # Collect .athdf inputs, outputs, sim consts.
