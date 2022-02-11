@@ -88,7 +88,7 @@ See [`sample.pbs`](/nas/sample.pbs).
 ## [Athena++](https://github.com/PrincetonUniversity/athena-public-version/wiki)
 ### [Configure](https://github.com/PrincetonUniversity/athena-public-version/wiki/Configuring)
 ```bash
-pfeXX:~> ./configure.py --prob=streaming_instability -p --eos=isothermal --nghost=3 -hdf5 -h5double -mpi --cxx=icpc -mpi --mpiccmd="icpc -lmpi -lmpi++" --cflag="-axCORE-AVX512,CORE-AVX2 -xAVX"
+pfeXX:~> ./configure.py --prob=streaming_instability -p --eos=isothermal --nghost=3 -hdf5 -h5double -mpi --cxx=icpc -mpi --mpiccmd="icpc -lmpi -lmpi++" --cflag="-xCORE-AVX512"
 ```
 
 ### [Compile](https://github.com/PrincetonUniversity/athena-public-version/wiki/Compiling)
