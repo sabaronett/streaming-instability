@@ -75,4 +75,4 @@ anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
 metadata = dict(title=title, artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path']='/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=60, metadata=metadata, bitrate=-1)
-anim.save('../video/rhop.mp4', writer=writer)
+anim.save('../video/%s-Pi%s-%s_rhop.mp4'%(run, Pi, res), writer=writer)
