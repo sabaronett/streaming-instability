@@ -85,13 +85,13 @@ where `XX` is the ID of the server initiated earlier.
 See [`sample.pbs`](/nas/sample.pbs).
 
 
-## [Athena++](https://github.com/PrincetonUniversity/athena-public-version/wiki)
-### [Configure](https://github.com/PrincetonUniversity/athena-public-version/wiki/Configuring)
+## [Athena++](https://github.com/PrincetonUniversity/athena/wiki)
+### [Configure](https://github.com/PrincetonUniversity/athena/wiki/Configuring)
 ```bash
 pfeXX:~> ./configure.py --prob=streaming_instability -p --eos=isothermal --nghost=3 -hdf5 -h5double -mpi --cxx=icpc -mpi --mpiccmd="icpc -lmpi -lmpi++" --cflag="-xCORE-AVX512"
 ```
 
-### [Compile](https://github.com/PrincetonUniversity/athena-public-version/wiki/Compiling)
+### [Compile](https://github.com/PrincetonUniversity/athena/wiki/Compiling)
 #### On Pleiades front end (PFE)
 ```bash
 $ make -j 2
