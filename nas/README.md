@@ -73,7 +73,7 @@ $ vncviewer localhost:2222X
 ``` 
 5. Submit job:
 ```bash
-pfeXX:~> qsub -I -X -lselect=1:ncpus=16:mpiprocs=16:model=san,walltime=1:00:00 -q devel
+pfeXX:~> qsub -I -X -lselect=1:ncpus=28:mpiprocs=28:model=bro_ele,walltime=1:00:00 -q devel
 ```
 6. When finished, before logging off, make sure to kill the VNC server:
 ```bash
