@@ -11,31 +11,12 @@ if compgen -G "*.athdf" > /dev/null; then
     mv -v *.athdf athdf/
 fi
 
-# C++ crash memory dumps
-if compgen -G "core.*" > /dev/null; then
-    if [[ ! -d core ]]; then
-        mkdir core
+# Athena++ XDMF files (VisIt/ParaView)
+if compgen -G "*.xdmf" > /dev/null; then
+    if [[ ! -d xdmf ]]; then
+        mkdir xdmf
     fi
-    mv -v core.* core/ 
-fi
-
-# Athena++ Dust particle data
-if compgen -G "*.dat" > /dev/null; then
-    if [[ ! -d dat ]]; then
-        mkdir dat
-    fi
-    mv -v *.dat dat/
-fi
-
-# PBS stdout, Athena++ history files
-if compgen -G "*.o*" > /dev/null; then
-    if [[ ! -d output ]]; then
-        mkdir output
-    fi
-    mv -v *.o* output/
-    if compgen -G "*.hst" > /dev/null; then
-        cp -v *.hst output/
-    fi
+    mv -v *.xdmf xdmf/
 fi
 
 # Athena++ restart files
@@ -51,12 +32,31 @@ if compgen -G "*.rst" > /dev/null; then
     fi
 fi
 
-# Athena++ XDMF files (VisIt/ParaView)
-if compgen -G "*.xdmf" > /dev/null; then
-    if [[ ! -d xdmf ]]; then
-        mkdir xdmf
+# Athena++ Dust particle data
+if compgen -G "*.dat" > /dev/null; then
+    if [[ ! -d dat ]]; then
+        mkdir dat
     fi
-    mv -v *.xdmf xdmf/
+    mv -v *.dat dat/
+fi
+
+# C++ crash memory dumps
+if compgen -G "core.*" > /dev/null; then
+    if [[ ! -d core ]]; then
+        mkdir core
+    fi
+    mv -v core.* core/ 
+fi
+
+# PBS stdout, Athena++ history files
+if compgen -G "*.o*" > /dev/null; then
+    if [[ ! -d output ]]; then
+        mkdir output
+    fi
+    mv -v *.o* output/
+    if compgen -G "*.hst" > /dev/null; then
+        cp -v *.hst output/
+    fi
 fi
 
 echo "... Done."
