@@ -11,8 +11,10 @@
 
 # Misc.
 ipynb/autocorrelation/*
+ipynb/scripts
 bad/
 logs/
+misc/
 old*/
 test/
 scratch.txt
