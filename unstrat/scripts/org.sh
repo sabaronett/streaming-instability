@@ -43,7 +43,9 @@ if compgen -G "*.rst" > /dev/null; then
     if [[ ! -d rst ]]; then
         mkdir rst
     fi
-    mv -v *.[0-9][0-9][0-9][0-9][0-9].rst rst/
+    if compgen -G "*.[0-9][0-9][0-9][0-9][0-9].rst" > /dev/null; then
+        mv -v *.[0-9][0-9][0-9][0-9][0-9].rst rst/
+    fi
     if compgen -G "*.final.rst" > /dev/null; then
         cp -v *.final.rst rst/
     fi
