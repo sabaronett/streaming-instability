@@ -13,7 +13,7 @@
 ipynb/autocorrelation/*
 bad/
 logs/
-old/
+old*/
 test/
 scratch.txt
 *.old.*
