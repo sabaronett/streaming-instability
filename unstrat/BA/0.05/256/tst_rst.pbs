@@ -1,0 +1,8 @@
+#PBS -j oe
+#PBS -l select=2:ncpus=40:mpiprocs=40:model=cas_ait
+#PBS -l walltime=0:05:00
+#PBS -m abe
+#PBS -N BA-Pi0.05-256_tst_rst
+#PBS -q devel
+
+mpiexec -n 64 $ATHENA_DUST -t 0:04:00 -r SI.final.rst
