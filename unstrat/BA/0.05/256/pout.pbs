@@ -1,0 +1,9 @@
+#PBS -j oe
+#PBS -l select=2:ncpus=40:mpiprocs=40:model=cas_ait
+#PBS -l walltime=0:10:00
+#PBS -m abe
+#PBS -N BA-Pi0.05-256_pout
+#PBS -q devel
+
+# Redo last 10% of run with high-cadence particle data output
+mpiexec -n 64 $ATHENA_DUST -t 0:09:00 -r SI.00009.rst outputp/file_type=bin outputp/dt=1.0
