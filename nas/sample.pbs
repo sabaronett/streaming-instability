@@ -1,15 +1,24 @@
-#PBS -j oe                          # join std err to std out
-#PBS -l select=1:ncpus=1:mem=1GB
-#PBS -l walltime=01:00:00           # HH:MM:SS
-#PBS -m abe                         # status emails
-#PBS -N plot_growth                 # job name
-#PBS -q ldan                        # or `devel`
-#PBS -W group_list=s2336            # non-default GID
+# Sample PBS Script (https://www.nas.nasa.gov/hecc/support/kb/sample-pbs-script-for-pleiades_190.html)
+
+# join stderr to stdout
+#PBS -j oe
+# select resources (https://www.nas.nasa.gov/hecc/support/kb/preparing-to-run-on-aitken-cascade-lake-nodes_597.html)
+#PBS -l select=1:ncpus=1
+# requested time in HH:MM:SS
+#PBS -l walltime=01:00:00
+# status emails (b=job start; e=errors)
+#PBS -m abe
+# job name
+#PBS -N plot_growth
+# specific queues (https://www.nas.nasa.gov/hecc/support/kb/pbs-job-queue-structure_187.html)
+#PBS -q ldan
+# non-default GID (https://www.nas.nasa.gov/hecc/support/kb/charging-to-a-project-group-id-(gid)_173.html)
+#PBS -W group_list=s2336
 
 echo ----------------------------------------
 echo Job started on `date`
 echo ----------------------------------------
 
-python partial_plot_growth.py       # run code
+python partial_plot_growth.py  # run code
 
 # -end of script-
