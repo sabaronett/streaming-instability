@@ -6,6 +6,10 @@ configure       = --prob=streaming_instability -p --eos=isothermal --nghost=3 -h
 <job>
 problem_id      = SI                   # problem ID: output file basename
 
+<outputp>
+file_type       = bin                  # binary data dump
+dt              = 100.0                # time increment between outputs
+
 <output1>
 file_type       = hdf5                 # HDF5 data dump
 variable        = prim                 # output variables
