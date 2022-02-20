@@ -17,6 +17,7 @@ bad/
 logs/
 misc/
 old*/
+tabs/
 test/
 scratch.txt
 *.old.*
