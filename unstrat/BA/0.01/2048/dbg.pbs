@@ -5,4 +5,4 @@
 #PBS -N BA-Pi0.01-2048_dbg
 #PBS -q debug
 
-mpiexec -n 4096 $ATHENA_DUST -t 1:55:00 -r SI.00007.rst
+mpiexec -n 4096 $ATHENA_DUST -t 1:55:00 -r SI.00006.rst
