@@ -88,7 +88,7 @@ See [`sample.pbs`](/nas/sample.pbs).
 ## [Athena++](https://github.com/PrincetonUniversity/athena/wiki)
 ### [Configure](https://github.com/PrincetonUniversity/athena/wiki/Configuring)
 1. ```bash
-   pfeXX:~> ./configure.py --prob=streaming_instability -p --eos=isothermal --nghost=3 -hdf5  -h5double -mpi --cxx=icpc -mpi --mpiccmd="icpc -lmpi -lmpi++" --cflag="-xCORE-AVX512"
+   pfeXX:~> ./configure.py --prob=streaming_instability -p --eos=isothermal --nghost=3 -mpi -hdf5 -h5double --cxx=icpc --mpiccmd="icpc -lmpi -lmpi++" --cflag="-xCORE-AVX512"
    ```
 2. Manually remove `-xhost` from `athena/Makefile`, under
    ```Makefile
