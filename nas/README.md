@@ -103,7 +103,7 @@ See [`sample.pbs`](/nas/sample.pbs).
 Parallel compilation on a single Electra Broadwell node takes less than 6 minutes.
 1. Request an interactive node with
    ```bash
-   qsub -I -lselect=1:ncpus=28:mpiprocs=28:model=bro_ele,walltime=0:10:00 -q devel
+   qsub -I -lselect=1:ncpus=28:model=bro_ele,walltime=0:10:00 -q devel
    ```
 2. Navigate to Athena++'s root, then
    ```bash
