@@ -9,6 +9,7 @@ output/
 *.mp4
 *.npz
 *.pdf
+*.png
 
 # Misc.
 ipynb/autocorrelation/*
