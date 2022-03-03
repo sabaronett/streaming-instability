@@ -24,13 +24,15 @@ outputs = sorted(list(Path('athdf').glob(athinput["job"]["problem_id"]+
 vp1s = []                                 # sorted dust density snapshots
 sat_outputs = outputs[i_sat:]             # slice saturated state
 
+print('Computing...')
+
 for output in sat_outputs:
     data = athena_read.athdf(output)
     temp = data['vp1'].flatten()
     vp1s.append(np.sort(temp))            # sort
     prog = 100*len(vp1s)/len(sat_outputs) # percentage progress
 
-    print('{:3.1f}%% done.'.format(prog), flush=True)
+    print('{:3.1f}%% done.'.format(prog))
 
 avgs = np.average(vp1s, axis=0)           # avg. ordered vx
 
