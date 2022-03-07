@@ -42,7 +42,8 @@ for i,ax in enumerate(axs.flat):
              *athinput['problem']['npx3']
         print('Np = ', Np)
         vpx0 = hst['vp1'][0]/Np/etav_K
-        oldvpx = np.average(hst['vp1'][i_sat:])/Np/etav_K
+        hst_i_sat = int(t_sats[i]/athinput['output3']['dt'])
+        oldvpx = np.average(hst['vp1'][hst_i_sat:])/Np/etav_K
         outputs = sorted(list(Path(path+'athdf').glob(
                   athinput["job"]["problem_id"]+'.out1.*.athdf')))
         print('  {:n} total outputs.'.format(len(outputs)))
@@ -54,7 +55,7 @@ for i,ax in enumerate(axs.flat):
             data = athena_read.athdf(output)
             vpxs = np.append(vpxs, data['vp1'].flatten())
             rhops = np.append(rhops, data['rhop'].flatten())
-            print('  {:.1%} done.'.format(j/len(sat_outputs)))
+            print('  {:.0%} done.'.format(j/len(sat_outputs)))
 
         arrays[0].append(runs[i])
         arrays[1].append(Pi[0])
@@ -80,13 +81,6 @@ plt.savefig('scripts/figs/vpxd.pdf', bbox_inches='tight', pad_inches=0.01)
 tuples = list(zip(*arrays))
 names = ['Case', '$\Pi$']
 index = pd.MultiIndex.from_tuples(tuples, names=names)
-df = pd.DataFrame({
-     r'$v_{\textrm{p},x,0}$'   : vpx0s,
-     r'$v_{\textrm{p},x}$'     : avgvpxs,
-     r'Old $v_{\textrm{p},x}$' : oldvpxs},
-     index=index)
-s = df.style.format({
-    r'$v_{\textrm{p},x,0}$'   : '{:.3f}',
-    r'$v_{\textrm{p},x}$'     : '{:.3f}',
-    r'Old $v_{\textrm{p},x}$' : '{:.3f}'})
-s.to_latex(buf='scripts/tabs/vpxd.txt')
+pd.DataFrame({r'$v_{\textrm{p},x,0}$'   : vpx0s,
+              r'$v_{\textrm{p},x}$'     : avgvpxs,
+              r'Old $v_{\textrm{p},x}$' : oldvpxs}, index=index)
