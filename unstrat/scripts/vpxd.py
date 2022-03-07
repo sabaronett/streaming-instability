@@ -35,10 +35,12 @@ for i,ax in enumerate(axs.flat):
         i_sat = int(t_sats[i]/athinput['output3']['dt'])
         if runs[i]=='AB' and Pi[0]=='0.01':
             i_sat = int(4.0/athinput['output3']['dt'])
+        print('i_sat = ', i_sat)
         etav_K = float(Pi[0])*athinput['hydro']['iso_sound_speed']
         hst = athena_read.hst(path+'output/SI.hst')
         Np = athinput['problem']['npx1']*athinput['problem']['npx2']\
              *athinput['problem']['npx3']
+        print('Np = ', Np)
         vpx0 = hst['vp1'][0]/Np/etav_K
         oldvpx = np.average(hst['vp1'][i_sat:])/Np/etav_K
         outputs = sorted(list(Path(path+'athdf').glob(
