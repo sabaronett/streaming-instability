@@ -5,4 +5,4 @@
 #PBS -N vpxd
 #PBS -q devel
 
-python ../vpxd.py
+python scripts/vpxd.py
