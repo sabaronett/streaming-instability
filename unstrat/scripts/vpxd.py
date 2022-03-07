@@ -25,7 +25,7 @@ res = '2048'
 xlims = [(-1.0, 1.0), (-2.0, 2.0)]
 n_bins = 50
 arrays, vpx0s, avgvpxs, oldvpxs = [[], []], [], [], []
-t_sats = [2.0, 20.0]                                                 # from DDD
+t_sats = [2.0, 20.0]
 
 for i,ax in enumerate(axs.flat):
     for Pi in Pis:
@@ -72,6 +72,7 @@ for i,ax in enumerate(axs.flat):
     ax.tick_params(which='both', top=True, right=True)
 
 ax.set(xlabel=r'$v_{\mathrm{p},x}$ / $(\eta v_\mathrm{K})$')
+plt.savefig('scripts/figs/vpxd.pdf', bbox_inches='tight', pad_inches=0.01)
 
 tuples = list(zip(*arrays))
 names = ['Case', '$\Pi$']
@@ -85,4 +86,4 @@ s = df.style.format({
     r'$v_{\textrm{p},x,0}$'   : '{:.3f}',
     r'$v_{\textrm{p},x}$'     : '{:.3f}',
     r'Old $v_{\textrm{p},x}$' : '{:.3f}'})
-s.to_latex(buf='vpxd.txt')
+s.to_latex(buf='scripts/tabs/vpxd.txt')
