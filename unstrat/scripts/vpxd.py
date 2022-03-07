@@ -32,9 +32,9 @@ for i,ax in enumerate(axs.flat):
         path = '%s/%s/%s/'%(runs[i], Pi[0], res)
         print(f'Processing '+path+'...')
         athinput = athena_read.athinput(path+'athinput.si')
-        i_sat = int(t_sats[i]/athinput['output3']['dt'])
+        i_sat = int(t_sats[i]/athinput['output1']['dt'])
         if runs[i]=='AB' and Pi[0]=='0.01':
-            i_sat = int(4.0/athinput['output3']['dt'])
+            i_sat = int(4.0/athinput['output1']['dt'])
         print('i_sat = ', i_sat)
         etav_K = float(Pi[0])*athinput['hydro']['iso_sound_speed']
         hst = athena_read.hst(path+'output/SI.hst')
@@ -45,6 +45,7 @@ for i,ax in enumerate(axs.flat):
         oldvpx = np.average(hst['vp1'][i_sat:])/Np/etav_K
         outputs = sorted(list(Path(path+'athdf').glob(
                   athinput["job"]["problem_id"]+'.out1.*.athdf')))
+        print('  {:n} total outputs.'.format(len(outputs)))
         sat_outputs = outputs[i_sat:]
         vpxs, rhops = [], []
         print('  {:n} outputs to process.'.format(len(sat_outputs)))
