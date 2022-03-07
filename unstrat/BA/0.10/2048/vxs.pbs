@@ -1,7 +1,0 @@
-#PBS -j oe
-#PBS -l select=1:ncpus=1:model=bro_ele
-#PBS -l walltime=1:15:00
-#PBS -m abe
-#PBS -N BA-Pi0.10-2048_vxs
-
-python ../../../scripts/vxs.py 20 # t_sat / T (from DDD)
