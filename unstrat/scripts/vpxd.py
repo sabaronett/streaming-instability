@@ -50,7 +50,7 @@ for i,ax in enumerate(axs.flat):
             data = athena_read.athdf(output)
             vpxs = np.append(vpxs, data['vp1'].flatten())
             rhops = np.append(rhops, data['rhop'].flatten())
-            print(f'  {j/len(sat_outputs):.1%} done.')
+            print('  {:s} processed. {:.1%} done.'.format(output, j/len(sat_outputs)))
 
         arrays[0].append(runs[i])
         arrays[1].append(Pi[0])
