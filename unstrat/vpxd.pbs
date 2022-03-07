@@ -1,8 +1,7 @@
 #PBS -j oe
 #PBS -l select=1:ncpus=1:model=cas_ait
-#PBS -l walltime=0:05:00
+#PBS -l walltime=10:00:00
 #PBS -m abe
 #PBS -N vpxd
-#PBS -q devel
 
 python scripts/vpxd.py
