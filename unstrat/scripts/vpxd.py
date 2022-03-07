@@ -29,7 +29,7 @@ t_sats = [2.0, 20.0]                                                 # from DDD
 
 for i,ax in enumerate(axs.flat):
     for Pi in Pis:
-        path = '../../%s/%s/%s/'%(runs[i], Pi[0], res)
+        path = '%s/%s/%s/'%(runs[i], Pi[0], res)
         print(f'Processing '+path+'...')
         athinput = athena_read.athinput(path+'athinput.si')
         i_sat = int(t_sats[i]/athinput['output3']['dt'])
@@ -41,16 +41,17 @@ for i,ax in enumerate(axs.flat):
              *athinput['problem']['npx3']
         vpx0 = hst['vp1'][0]/Np/etav_K
         oldvpx = np.average(hst['vp1'][i_sat:])/Np/etav_K
-        outputs = sorted(list(Path(path+'athdf').glob(athinput["job"]["problem_id"]+
-                                                      '.out1.*.athdf')))
+        outputs = sorted(list(Path(path+'athdf').glob(
+                  athinput["job"]["problem_id"]+'.out1.*.athdf')))
         sat_outputs = outputs[i_sat:]
         vpxs, rhops = [], []
+        print('  {:n} outputs to process.'.format(len(sat_outputs)))
 
         for j,output in enumerate(sat_outputs):
             data = athena_read.athdf(output)
             vpxs = np.append(vpxs, data['vp1'].flatten())
             rhops = np.append(rhops, data['rhop'].flatten())
-            print('  {:s} processed. {:.1%} done.'.format(output, j/len(sat_outputs)))
+            print('  {:.1%} done.'.format(j/len(sat_outputs)))
 
         arrays[0].append(runs[i])
         arrays[1].append(Pi[0])
