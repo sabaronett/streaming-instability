@@ -27,7 +27,6 @@ Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
 res = '2048'
 xlims = [(-1.0, 1.0), (-2.0, 2.0)]
 n_bins = 50
-arrays, avgvpxs = [[], []], []
 t_sats = [2.0, 20.0]
 
 for i,ax in enumerate(axs.flat):
@@ -59,10 +58,9 @@ for i,ax in enumerate(axs.flat):
             rhops = np.append(rhops, data['rhop'].flatten())
             print('  {:.0%} done'.format(j/len(sat_outputs)))
 
-        print('  Done.')
-        arrays[0].append(runs[i])
-        arrays[1].append(Pi[0])
-        avgvpxs.append(np.average(vpxs, weights=rhops)/etav_K)
+        print('  100%% done.')
+        avg_vpx = np.average(vpxs, weights=rhops)/etav_K
+        print(f'    avg_vpx = {avg_vpx:.3f} / (etav_K)')
         ax.hist(vpxs/etav_K, bins=n_bins, density=True, weights=rhops,
                 histtype='step', label=label)
 
@@ -77,9 +75,3 @@ for i,ax in enumerate(axs.flat):
 
 ax.set(xlabel=r'$v_{\mathrm{p},x}$ / $(\eta v_\mathrm{K})$')
 plt.savefig(f'scripts/figs/vpxd_mini_{last:02}.pdf', bbox_inches='tight', pad_inches=0.01)
-
-tuples = list(zip(*arrays))
-names = ['Case', '$\Pi$']
-index = pd.MultiIndex.from_tuples(tuples, names=names)
-df = pd.DataFrame({r'$\langle v_{\textrm{p},x} \rangle$':avgvpxs}, index=index)
-print('=====TABLE=====\n', pd)
