@@ -18,7 +18,7 @@ import pandas as pd
 from pathlib import Path
 
 # Passed arguments
-last = float(sys.argv[1])                     # only process last many outputs
+last = int(sys.argv[1])                        # only process last many outputs
 
 fig, axs = plt.subplots(2, 1, figsize=(6,8), dpi=300)
 runs = ['AB', 'BA']
