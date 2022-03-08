@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N vpxd_mini
 
-python scripts/vpxd_mini.py 20 # last many outputs to process
+python scripts/vpxd_mini.py 10 # last many outputs to process
