@@ -32,7 +32,7 @@ t_sats = [2.0, 20.0]
 for i,ax in enumerate(axs.flat):
     for Pi in Pis:
         path = '%s/%s/%s/'%(runs[i], Pi[0], res)
-        print(f'Processing '+path+'...')
+        print(f'Processing '+path+'...', flush=True)
         athinput = athena_read.athinput(path+'athinput.si')
         i_sat = int(t_sats[i]/athinput['output1']['dt'])
         if runs[i]=='AB' and Pi[0]=='0.01':
@@ -56,11 +56,10 @@ for i,ax in enumerate(axs.flat):
             data = athena_read.athdf(output)
             vpxs = np.append(vpxs, data['vp1'].flatten())
             rhops = np.append(rhops, data['rhop'].flatten())
-            print('  {:.0%} done'.format(j/len(sat_outputs)))
+            print('  {:.0%}'.format(j/len(sat_outputs)), flush=True)
 
-        print('  100%% done.')
         avg_vpx = np.average(vpxs, weights=rhops)/etav_K
-        print(f'    avg_vpx = {avg_vpx:.3f} / (etav_K)')
+        print(f'  100%%\n    avg_vpx = {avg_vpx:.3f} / (etav_K)', flush=True)
         ax.hist(vpxs/etav_K, bins=n_bins, density=True, weights=rhops,
                 histtype='step', label=label)
 
