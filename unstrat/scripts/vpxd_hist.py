@@ -2,9 +2,9 @@
 #==============================================================================
 # vpxd_hist.py
 #
-# Computes and saves the probability density function histogram of zonal radial
-# velocities, weighted by particle densities, of the dust during the saturated,
-# turbulent state of the SI.
+# Computes and saves the probability density function histogram and standard
+# moments of zonal radial velocities, weighted by particle densities, of the
+# dust during the saturated, turbulent state of the SI.
 #
 # Author: Stanley A. Baronett
 # Created: 2022-03-09
@@ -14,6 +14,7 @@ import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
 import athena_read
 import numpy as np
+from scipy.stats import skew, kurtosis
 from pathlib import Path
 
 t_sat, n_bins = float(sys.argv[1]), int(sys.argv[2]) # t_sat in code unit [T]
@@ -23,19 +24,23 @@ i_sat = int(t_sat/dt)          # output index of saturated state
 outputs = sorted(list(Path('athdf').glob(athinput["job"]["problem_id"]+
                                          '.out1.*.athdf')))
 sat_outputs = outputs[i_sat:]  # slice saturated state
-vp1s, rhops = [], []
+vpxs, rhops = [], []
 
 print(f'Compiling data...', flush=True)
 
 for i,output in enumerate(sat_outputs):
     data = athena_read.athdf(output)
     temp = data['vp1'].flatten()
-    vp1s.append(temp)
+    vpxs.append(temp)
     temp = data['rhop'].flatten()
     rhops.append(temp)
     print('  {:.0%}'.format(i/len(sat_outputs)), flush=True)
 
-print('  100%\nComputing histogram...', flush=True)
-hist, bin_edges = np.histogram(vp1s, bins=n_bins, weights=rhops, density=True)
+print('  100%\nComputing histogram and central moments...', flush=True)
+hist, bin_edges = np.histogram(vpxs, bins=n_bins, weights=rhops, density=True)
+wavg = np.average(vpxs, weights=rhops)
+wdist = vpxs*rhops
+wvar, wskew, wkurt = np.var(wdist), skew(wdist), kurtosis(wdist)
 print('... Done.\nSaving...', flush=True)
-np.savez_compressed('output/vpxd_hist', hist=hist, bin_edges=bin_edges)
+np.savez_compressed('output/vpxd_hist', hist=hist, bin_edges=bin_edges,
+                    wavg=wavg, wvar=wvar, wskew=wskew, wkurt=wkurt)
