@@ -29,14 +29,13 @@ print(f'Compiling data...', flush=True)
 
 for i,output in enumerate(sat_outputs):
     data = athena_read.athdf(output)
-    vp1s = np.append(vp1s, data['vp1'].flatten())
-    rhops = np.append(rhops, data['rhop'].flatten())
-
+    temp = data['vp1'].flatten()
+    vp1s.append(temp)
+    temp = data['rhop'].flatten()
+    rhops.append(temp)
     print('  {:.0%}'.format(i/len(sat_outputs)), flush=True)
 
 print('  100%\nComputing histogram...', flush=True)
-
 hist, bin_edges = np.histogram(vp1s, bins=n_bins, weights=rhops, density=True)
-
 print('... Done.\nSaving...', flush=True)
 np.savez_compressed('output/vpxd_hist', hist=hist, bin_edges=bin_edges)
