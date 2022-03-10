@@ -8,14 +8,14 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-03-09
-# Last Modified: 2022-03-09
+# Last Modified: 2022-03-10
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
 import athena_read
 import numpy as np
 from pathlib import Path
-from scipy.stats import skew, kurtosis
+# from scipy.stats import skew, kurtosis # for later use with outputp data
 
 t_sat, n_bins = float(sys.argv[1]), int(sys.argv[2]) # t_sat in code unit [T]
 athinput = athena_read.athinput('athinput.si')
@@ -37,10 +37,14 @@ for i,output in enumerate(sat_outputs):
 print('  100%\nComputing histogram and central moments...', flush=True)
 hist, bin_edges = np.histogram(vpxs, bins=n_bins, weights=rhops, density=True)
 wavg = np.average(vpxs, weights=rhops)
-wdist = vpxs*rhops
-wvar = np.var(wdist)
-wskew = skew(wdist, axis=None)
-wkurt = kurtosis(wdist, axis=None)
+wvar = np.average((vpxs-wavg)**2, weights=rhops)
+wskew = np.average(((vpxs-wavg)/np.sqrt(wvar))**3, weights=rhops)
+wkurt = np.average((vpxs-wavg)**4/wvar**2, weights=rhops)
+# For later use with outputp particle data
+# mean = np.mean(vpxs)
+# var = np.var(vpxs)
+# skewness = skew(vpxs, axis=None)
+# kurt = kurtosis(vpxs, axis=None)
 print('... Done.\nSaving...', flush=True)
 np.savez_compressed('output/vpxd_hist', hist=hist, bin_edges=bin_edges,
                     wavg=wavg, wvar=wvar, wskew=wskew, wkurt=wkurt)
