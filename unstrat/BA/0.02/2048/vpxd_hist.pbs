@@ -1,7 +1,7 @@
 #PBS -j oe
 #PBS -l select=1:ncpus=1:model=bro_ele
-#PBS -l walltime=12:00:00
+#PBS -l walltime=48:00:00
 #PBS -m abe
 #PBS -N BA-Pi0.02-2048_vpxd_hist
 
-python ../../../scripts/vpxd_hist.py 2 100 # t_sat, n_bins
+python ../../../scripts/vpxd_hist.py 20 100 # t_sat, n_bins
