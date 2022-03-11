@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-03-09
-# Last Modified: 2022-03-10
+# Last Modified: 2022-03-11
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -19,11 +19,13 @@ from pathlib import Path
 
 t_sat, n_bins = float(sys.argv[1]), int(sys.argv[2]) # t_sat in code unit [T]
 athinput = athena_read.athinput('athinput.si')
-dt = athinput['output1']['dt'] # time between vp1 outputs
-i_sat = int(t_sat/dt)          # output index of saturated state
+Pi = athinput['problem']['duy0']                     # radial pressure gradient
+etav_K = Pi*athinput['hydro']['iso_sound_speed']     # scaling factor
+dt = athinput['output1']['dt']                       # time between vp1 outputs
+i_sat = int(t_sat/dt)                                # sat state output index
 outputs = sorted(list(Path('athdf').glob(athinput["job"]["problem_id"]+
                                          '.out1.*.athdf')))
-sat_outputs = outputs[i_sat:]  # slice saturated state
+sat_outputs = outputs[i_sat:]                        # slice saturated state
 vpxs, rhops = [], []
 
 print(f'Compiling data...', flush=True)
@@ -34,6 +36,7 @@ for i,output in enumerate(sat_outputs):
     rhops.append(data['rhop'])
     print('  {:.0%}'.format(i/len(sat_outputs)), flush=True)
 
+vpxs = vpxs/etav_K                                   # normalize for plot
 print('  100%\nComputing histogram and central moments...', flush=True)
 hist, bin_edges = np.histogram(vpxs, bins=n_bins, weights=rhops, density=True)
 wavg = np.average(vpxs, weights=rhops)
