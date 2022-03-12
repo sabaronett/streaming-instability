@@ -17,6 +17,7 @@ import numpy as np
 from pathlib import Path
 # from scipy.stats import skew, kurtosis # for later use with outputp data
 
+# Collect Athena++ inputs, outputs, and sim constants
 t_sat, n_bins = float(sys.argv[1]), int(sys.argv[2]) # t_sat in code unit [T]
 athinput = athena_read.athinput('athinput.si')
 Pi = athinput['problem']['duy0']                     # radial pressure gradient
@@ -37,7 +38,7 @@ for i,output in enumerate(sat_outputs):
     print('  {:.0%}'.format(i/len(sat_outputs)), flush=True)
 
 print('  100%\nComputing histogram and central moments...', flush=True)
-vpxs = np.asarray(vpxs)/etav_K                                   # normalize for plot
+vpxs = np.asarray(vpxs)/etav_K                       # normalize for plot
 hist, bin_edges = np.histogram(vpxs, bins=n_bins, weights=rhops, density=True)
 wavg = np.average(vpxs, weights=rhops)
 wvar = np.average((vpxs-wavg)**2, weights=rhops)
