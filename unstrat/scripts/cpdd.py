@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-02-08
-# Last Modified: 2022-02-13
+# Last Modified: 2022-03-12
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -16,36 +16,31 @@ import athena_read
 import numpy as np
 from pathlib import Path
 
-# Passed arguments
-t_sat = float(sys.argv[1])                   # / T
-
-# Collect .athdf inputs, outputs, sim consts.
+# Collect Athena++ inputs, outputs, and sim constants
+t_sat = float(sys.argv[1])                   # code unit [T]
 athinput = athena_read.athinput('athinput.si')
 epsilon = athinput['problem']['epsilon']     # avg. BG dust/gas ρ-ratio
 dt = athinput['output2']['dt']               # time between rhop outputs
 i_sat = int(t_sat / dt)                      # output index of sat. state
 outputs = sorted(list(Path('athdf').glob(athinput["job"]["problem_id"]+
                                          '.out2.*.athdf')))
+sat_outputs = outputs[i_sat:]                # slice saturated state
 rhops = []                                   # sorted dust density snapshots
 
-# Load & process saturated-state data into memory
-sat_outputs = outputs[i_sat:]
-for output in sat_outputs:
-    data = athena_read.athdf(output)
-    temp = data['rhop'].flatten() / epsilon  # flatten & convert
-    rhops.append(np.sort(temp))              # sort
-    prog = 100*len(rhops)/len(sat_outputs)   # percentage progress
-    print('{:3.1f}%% done.'.format(prog), flush=True)
+print(f'Compiling data...', flush=True)
 
-# Find min., max., avg. of each ordered rhop over saturated state
+for i,output in enumerate(sat_outputs):
+    data = athena_read.athdf(output)
+    rhops.append(np.sort(data['rhop']))
+    print('  {:.0%}'.format(i/len(sat_outputs)), flush=True)
+
+print('  100%\nComputing statistical quantities...', flush=True)
+rhops = np.asarray(rhops)/epsilon            # convert for plot
 mins = np.amin(rhops, axis=0)
 maxs = np.amax(rhops, axis=0)
 avgs = np.average(rhops, axis=0)
-
-# Find std. dev. computed in log space
-lnrhops = np.log(rhops)
-stds = np.exp(np.std(lnrhops, axis=0))
-cdf = np.linspace(1, 0 , mins.size, endpoint=False)
+stds = np.exp(np.std(np.log(rhops), axis=0)) # computed in log space
+cdf = np.linspace(1, 0 , avgs.size, endpoint=False)
 
 np.savez_compressed('output/cpdd', cdf=cdf, mins=mins, maxs=maxs, avgs=avgs,
                     stds=stds)
