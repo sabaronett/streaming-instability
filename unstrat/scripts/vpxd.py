@@ -50,5 +50,5 @@ wkurt = np.average((vpxs-wavg)**4/wvar**2, weights=rhops)-3 # excess kurtosis
 # skewness = skew(vpxs, axis=None)
 # kurt = kurtosis(vpxs, axis=None)
 print('... Done.\nSaving...', flush=True)
-np.savez_compressed('output/vpxd_hist', hist=hist, bin_edges=bin_edges,
+np.savez_compressed('output/vpxd', hist=hist, bin_edges=bin_edges,
                     wavg=wavg, wvar=wvar, wskew=wskew, wkurt=wkurt)
