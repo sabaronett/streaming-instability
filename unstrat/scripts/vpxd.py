@@ -43,7 +43,7 @@ hist, bin_edges = np.histogram(vpxs, bins=n_bins, weights=rhops, density=True)
 wavg = np.average(vpxs, weights=rhops)
 wvar = np.average((vpxs-wavg)**2, weights=rhops)
 wskew = np.average(((vpxs-wavg)/np.sqrt(wvar))**3, weights=rhops)
-wkurt = np.average((vpxs-wavg)**4/wvar**2, weights=rhops)
+wkurt = np.average((vpxs-wavg)**4/wvar**2, weights=rhops)-3 # excess kurtosis
 # For later use with outputp particle data
 # mean = np.mean(vpxs)
 # var = np.var(vpxs)
