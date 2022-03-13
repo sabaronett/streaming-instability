@@ -31,7 +31,7 @@ print(f'Compiling data...', flush=True)
 
 for i,output in enumerate(sat_outputs):
     data = athena_read.athdf(output)
-    rhops.append(np.sort(data['rhop']))
+    rhops.append(np.sort(data['rhop'], axis=None))
     print('  {:.0%}'.format(i/len(sat_outputs)), flush=True)
 
 print('  100%\nComputing statistical quantities...', flush=True)
