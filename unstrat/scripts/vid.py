@@ -6,7 +6,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-02-08
-# Last Modified: 2022-02-13
+# Last Modified: 2022-03-16
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -54,7 +54,7 @@ def animate(i):
     Args:
         i: Frame number.
     """
-    ax.set_title('$t={:.1f}$ / $T$'.format(times[0]))
+    ax.set_title('$t={:.1f}$ / $T$'.format(times[i]))
     clipped = np.clip(rhops[i].ravel(), vmin, vmax) # flattens, clips array
     img.set_array(clipped)
     img.set_clim(vmin, vmax)
