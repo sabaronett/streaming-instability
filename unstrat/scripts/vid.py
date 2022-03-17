@@ -6,7 +6,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-02-08
-# Last Modified: 2022-03-16
+# Last Modified: 2022-03-17
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -26,6 +26,7 @@ res, dpi = athinput['mesh']['nx1'], 450    # 2160p default
 if res < 2048: dpi = 225                   # 1080p for lower resolution runs
 c_s = athinput['hydro']['iso_sound_speed'] # sound speed
 Omega = athinput['problem']['omega']       # local Keplerian angular frequency
+Pi = athinput['problem']['duy0']           # radial pressure gradient
 H = c_s/Omega                              # gas scale height
 T = 2*np.pi/Omega                          # orbital period
 outputs = sorted(list(Path('athdf').glob(athinput["job"]["problem_id"]+
@@ -42,7 +43,7 @@ for output in outputs:                     # load all data into memory
 # Initialize first frame
 clipped = np.clip(rhops[0], vmin, vmax)
 fig, ax = plt.subplots(dpi=dpi)
-ax.set(aspect='equal', title='$t={:.1f}$ / $T$'.format(times[0]),
+ax.set(aspect='equal', title=f'$t={times[0]:.2f}$ / $T$',
        xlabel='$x$ / $H$', ylabel='$z$ / $H$')
 img = ax.pcolormesh(xf, zf, clipped, norm=colors.LogNorm(vmin, vmax))
 cb = plt.colorbar(img)
@@ -54,11 +55,11 @@ def animate(i):
     Args:
         i: Frame number.
     """
-    ax.set_title('$t={:.1f}$ / $T$'.format(times[i]))
-    clipped = np.clip(rhops[i].ravel(), vmin, vmax) # flattens, clips array
+    ax.set_title(f'{run:s}, $\Pi=${Pi:.2f}, $t={times[i]:.2}$ / $T$')
+    clipped = np.clip(rhops[i].ravel(), vmin, vmax) # flatten, clip array
     img.set_array(clipped)
     img.set_clim(vmin, vmax)
-    print(f'  frame {i:4n}', flush=True)      # print frame progess
+    print(f'  frame {i:4n}', flush=True)            # print frame progess
 
 # Compile and save animation
 print('Processing frames...', flush=True)
