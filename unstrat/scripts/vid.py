@@ -58,9 +58,10 @@ def animate(i):
     clipped = np.clip(rhops[i].ravel(), vmin, vmax) # flattens, clips array
     img.set_array(clipped)
     img.set_clim(vmin, vmax)
-    print('Frame {:5d}'.format(i))                  # print frame progess
+    print(f'  frame {i:4n}', flush=True)      # print frame progess
 
 # Compile and save animation
+print('Processing frames...', flush=True)
 Pi = athinput['problem']['duy0']
 title = '%s-Pi%s-%s Dust Density'%(run, Pi, res)
 anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
@@ -68,3 +69,4 @@ metadata = dict(title=title, artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path']='/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=60, metadata=metadata, bitrate=-1)
 anim.save('%s-Pi%s-%s_rhop.mp4'%(run, Pi, res), writer=writer)
+print('Done.\nVideo saved.', flush=True)
