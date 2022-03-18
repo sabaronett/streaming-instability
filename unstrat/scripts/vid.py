@@ -43,7 +43,7 @@ for output in outputs:                     # load all data into memory
 # Initialize first frame
 clipped = np.clip(rhops[0], vmin, vmax)
 fig, ax = plt.subplots(dpi=dpi)
-ax.set(aspect='equal', title=f'$t={times[0]:3.2f}\,T$',
+ax.set(aspect='equal', title=f'{run:s}, $\Pi=${Pi:.2f}, $t={times[0]:6.2f}\,T$',
        xlabel='$x$ / $H$', ylabel='$z$ / $H$')
 img = ax.pcolormesh(xf, zf, clipped, norm=colors.LogNorm(vmin, vmax))
 cb = plt.colorbar(img)
@@ -55,7 +55,7 @@ def animate(i):
     Args:
         i: Frame number.
     """
-    ax.set_title(f'{run:s}, $\Pi=${Pi:.2f}, $t={times[i]:3.2f}\,T$')
+    ax.set_title(f'{run:s}, $\Pi=${Pi:.2f}, $t={times[i]:6.2f}\,T$')
     clipped = np.clip(rhops[i].ravel(), vmin, vmax) # flatten, clip array
     img.set_array(clipped)
     img.set_clim(vmin, vmax)
@@ -63,11 +63,10 @@ def animate(i):
 
 # Compile and save animation
 print('Processing frames...', flush=True)
-Pi = athinput['problem']['duy0']
-title = '%s-Pi%s-%s Dust Density'%(run, Pi, res)
+title = f'{run:s}-Pi{Pi:.2f}-{res:n}'
 anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
-metadata = dict(title=title, artist='Stanley A. Baronett')
+metadata = dict(title=(title+' Dust Density'), artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path']='/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
 writer = animation.FFMpegWriter(fps=60, metadata=metadata, bitrate=-1)
-anim.save('%s-Pi%s-%s_rhop.mp4'%(run, Pi, res), writer=writer)
+anim.save(title+'_rhop.mp4', writer=writer)
 print('Done.\nVideo saved.', flush=True)
