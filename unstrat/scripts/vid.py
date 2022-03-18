@@ -43,7 +43,7 @@ for output in outputs:                     # load all data into memory
 # Initialize first frame
 clipped = np.clip(rhops[0], vmin, vmax)
 fig, ax = plt.subplots(dpi=dpi)
-ax.set(aspect='equal', title=f'$t={times[0]:.2f}$ / $T$',
+ax.set(aspect='equal', title=f'$t={times[0]:3.2f}\,T$',
        xlabel='$x$ / $H$', ylabel='$z$ / $H$')
 img = ax.pcolormesh(xf, zf, clipped, norm=colors.LogNorm(vmin, vmax))
 cb = plt.colorbar(img)
@@ -55,7 +55,7 @@ def animate(i):
     Args:
         i: Frame number.
     """
-    ax.set_title(f'{run:s}, $\Pi=${Pi:.2f}, $t={times[i]:.2}$ / $T$')
+    ax.set_title(f'{run:s}, $\Pi=${Pi:.2f}, $t={times[i]:3.2f}\,T$')
     clipped = np.clip(rhops[i].ravel(), vmin, vmax) # flatten, clip array
     img.set_array(clipped)
     img.set_clim(vmin, vmax)
