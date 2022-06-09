@@ -23,7 +23,7 @@ tab = [['Run', 'v_p,x,max [H/T]', 'v_p,z,max [H/T]']]
 for case in cases:
     for Pi in Pis:
         run = f'{case:s}/{Pi:s}'
-        output = 'run'+f'/{res:n}/SI.pout.00001.dat'
+        output = '../'+run+f'/{res:n}/SI.pout.00001.dat'
         print(f'Loading {run:s} particle data...')
         time, pdata = athena_read.particles(output)
         row = [run, None, None]
