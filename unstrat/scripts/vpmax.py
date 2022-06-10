@@ -19,7 +19,7 @@ cases = ['AB', 'BA']
 Pis = ['0.01', '0.02', '0.05', '0.10']
 res = 2048
 
-print('Run\t\tv_{p,x,max} [H/T]\t\tv_{p,z,max} [H/T]')
+print('Run\t\t\tv_{p,x,max} [H/T]\t\t\tv_{p,z,max} [H/T]')
 print('=======================================================================')
 
 for case in cases:
