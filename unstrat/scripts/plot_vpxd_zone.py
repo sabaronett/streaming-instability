@@ -49,9 +49,9 @@ for i,ax in enumerate(axs.flat):
         arrays[0].append(runs[i])
         arrays[1].append(Pi[0])
         avgvpxs.append(np.average(vpxs, weights=rhops))
-        ax.hist(vpxs, bins=n_bins, density=True, weights=rhops, c=Pi[1],
+        ax.hist(vpxs, bins=n_bins, density=True, weights=rhops, color=Pi[1],
                 histtype='step', label=r'{:s}, {:.0f} $T$'.format(Pi[0], t))
-        ax.axvline(vpx0, c=Pi[1], ls='--',
+        ax.axvline(vpx0, color=Pi[1], ls='--',
                    label=r'$v_{\mathrm{p},x,0},\,0\,T$')
 
     ax.grid()
