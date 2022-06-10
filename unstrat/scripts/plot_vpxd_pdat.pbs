@@ -3,6 +3,6 @@
 #PBS -l walltime=1:00:00
 #PBS -m abe
 #PBS -N plot_vpxd_pdat
-#PBS -q devel
+#PBS -q debug
 
 python plot_vpxd_pdat.py
