@@ -55,10 +55,10 @@ for i,ax in enumerate(axs.flat):
                    label=r'$v_{\mathrm{p},x,0},\,0\,T$')
 
     ax.grid()
-    ax.legend( ncol=2, title=r'$\Pi,\,t$')
+    ax.legend(title=r'$\Pi,\,t$')
     ax.minorticks_on()
     ax.set(ylabel=r'd$f_\mathrm{zone}$ / d$v_{\mathrm{p},x}$')
-    ax.text(0.03, 0.97, runs[i], ha='left', va='top', size='large',
+    ax.text(0.03, 0.97, runs[i], ha='left', va='top', size='x-large',
             transform=ax.transAxes)
     ax.tick_params(which='both', top=True, right=True)
 
