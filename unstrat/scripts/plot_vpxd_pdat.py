@@ -29,9 +29,9 @@ for i,ax in enumerate(axs.flat):
     for Pi in Pis:
         path = '../%s/%s/%s/'%(runs[i], Pi[0], res)
         outputs = sorted(list(Path(path+'dat').glob('SI.pout.*.dat')))
-        time, pdata = athena_read.particles(outputs[0])  # equilibrium
+        time, pdata = athena_read.particles(str(outputs[0]))  # equilibrium
         vpx0 = np.average(pdata['vpx'])
-        time, pdata = athena_read.particles(outputs[-1]) # last snapshot
+        time, pdata = athena_read.particles(str(outputs[-1])) # last snapshot
 
         ax.axvline(vpx0, color=Pi[1], ls='--',
                    label=r'$v_{\mathrm{p},x,0},\,0\,T$')
