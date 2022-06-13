@@ -1,0 +1,7 @@
+#PBS -j oe
+#PBS -l select=103:ncpus=40:mpiprocs=40:model=cas_ait
+#PBS -l walltime=8:00:00
+#PBS -m abe
+#PBS -N AB-Pi0.10-2048_prst-8T
+
+mpiexec -n 4096 $ATHENA_DUST -i athinput.si -r SI.00008.rst -t 7:50:00
