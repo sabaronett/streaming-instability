@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N AB-Pi0.01-2048_athdf2txt
 
-python ../../../scripts/athdf2txt.py ../athdf/SI.out1.00100.athdf
+python ../../../../scripts/athdf2txt.py ../athdf/SI.out1.00100.athdf
