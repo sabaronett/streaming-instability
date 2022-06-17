@@ -18,7 +18,7 @@
   - Dust density evolution video: https://youtu.be/dSfsSFgFE0o
 
 ## File Contents
-- 'SI.pout.00001.txt' (ASCII)
+- 'SI.pout.00020.txt' (ASCII)
   - Lagrangian particle data snapshot of the dust at t = 10 T (orbits)
   - Columns:
     1. xp
