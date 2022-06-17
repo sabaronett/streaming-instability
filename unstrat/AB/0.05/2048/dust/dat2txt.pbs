@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N AB-Pi0.05-2048_dat2txt
 
-python ../../../scripts/dat2txt.py ../dat/SI.pout.00001.dat
+python ../../../../scripts/dat2txt.py ../dat/SI.pout.00001.dat
