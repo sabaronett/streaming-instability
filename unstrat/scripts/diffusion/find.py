@@ -157,7 +157,7 @@ def par_disp(datadir='./dat', athinput=None, save_to=None):
 
     # Save the results if requested.
     if save_to is not None:
-        file = 'output/' + save_to
+        file = f'{datadir}/' + save_to
         print('Saving the results to ' + file + '.npz......',
               end='', flush=True)
         kw = dict(t=t)
