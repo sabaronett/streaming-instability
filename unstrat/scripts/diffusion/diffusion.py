@@ -13,17 +13,17 @@ sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
 import athena_read
 from dust import Diffusion, MultiSpecies
 import math
-import matplotlib as mpl
-mpl.use("PDF")
-from matplotlib import cm
-from matplotlib.backends.backend_pdf import PdfPages
-from matplotlib.colors import LogNorm
-from matplotlib.offsetbox import AnchoredText
-import matplotlib.pyplot as plt
+# import matplotlib as mpl
+# mpl.use("PDF")
+# from matplotlib import cm
+# from matplotlib.backends.backend_pdf import PdfPages
+# from matplotlib.colors import LogNorm
+# from matplotlib.offsetbox import AnchoredText
+# import matplotlib.pyplot as plt
 import numpy as np
 # import PencilCode as pc
 import random
-from utilities import compose_title
+# from utilities import compose_title
 
 # Get the stopping times and the solid-to-gas ratios.
 athinput = athena_read.athinput('athinput.si')
