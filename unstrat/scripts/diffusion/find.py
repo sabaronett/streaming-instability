@@ -46,9 +46,10 @@ def par_disp(datadir='./dat', athinput=None, save_to=None):
     # Determine numbers of particles and snapshots.
     outputs = sorted(list(Path(datadir).glob(athinput['job']['problem_id'] +
                                              '.pout.*.dat')))
+    del outputs[0]  # exclude t=0 snapshot
     time, pdata = athena_read.particles(str(outputs[0]))
     npar = pdata.size
-    nt = len(outputs) - 1   # exclude t=0 snapshot
+    nt = len(outputs)
     print(f'Total number of particles: {npar}')
     print(f'Total number of snapshots: {nt}')
 
