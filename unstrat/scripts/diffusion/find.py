@@ -8,9 +8,6 @@
 # Created: 2013-10-21
 # Last Modified: 2022-06-22
 #==============================================================================
-from lzma import LZMACompressor
-
-
 def par_disp(datadir='./dat', athinput=None, save_to=None):
     """Finds the displacement of each particle as a function of time.
 
