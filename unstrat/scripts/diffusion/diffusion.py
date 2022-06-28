@@ -32,7 +32,7 @@ athinput = athena_read.athinput('athinput.si')
 taus = athinput['problem']['omega'] * athinput['particles']['taus0']
 epsilon = athinput['problem']['epsilon']
 nout = 3 # Minimum number needed to calculate the diffusion coefficient.
-if sys.argv[1]: nout = sys.argv[1]
+if sys.argv[1]: nout = int(sys.argv[1])
 
 # Find the displacement and the diffusion coefficient.
 diff = Diffusion(athinput=athinput, nout=nout)
