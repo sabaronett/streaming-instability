@@ -6,7 +6,7 @@
 #
 # Author: Stanley A. Baronett, Chao-Chin Yang
 # Created: 2013-10-21
-# Last Modified: 2022-06-22
+# Last Modified: 2022-06-28
 #==============================================================================
 def par_disp(datadir='./dat', athinput=None, save_to=None):
     """Finds the displacement of each particle as a function of time.
@@ -32,7 +32,7 @@ def par_disp(datadir='./dat', athinput=None, save_to=None):
     """
     # Author: Stanley A. Baronett, Chao-Chin Yang
     # Created: 2018-01-16
-    # Last Modified: 2022-06-22
+    # Last Modified: 2022-06-28
     import sys
     sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
     import athena_read
@@ -60,10 +60,10 @@ def par_disp(datadir='./dat', athinput=None, save_to=None):
     lz = mesh['x2max'] - mesh['x2min']
     active = (mesh[f'nx1'] > 1 and mesh[f'ix1_bc'] == 'periodic'\
                 and mesh[f'ox1_bc'] == 'periodic',
-              mesh[f'nx3'] > 1 and mesh[f'ix3_bc'] == 'periodic'\
-                and mesh[f'ox3_bc'] == 'periodic',
               mesh[f'nx2'] > 1 and mesh[f'ix2_bc'] == 'periodic'\
-                and mesh[f'ox2_bc'] == 'periodic') # (x, y, z)
+                and mesh[f'ox2_bc'] == 'periodic',
+              mesh[f'nx3'] > 1 and mesh[f'ix3_bc'] == 'periodic'\
+                and mesh[f'ox3_bc'] == 'periodic')
     print(f'Active dimensions: {active}')
 
     # Define function to detect boundary jumping.
