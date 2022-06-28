@@ -1,0 +1,12 @@
+#PBS -j oe
+#PBS -l select=1:ncpus=1:model=bro_ele
+#PBS -l walltime=1:00:00
+#PBS -m abe
+#PBS -N AB-Pi0.05-256_diffusion_conv
+#PBS -q debug
+
+python ../../../scripts/diffusion/diffusion.py 6 # nout
+python ../../../scripts/diffusion/diffusion.py 11
+python ../../../scripts/diffusion/diffusion.py 21
+python ../../../scripts/diffusion/diffusion.py 41
+python ../../../scripts/diffusion/diffusion.py 81

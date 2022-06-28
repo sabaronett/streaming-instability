@@ -388,9 +388,9 @@ class Diffusion:
     """
     # Author: Stanley A. Baronett, Chao-Chin Yang
     # Created: 2021-05-07
-    # Last Modified: 2022-06-22
+    # Last Modified: 2022-06-28
 
-    def __init__(self, datadir="./dat", athinput=None):
+    def __init__(self, datadir="./dat", athinput=None, nout=3):
         """Finds the displacement of each dust particle as a function of
         time.
 
@@ -399,10 +399,13 @@ class Diffusion:
                 Data directory.
             athinput
                 If not None, a dictionary of dictionaries for athinput file.
+            nout
+                Number of particle outputs (.dat) to include, ending with the
+                last available (highest numbered) file.
         """
         # Author: Stanley A. Baronett, Chao-Chin Yang
         # Created: 2021-05-07
-        # Last Modified: 2022-06-22
+        # Last Modified: 2022-06-28
         import sys
         sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
         import athena_read
@@ -413,8 +416,8 @@ class Diffusion:
         # import read
 
         # Find the displacement.
-        time, (dxp, dyp, dzp) = find.par_disp(datadir=datadir,
-                                              athinput=athinput, save_to='disp')
+        time, (dxp, dyp, dzp) = find.par_disp(datadir=datadir, save_to='disp',
+                                              athinput=athinput, nout=nout)
 
         # Normalize the time and displacement.
         if athinput is None:

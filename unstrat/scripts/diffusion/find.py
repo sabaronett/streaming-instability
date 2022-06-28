@@ -8,7 +8,7 @@
 # Created: 2013-10-21
 # Last Modified: 2022-06-28
 #==============================================================================
-def par_disp(datadir='./dat', athinput=None, save_to=None):
+def par_disp(datadir='./dat', save_to=None, athinput=None, nout=3):
     """Finds the displacement of each particle as a function of time.
 
     Keyword Arguments:
@@ -16,6 +16,9 @@ def par_disp(datadir='./dat', athinput=None, save_to=None):
             Path to the data directory.
         athinput
             If not None, a dictionary of dictionaries for athinput file.
+        nout
+            Number of particle outputs (.dat) to include, ending with the last
+            available (highest numbered) file.
         save_to
             If not None, a string of the filename (without .npz
             extension) to save the results (t and dxp) to a numpy data
@@ -46,7 +49,7 @@ def par_disp(datadir='./dat', athinput=None, save_to=None):
     # Determine numbers of particles and snapshots.
     outputs = sorted(list(Path(datadir).glob(athinput['job']['problem_id'] +
                                              '.pout.*.dat')))
-    del outputs[0]  # exclude t=0 snapshot
+    outputs = outputs[-nout:] # Only keep last 'nout' outputs
     time, pdata = athena_read.particles(str(outputs[0]))
     npar = pdata.size
     nt = len(outputs)

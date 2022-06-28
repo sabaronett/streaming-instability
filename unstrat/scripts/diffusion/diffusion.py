@@ -6,7 +6,7 @@
 #
 # Author: Stanley A. Baronett, Chao-Chin Yang
 # Created: 2021-05-10
-# Last Modified: 2022-06-17
+# Last Modified: 2022-06-28
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -25,17 +25,19 @@ import numpy as np
 import random
 # from utilities import compose_title
 
-# Get the stopping times and the solid-to-gas ratios.
+# Get the stopping times, solid-to-gas ratios, and no. of outputs to process.
 athinput = athena_read.athinput('athinput.si')
 # tausmin, tausmax = 10**par.logtausmin, 10**par.logtausmax
 # ms = MultiSpecies(par=par)
 taus = athinput['problem']['omega'] * athinput['particles']['taus0']
 epsilon = athinput['problem']['epsilon']
+nout = 3 # Minimum number needed to calculate the diffusion coefficient.
+if sys.argv[1]: nout = sys.argv[1]
 
 # Find the displacement and the diffusion coefficient.
-diff = Diffusion(athinput=athinput)
+diff = Diffusion(athinput=athinput, nout=nout)
 dpx, dpy, dpz = diff.coefficient()
-np.savez("output/dcoeff", taus=taus, dpx=dpx, dpz=dpz)
+np.savez(f'output/dcoeff-{nout}', taus=taus, dpx=dpx, dpy=dpy, dpz=dpz)
 
 # # Select several snapshots.
 # ntimes = len(diff.time)
