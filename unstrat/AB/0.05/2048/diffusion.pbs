@@ -3,6 +3,5 @@
 #PBS -l walltime=1:00:00
 #PBS -m abe
 #PBS -N AB-Pi0.05-2048_diffusion
-#PBS -q debug
 
-python ../../../scripts/diffusion/diffusion.py
+python ../../../scripts/diffusion/diffusion.py 21 # nout
