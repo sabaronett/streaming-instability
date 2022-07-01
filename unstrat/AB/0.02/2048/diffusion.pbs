@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N AB-Pi0.02-2048_sat-diffusion
 
-python ../../../scripts/diffusion/diffusion.py 81 # nout
+python ../../../scripts/diffusion/diffusion.py 80 # nout
