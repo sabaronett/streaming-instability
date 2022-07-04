@@ -10,7 +10,7 @@
 # Updated: 2022-07-04
 #==============================================================================
 import sys
-sys.path.insert(0, '/home/stanley/github/sabaronett/local/athena/athena-dust/vis/python')
+sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
 import athena_read
 import numpy as np
 import matplotlib.pyplot as plt
