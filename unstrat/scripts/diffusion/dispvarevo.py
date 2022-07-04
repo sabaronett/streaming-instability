@@ -18,20 +18,23 @@ import matplotlib.pyplot as plt
 t0 = float(sys.argv[1])
 dtmax = int(sys.argv[2])
 tfit = np.asarray([0, dtmax])
-dirs = ['x', 'z']
-fig, axs = plt.subplots(2, 1, figsize=(6, 8), dpi=150)
-
 athinput = athena_read.athinput('athinput.si')
 Pi = athinput['problem']['duy0']
 taus = athinput['particles']['taus0']*athinput['problem']['omega']
 epsilon = athinput['problem']['epsilon']
+
+if round(taus, 1) == 0.1 and epsilon == 1.0:
+    case = 'AB'
+    dtmax = 10*dtmax
+elif round(taus, 1) == 1.0 and epsilon == 0.2: case = 'BA'
+else: case = '?'
+
+dirs = ['x', 'z']
 res = athinput['mesh']['nx1']
 disp = np.load('dat/disp.npz')
 dcoeffs = np.load(f'output/dcoeff-{str(dtmax)}.npz')
+fig, axs = plt.subplots(2, 1, figsize=(6, 8), dpi=150)
 sat = 'sat'
-if round(taus, 1) == 0.1 and epsilon == 1.0: case = 'AB'
-elif round(taus, 1) == 1.0 and epsilon == 0.2: case = 'BA'
-else: case = '?'
 title = f'{case}, $\Pi={Pi}$ ({res}$^2$), $t_0=t_\mathrm{{{sat}}}={t0:.1f}\,T$'
 
 axs[0].set(title=title)
