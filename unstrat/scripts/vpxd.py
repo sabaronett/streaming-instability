@@ -32,7 +32,7 @@ vpxs = []
 print(f'Compiling data outputs...', flush=True)
 
 for i, output in enumerate(sat_outputs):
-    data = athena_read.athdf(output)
+    data = athena_read.particles(str(output))
     vpxs.append(data['vpx'])
     print('\t{:.0%}'.format(i/len(sat_outputs)), flush=True)
 
