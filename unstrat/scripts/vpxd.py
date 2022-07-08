@@ -24,8 +24,8 @@ Pi = athinput['problem']['duy0']                   # radial pressure gradient
 etav_K = Pi*athinput['hydro']['iso_sound_speed']   # scaling factor
 dt = athinput['outputp']['dt']                     # time between vpx outputs
 i_sat = int(t_sat/dt)                              # sat state output index
-outputs = sorted(list(Path('athdf').glob(athinput["job"]["problem_id"]+
-                                         '.out1.*.athdf')))
+outputs = sorted(list(Path('dat').glob(athinput["job"]["problem_id"]+
+                                         '.pout.*.dat')))
 sat_outputs = outputs[i_sat:]                      # slice saturated state
 vpxs = []
 
