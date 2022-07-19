@@ -1,0 +1,7 @@
+#PBS -j oe
+#PBS -l select=1:ncpus=1:model=bro_ele
+#PBS -l walltime=2:00:00
+#PBS -m abe
+#PBS -N BA-Pi0.10-1024_sat-diffusion
+
+python ../../../scripts/diffusion/diffusion.py 81 # nout
