@@ -19,6 +19,7 @@ dt              = 0.05                 # time increment between 2000 outputs
 <output3>
 file_type       = hst                  # history data dump
 dt              = 0.1                  # time increment between 1000 outputs
+data_format     = %14.7e               # extra sig. figs to track np
 
 <output4>
 file_type       = rst                  # restart file
