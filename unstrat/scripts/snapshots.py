@@ -9,7 +9,7 @@
 # Updated: 2022-07-25
 #==============================================================================
 import sys
-sys.path.insert(0, '/home/stanley/bitbucket/ccyang/athena-dust/vis/python')
+sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
 import athena_read
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
@@ -19,10 +19,13 @@ import time
 start = time.time()
 fig, axs = plt.subplots(2, 4, figsize=(8, 4), dpi=300)
 workdir = '../unstrat'
-case = sys.argv[1]
+case = 'AB'
 Pis = ['0.01', '0.02', '0.05', '0.10']
 res = '2048'
 vmin, vmax = 1e-1, 1e1                           # CPDD > 85%; CPDD < 5%
+
+# Check for user-passed arguments
+if sys.argv[1]: case = sys.argv[1]
 if sys.argv[2]: vmin = float(sys.argv[2])
 if sys.argv[3]: vmax = float(sys.argv[3])
 
