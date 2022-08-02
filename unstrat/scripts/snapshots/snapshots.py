@@ -20,7 +20,6 @@ import matplotlib.ticker as ticker
 import numpy as np
 
 fig, axs = plt.subplots(2, 4, figsize=(8, 3.2), dpi=200)
-# fig.subplots_adjust(wspace=0.5, hspace=0.5)
 workdir = '../..'
 case = 'AB'
 Pis = ['0.01', '0.02', '0.05', '0.10']
