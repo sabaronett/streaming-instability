@@ -11,7 +11,7 @@
 # Updated: 2022-08-02
 #==============================================================================
 import sys
-sys.path.insert(0, '/home/stanley/bitbucket/ccyang/athena-dust/vis/python')
+sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
 import athena_read
 import matplotlib as mpl
 import matplotlib.pyplot as plt
