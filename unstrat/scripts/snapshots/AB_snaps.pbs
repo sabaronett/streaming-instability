@@ -1,8 +1,7 @@
 #PBS -j oe
 #PBS -l select=1:ncpus=1:model=bro_ele
-#PBS -l walltime=2:00:00
+#PBS -l walltime=0:05:00
 #PBS -m abe
 #PBS -N AB_snaps
-#PBS -q debug
 
 python snapshots.py AB 2048 1e-1 1e1

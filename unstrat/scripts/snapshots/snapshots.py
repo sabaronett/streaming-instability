@@ -22,16 +22,17 @@ import numpy as np
 fig, axs = plt.subplots(2, 4, figsize=(8, 3.2), dpi=200)
 workdir = '../..'
 case = 'AB'
-Pis = ['0.01', '0.02', '0.05', '0.10']
+Pis = ['0.10', '0.05', '0.02', '0.01']
 res = '2048'
-vmin, vmax = 1e-1, 1e1 # default for AB (CPDD > 85%; CPDD < 5%)
+vmin_p, vmax_p = 1e-1, 1e1 # default for AB (CPDD > 85%; CPDD < 5%)
+vmin_g, vmax_g = 0, 0
 
 # Check for and override with user-passed arguments
 if len(sys.argv) > 1:
     case = sys.argv[1]
     res = sys.argv[2]
-    vmin = float(sys.argv[3])
-    vmax = float(sys.argv[4])
+    vmin_p = float(sys.argv[3])
+    vmax_p = float(sys.argv[4])
 
 for i, Pi in enumerate(Pis):
     # Collect parameters and plot densities
@@ -43,14 +44,15 @@ for i, Pi in enumerate(Pis):
     data = athena_read.athdf(f'{path}/athdf/SI.out1.00100.athdf')
     xf, zf = data['x1f']/H_g, data['x2f']/H_g
     t = data['Time']
-    clip = np.clip(data['rhop'][0], vmin, vmax)
-    rhops = axs[0][i].pcolormesh(xf, zf, clip, norm=colors.LogNorm(),
-                                 cmap='plasma')
-    rhogs = axs[1][i].pcolormesh(xf, zf, data['rho'][0])
-
-    axs[0][i].set(title=f'$\Pi={Pi:s}$', aspect='equal')
-    axs[1][i].set(aspect='equal')
-    axs[1][i].set_xlabel(r'$x$ / $H_\mathrm{g}$')
+    clip = np.clip(data['rhop'][0], vmin_p, vmax_p)
+    if i == 0:
+        vmin_g = np.amin(data['rho'][0])
+        vmax_g = np.amax(data['rho'][0])
+    j = len(Pis) - 1 - i
+    rhops = axs[0][j].pcolormesh(xf, zf, clip, norm=colors.LogNorm(), cmap='plasma')
+    rhogs = axs[1][j].pcolormesh(xf, zf, data['rho'][0], vmin=vmin_g, vmax=vmax_g)
+    axs[0][j].set(title=f'$\Pi={Pi:s}$', aspect='equal')
+    axs[1][j].set(xlabel=r'$x$ / $H_\mathrm{g}$', aspect='equal')
 
 for ax in axs.flat:
     ax.label_outer()
@@ -60,7 +62,7 @@ for ax in axs.flat:
     ax.tick_params(axis='x', labelrotation=45)
 
 # Add and format color bars
-mpl.rcParams["axes.formatter.offset_threshold"] = 3
+mpl.rcParams["axes.formatter.offset_threshold"] = 2
 formatter = ticker.ScalarFormatter(useMathText=True)
 formatter.set_powerlimits((-1, 1))
 cb_rhop = fig.colorbar(rhops, ax=axs.flat[:4], pad=0.03)
