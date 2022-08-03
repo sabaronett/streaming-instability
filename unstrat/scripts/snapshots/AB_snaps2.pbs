@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N AB_snaps2
 
-python snapshots.py AB 2048 1e-1 1e1
+python snapshots2.py AB 2048 1e-1 1e1
