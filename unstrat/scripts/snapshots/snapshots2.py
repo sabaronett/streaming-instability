@@ -72,5 +72,5 @@ cb_rhog.set_label(r'$\rho_\mathrm{g}$ / $\rho_\mathrm{g,0}$')
 # Format and save figure
 axs[0][0].set(ylabel=r'$z$ / $H_\mathrm{g}$')
 axs[1][0].set(ylabel=r'$z$ / $H_\mathrm{g}$')
-plt.savefig(f'figs/{case}-{res}_snaps.png', dpi=1000, bbox_inches='tight',
+plt.savefig(f'figs/{case}-{res}_snaps2.png', dpi=1000, bbox_inches='tight',
             pad_inches=0.01)
