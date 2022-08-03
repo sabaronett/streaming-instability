@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-08-02
-# Updated: 2022-08-02
+# Updated: 2022-08-03
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -42,5 +42,5 @@ avgs = np.average(rhogs, axis=0)
 stds = np.std(rhogs, axis=0)
 cdf = np.linspace(1, 0, avgs.size, endpoint=False)
 
-np.savez_compressed('output/cpdd', cdf=cdf, mins=mins, maxs=maxs, avgs=avgs,
+np.savez_compressed('output/cgdd', cdf=cdf, mins=mins, maxs=maxs, avgs=avgs,
                     stds=stds)
