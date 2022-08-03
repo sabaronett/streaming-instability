@@ -1,0 +1,7 @@
+#PBS -j oe
+#PBS -l select=1:ncpus=1:model=rom_ait
+#PBS -l walltime=0:10:00
+#PBS -m abe
+#PBS -N AB_snaps2
+
+python snapshots.py AB 2048 1e-1 1e1
