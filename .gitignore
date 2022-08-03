@@ -20,7 +20,7 @@ misc/
 old*/
 tabs/
 test/
-scratch.txt
+scratch.*
 *.old.*
 *.local.py
 *.code-workspace
