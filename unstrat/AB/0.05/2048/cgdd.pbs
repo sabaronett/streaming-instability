@@ -1,0 +1,7 @@
+#PBS -j oe
+#PBS -l select=1:ncpus=1:model=rom_ait
+#PBS -l walltime=2:00:00
+#PBS -m abe
+#PBS -N AB-Pi0.05-2048_cgdd
+
+python ../../../scripts/cgdd.py 2 # t_sat / T (from DDD)
