@@ -5,6 +5,7 @@
 *.xdmf
 
 # Data Analysis
+figs/
 output/
 *.mp4
 *.npz
