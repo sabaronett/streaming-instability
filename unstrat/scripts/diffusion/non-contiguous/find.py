@@ -106,8 +106,8 @@ def par_disp(datadir='./dat', save_to=None, athinput=None, nout=3):
         print('\rProcessing pout files ({:6.1%})......'.format((i+1)/nt),
               end='', flush=True)
         time, temp_pdata = athena_read.particles(str(output), indexing=False)
-        sorter = np.argsort(temp_pdata['id'], ids, sorter=sorter)
-        indices = np.searchsorted(temp_pdata)
+        sorter = np.argsort(temp_pdata['id'])
+        indices = sorter[np.searchsorted(temp_pdata['id'], ids, sorter=sorter)]
         pdata = temp_pdata[indices]
 
         # Monitor velocity extrema.
