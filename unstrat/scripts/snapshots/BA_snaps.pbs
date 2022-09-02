@@ -3,5 +3,6 @@
 #PBS -l walltime=0:10:00
 #PBS -m abe
 #PBS -N BA_snaps
+#PBS -W group_list=s2563
 
 python snapshots.py BA 2048 2e-2 2e0

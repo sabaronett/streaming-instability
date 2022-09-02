@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-07-25
-# Updated: 2022-08-03
+# Updated: 2022-09-02
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -50,7 +50,7 @@ for i, Pi in enumerate(Pis):
 
     # Add and format dust color bars, titles, and x-axis labels
     cb_rhop = fig.colorbar(rhops, ax=axs[0][i], location='top')
-    axs[0][i].set_title(f'$\Pi={Pi:s}$', pad=40)
+    axs[0][i].set_title(f'$\Pi={float(Pi)}$', pad=40)
     axs[0][i].set(aspect='equal')
     axs[1][i].set(xlabel=r'$x$ / $H_\mathrm{g}$', aspect='equal')
 
