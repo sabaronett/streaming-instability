@@ -19,16 +19,14 @@ from pathlib import Path
 
 # Collect Athena++ I/O, set plotting configurations
 athinput = athena_read.athinput('athinput.si')
+case, vmin, vmax = 'AB', 1e-1, 1e1
+if athinput['problem']['epsilon'] == 0.2:
+    case, vmin, vmax = 'BA', 2e-2, 2e0
 res, dpi = athinput['mesh']['nx1'], 450    # 2160p default
-if res < 2048: dpi = 225                   # 1080p for lower resolution cases
-fig, ax = plt.subplots(dpi=dpi)
-case = 'AB'
-if athinput['problem']['epsilon'] == 0.2: case = 'BA'
-Pi = athinput['problem']['duy0']           # radial pressure gradient
-vmin, vmax = 1e-1, 1e1                     # default for AB
-if case == 'BA': vmin, vmax = 2e-2, 2e0
+if res < 2048: dpi = 225                   # 1080p for lower resolution runs
 c_s = athinput['hydro']['iso_sound_speed']
 Omega = athinput['problem']['omega']
+Pi = athinput['problem']['duy0']
 Hg = c_s/Omega
 T = 2*np.pi/Omega
 outputs = sorted(list(Path('athdf').glob(athinput['job']['problem_id']+
@@ -43,13 +41,13 @@ for output in outputs:
     rhops.append(data['rhop'][0])
 
 # Initialize first frame
-clips = np.clip(rhops, vmin, vmax)
-frame = clips[0]
-ax.set(aspect='equal', title=f'{case:s}, $\Pi=${Pi}, $t={times[0]:.2f}T$',
-       xlabel=r'$x$ / $H_\mathrm{g}$', ylabel=r'$z$ / $H_\mathrm{g}$')
-img = ax.pcolormesh(xf, zf, frame, norm=colors.LogNorm(), cmap='plasma')
+clip = np.clip(rhops[0], vmin, vmax)
+fig, ax = plt.subplots(dpi=dpi)
+ax.set(aspect='equal', title=f'{case}, $\Pi=${Pi}, $t={times[0]:.2f}T$',
+       xlabel='$x/H_\mathrm{g}$', ylabel='$z/H_\mathrm{g}$')
+img = ax.pcolormesh(xf, zf, clip, norm=colors.LogNorm(vmin, vmax), cmap='plasma')
 cb = plt.colorbar(img)
-cb.set_label(r'$\rho_\mathrm{p}$ / $\rho_\mathrm{g,0}$')
+cb.set_label(r'$\rho_\mathrm{p}/\rho_\mathrm{g,0}$')
 
 def animate(i):
     """
@@ -60,10 +58,11 @@ def animate(i):
         i : int
             Frame number.
     """
-    ax.set_title(f'{case:s}, $\Pi=${Pi}, $t={times[i]:.2f}T$')
-    frame = clips[i]
-    img.set_array(frame)
-    print(f'  frame {i:4n}', flush=True)   # print frame progess
+    ax.set_title(f'{case}, $\Pi=${Pi}, $t={times[i]:.2f}T$')
+    clip = np.clip(rhops[i].ravel(), vmin, vmax)
+    img.set_array(clip)
+    img.set_clim(vmin, vmax)
+    print(f'  frame {i:4n}', flush=True)
 
 # Compile and save animation
 print('Processing frames...', flush=True)
