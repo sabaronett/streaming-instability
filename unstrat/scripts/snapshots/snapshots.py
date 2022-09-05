@@ -52,7 +52,7 @@ for i, Pi in enumerate(Pis):
     cb_rhop = fig.colorbar(rhops, ax=axs[0][i], location='top')
     axs[0][i].set_title(f'$\Pi={float(Pi)}$', pad=40)
     axs[0][i].set(aspect='equal')
-    axs[1][i].set(xlabel=r'$x$ / $H_\mathrm{g}$', aspect='equal')
+    axs[1][i].set(xlabel=r'$x/H_\mathrm{g}$', aspect='equal')
 
     # Add and format gas color bars
     formatter = ticker.ScalarFormatter(useMathText=True)
@@ -67,11 +67,11 @@ for ax in axs.flat:
     ax.tick_params(axis='x', labelrotation=45)
 
 # Format and save figure
-axs[0][0].text(-0.6, 1.31, r'$\rho_\mathrm{p}$ / $\rho_\mathrm{g,0}$', ha='left',
+axs[0][0].text(-0.6, 1.31, r'$\rho_\mathrm{p}/\rho_\mathrm{g,0}$', ha='left',
                va='top', transform=axs[0][0].transAxes)
-axs[1][0].text(-0.6, 1.31, r'$\rho_\mathrm{g}$ / $\rho_\mathrm{g,0}$', ha='left',
+axs[1][0].text(-0.6, 1.31, r'$\rho_\mathrm{g}/\rho_\mathrm{g,0}$', ha='left',
                va='top', transform=axs[1][0].transAxes)
-axs[0][0].set(ylabel=r'$z$ / $H_\mathrm{g}$')
-axs[1][0].set(ylabel=r'$z$ / $H_\mathrm{g}$')
+axs[0][0].set(ylabel=r'$z/H_\mathrm{g}$')
+axs[1][0].set(ylabel=r'$z/H_\mathrm{g}$')
 plt.savefig(f'figs/{case}-{res}_snaps.png', dpi=1000, bbox_inches='tight',
             pad_inches=0.01)
