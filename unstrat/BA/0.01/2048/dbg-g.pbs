@@ -1,8 +1,0 @@
-#PBS -j oe
-#PBS -l select=103:ncpus=40:mpiprocs=40:model=cas_ait
-#PBS -l walltime=2:00:00
-#PBS -m abe
-#PBS -N BA-Pi0.01-2048_dbg-g
-#PBS -q debug
-
-mpiexec -n 4096 $ATHENA_DEBUG -t 1:50:00 -r SI.final.rst -i athinput.si
