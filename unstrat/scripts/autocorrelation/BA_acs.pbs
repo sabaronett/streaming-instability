@@ -1,0 +1,8 @@
+#PBS -j oe
+#PBS -l select=1:ncpus=1:model=rom_ait
+#PBS -l walltime=0:10:00
+#PBS -m abe
+#PBS -N BA_acs
+#PBS -W group_list=s2563
+
+python autocorrelations.py
