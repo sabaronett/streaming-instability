@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-09-16
-# Updated: 2022-09-16
+# Updated: 2022-09-23
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -20,7 +20,6 @@ import matplotlib.ticker as ticker
 import numpy as np
 from scipy import fftpack
 
-mpl.rcParams["axes.formatter.offset_threshold"] = 2
 fig, axs = plt.subplots(2, 4, sharex=True, sharey=True, figsize=(8, 5))
 workdir = '../..'
 case = 'BA'
@@ -54,7 +53,8 @@ for i, Pi in enumerate(Pis):
     ac = fftpack.ifft2(ft*np.conjugate(ft)).real
     norm = ac/ac[0][0]
     shift = fftpack.fftshift(norm)
-    rhogs = axs[1][i].pcolormesh(xf, zf, shift)
+    fix = (shift - 1)*1e5
+    rhogs = axs[1][i].pcolormesh(xf, zf, fix)
 
     # Add and format dust color bars, titles, and x-axis labels
     cb_rhop = fig.colorbar(rhops, ax=axs[0][i], location='top')
@@ -63,11 +63,9 @@ for i, Pi in enumerate(Pis):
     axs[1][i].set(xlabel=r'$x/H_\mathrm{g}$', aspect='equal')
 
     # Add and format gas color bars
-    formatter = ticker.ScalarFormatter(useMathText=True)
-    formatter.set_powerlimits((-1, 1))
-    cb_rhog = fig.colorbar(rhogs, ax=axs[1][i], location='top',
-                           format=formatter)
-
+    cb_rhog = fig.colorbar(rhogs, ax=axs[1][i], location='top')
+    axs[1][i].text(0.49, 1.43, r'$\times10^{-5}+1$',
+               ha='left', va='top', transform=axs[1][i].transAxes)
 for ax in axs.flat:
     ax.label_outer()
     ax.minorticks_on()
@@ -76,15 +74,11 @@ for ax in axs.flat:
     ax.tick_params(axis='x', labelrotation=45)
 
 # Format and save figure
-qty = r'$\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}$'
-unit = r'$/\mathrm{max}\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}$'
-axs[0][0].text(-0.6, 1.43, qty+unit, ha='left', va='top',
-               transform=axs[0][0].transAxes)
-qty =  r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}$'
-unit = r'$/\mathrm{max}\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}$'
-axs[1][0].text(-0.6, 1.31, qty+unit, ha='left', va='top',
-               transform=axs[1][0].transAxes)
+axs[0][0].text(-0.6, 1.31, r'$\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}$',
+               ha='left', va='top', transform=axs[0][0].transAxes)
+axs[1][0].text(-0.6, 1.31, r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}$',
+               ha='left', va='top', transform=axs[1][0].transAxes)
 axs[0][0].set(ylabel=r'$z/H_\mathrm{g}$')
 axs[1][0].set(ylabel=r'$z/H_\mathrm{g}$')
-plt.savefig(f'figs/{case}-{res}_acs.png', dpi=1000, bbox_inches='tight',
-            pad_inches=0.01)
+plt.savefig(f'figs/{case}_auto-correlations.png', dpi=1000,
+            bbox_inches='tight', pad_inches=0.01)
