@@ -5,4 +5,4 @@
 #PBS -N BA_autocorrelation
 #PBS -W group_list=s2563
 
-python autocorrelations.py
+python BA_autocorrelations.py
