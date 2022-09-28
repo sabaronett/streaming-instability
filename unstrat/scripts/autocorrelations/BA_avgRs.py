@@ -35,10 +35,12 @@ for i, Pi in enumerate(Pis):
     path = f'{workdir}/{case}/{Pi}/{res}'
     athinput = athena_read.athinput(f'{path}/athinput.si')
     outputs = sorted(list(Path(f'{path}/athdf').glob(\
-            athinput['job']['problem_id']+'.out2.*.athdf')))
+        athinput['job']['problem_id']+'.out2.*.athdf')))
     dt = athinput['output2']['dt']
     i_sat  = int(t_sat/dt)
+    print(f'BEFORE\n\ttype(outputs) = {type(outputs)}\n\tlen(outputs) = {len(outputs)}\n')
     outputs = outputs[i_sat:]
+    print(f'AFTER\n\ttype(outputs) = {type(outputs)}\n\tlen(outputs) = {len(outputs)}')
     c_s = athinput['hydro']['iso_sound_speed']
     Omega = athinput['problem']['omega']
     H_g = c_s/Omega
