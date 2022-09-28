@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
 
-fig, axs = plt.subplots(2, 1, figsize=(9, 6.58), dpi=300)
+fig, axs = plt.subplots(2, 1, figsize=(9, 7), dpi=300)
 workdir = '../..'
 cases = ['AB', 'BA']
 Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
@@ -34,7 +34,7 @@ for i, case in enumerate(cases):
             athdf = athena_read.athdf(output)
             
             times.append(athdf['Time'])
-            max_rhops.append(athdf.max())
+            max_rhops.append(athdf['rhop'].max())
 
         axs[i].semilogy(times, max_rhops, color=Pi[1], label=Pi[0])
         print(f'{case}/{Pi[0]} done.', flush=True)
