@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-07-25
-# Updated: 2022-09-02
+# Updated: 2022-09-28
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -20,7 +20,7 @@ import matplotlib.ticker as ticker
 import numpy as np
 
 mpl.rcParams["axes.formatter.offset_threshold"] = 2
-fig, axs = plt.subplots(2, 4, sharex=True, sharey=True, figsize=(8, 5))
+fig, axs = plt.subplots(2, 4, sharex=True, sharey=True, figsize=(7, 4.5))
 workdir = '../..'
 case = 'AB'
 Pis = ['0.01', '0.02', '0.05', '0.10']
@@ -45,7 +45,8 @@ for i, Pi in enumerate(Pis):
     xf, zf = data['x1f']/H_g, data['x2f']/H_g
     t = data['Time']
     clip = np.clip(data['rhop'][0], vmin_p, vmax_p)
-    rhops = axs[0][i].pcolormesh(xf, zf, clip, norm=colors.LogNorm(), cmap='plasma')
+    rhops = axs[0][i].pcolormesh(xf, zf, clip, norm=colors.LogNorm(),
+                                 cmap='plasma')
     rhogs = axs[1][i].pcolormesh(xf, zf, data['rho'][0])
 
     # Add and format dust color bars, titles, and x-axis labels
@@ -57,7 +58,8 @@ for i, Pi in enumerate(Pis):
     # Add and format gas color bars
     formatter = ticker.ScalarFormatter(useMathText=True)
     formatter.set_powerlimits((-1, 1))
-    cb_rhog = fig.colorbar(rhogs, ax=axs[1][i], location='top', format=formatter)
+    cb_rhog = fig.colorbar(rhogs, ax=axs[1][i], location='top',
+                           format=formatter)
 
 for ax in axs.flat:
     ax.label_outer()
@@ -67,11 +69,12 @@ for ax in axs.flat:
     ax.tick_params(axis='x', labelrotation=45)
 
 # Format and save figure
-axs[0][0].text(-0.6, 1.31, r'$\rho_\mathrm{p}/\rho_\mathrm{g,0}$', ha='left',
+axs[0][0].text(-0.65, 1.31, r'$\rho_\mathrm{p}/\rho_\mathrm{g,0}$', ha='left',
                va='top', transform=axs[0][0].transAxes)
-axs[1][0].text(-0.6, 1.31, r'$\rho_\mathrm{g}/\rho_\mathrm{g,0}$', ha='left',
+axs[1][0].text(-0.65, 1.31, r'$\rho_\mathrm{g}/\rho_\mathrm{g,0}$', ha='left',
                va='top', transform=axs[1][0].transAxes)
 axs[0][0].set(ylabel=r'$z/H_\mathrm{g}$')
 axs[1][0].set(ylabel=r'$z/H_\mathrm{g}$')
+plt.subplots_adjust(wspace=0.3)
 plt.savefig(f'figs/{case}-{res}_snaps.png', dpi=1000, bbox_inches='tight',
             pad_inches=0.01)
