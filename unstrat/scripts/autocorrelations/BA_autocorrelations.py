@@ -20,7 +20,7 @@ import matplotlib.ticker as ticker
 import numpy as np
 from scipy import fftpack
 
-fig, axs = plt.subplots(2, 4, sharex=True, sharey=True, figsize=(8, 5))
+fig, axs = plt.subplots(2, 4, sharex=True, sharey=True, figsize=(7, 4.5))
 workdir = '../..'
 case = 'BA'
 Pis = ['0.01', '0.02', '0.05', '0.10']
@@ -64,7 +64,7 @@ for i, Pi in enumerate(Pis):
 
     # Add and format gas color bars
     cb_rhog = fig.colorbar(rhogs, ax=axs[1][i], location='top')
-    axs[1][i].text(0.49, 1.43, r'$\times10^{-5}+1$',
+    axs[1][i].text(0.49, 1.51, r'$\times10^{-5}+1$',
                ha='left', va='top', transform=axs[1][i].transAxes)
 for ax in axs.flat:
     ax.label_outer()
@@ -74,11 +74,12 @@ for ax in axs.flat:
     ax.tick_params(axis='x', labelrotation=45)
 
 # Format and save figure
-axs[0][0].text(-0.6, 1.31, r'$\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}$',
+axs[0][0].text(-0.65, 1.31, r'$\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}$',
                ha='left', va='top', transform=axs[0][0].transAxes)
-axs[1][0].text(-0.6, 1.31, r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}$',
+axs[1][0].text(-0.65, 1.31, r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}$',
                ha='left', va='top', transform=axs[1][0].transAxes)
 axs[0][0].set(ylabel=r'$z/H_\mathrm{g}$')
 axs[1][0].set(ylabel=r'$z/H_\mathrm{g}$')
-plt.savefig(f'figs/{case}_auto-correlations.png', dpi=1000,
+plt.subplots_adjust(wspace=0.3)
+plt.savefig(f'figs/{case}_autocorrelations.png', dpi=1000,
             bbox_inches='tight', pad_inches=0.01)
