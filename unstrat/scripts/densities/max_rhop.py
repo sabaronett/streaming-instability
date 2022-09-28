@@ -27,7 +27,7 @@ for i, case in enumerate(cases):
         path = f'{workdir}/{case}/{Pi[0]}/{res}'
         athinput = athena_read.athinput(f'{path}/athinput.si')
         outputs = sorted(list(Path(f'{path}/athdf').glob(\
-            athinput['job']['problem_id']+'.out2.*.athdf')))
+            athinput['job']['problem_id']+'.out1.*.athdf')))
         times, max_rhops = [], []
 
         for output in outputs:
