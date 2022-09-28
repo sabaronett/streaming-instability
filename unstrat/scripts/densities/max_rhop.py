@@ -6,7 +6,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-09-27
-# Updated: 2022-09-27
+# Updated: 2022-09-28
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -24,10 +24,10 @@ res = '2048'
 
 for i, case in enumerate(cases):
     for Pi in Pis:
-        athinput = athena_read.athinput('athinput.si')
-        path = f'{workdir}/{case}/{Pi[0]}/{res}/athdf'
-        outputs = sorted(list(Path(path).glob(athinput['job']['problem_id']+
-                                              '.out2.*.athdf')))
+        path = f'{workdir}/{case}/{Pi[0]}/{res}'
+        athinput = athena_read.athinput(f'{path}/athinput.si')
+        outputs = sorted(list(Path(f'{path}/athdf').glob(\
+            athinput['job']['problem_id']+'.out2.*.athdf')))
         times, max_rhops = [], []
 
         for output in outputs:
