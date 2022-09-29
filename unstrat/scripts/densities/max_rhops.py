@@ -6,7 +6,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-09-27
-# Updated: 2022-09-28
+# Updated: 2022-09-29
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -32,9 +32,9 @@ for i, case in enumerate(cases):
 
         for output in outputs:
             athdf = athena_read.athdf(output)
-            
             times.append(athdf['Time'])
-            max_rhops.append(athdf['rhop'].max())
+            max_rhop = athdf['rhop'].max()
+            max_rhops.append(max_rhop)
 
         axs[i].semilogy(times, max_rhops, color=Pi[1], label=Pi[0])
         print(f'{case}/{Pi[0]} done.', flush=True)
@@ -51,4 +51,4 @@ axs[0].set(title=r'AB ($\tau_\mathrm{s}=0.1,\,\epsilon=1.0)$')
 axs[1].set(title=r'BA ($\tau_\mathrm{s}=1.0,\,\epsilon=0.2)$')
 axs[1].set(xlabel=r'$t$ / $T$')
 
-plt.savefig('figs/max_rhop.pdf', bbox_inches='tight', pad_inches=0.01)
+plt.savefig('figs/max_rhops.pdf', bbox_inches='tight', pad_inches=0.01)
