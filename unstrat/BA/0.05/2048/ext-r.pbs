@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N BA-Pi0.05-2048_ext-r
 
-mpiexec -n 4096 $ATHENA_DUST -i athinput.si -r SI.00011.rst -t 119:55:00
+mpiexec -n 4096 $ATHENA_DUST -i athinput.si -r SI.00011.rst -t 119:00:00
