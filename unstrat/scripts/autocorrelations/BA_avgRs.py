@@ -7,7 +7,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-09-28
-# Updated: 2022-09-28
+# Updated: 2022-10-06
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -22,12 +22,12 @@ fig, axs = plt.subplots(2, 4, sharex=True, sharey=True, figsize=(7, 4.5))
 workdir = '../..'
 case = 'BA'
 Pis = ['0.01', '0.02', '0.05', '0.10']
-res = '2048'
+res = 2048
 t_sat = 80 # [T]
 
 # Check for and override with user-passed arguments
 if len(sys.argv) > 1:
-    res = sys.argv[1]
+    res = int(sys.argv[1])
     t_sat = float(sys.argv[2])
 
 for i, Pi in enumerate(Pis):
@@ -38,9 +38,7 @@ for i, Pi in enumerate(Pis):
         athinput['job']['problem_id']+'.out2.*.athdf')))
     dt = athinput['output2']['dt']
     i_sat  = int(t_sat/dt)
-    print(f'BEFORE\n\ttype(outputs) = {type(outputs)}\n\tlen(outputs) = {len(outputs)}\n')
     outputs = outputs[i_sat:]
-    print(f'AFTER\n\ttype(outputs) = {type(outputs)}\n\tlen(outputs) = {len(outputs)}')
     c_s = athinput['hydro']['iso_sound_speed']
     Omega = athinput['problem']['omega']
     H_g = c_s/Omega
@@ -63,8 +61,8 @@ for i, Pi in enumerate(Pis):
         offset = (shift - 1)*1e5
         Rgs[i] = offset
     
-    avgRp = np.average(Rps, axis=1)
-    avgRg = np.average(Rgs, axis=1)
+    avgRp = np.average(Rps, axis=0)
+    avgRg = np.average(Rgs, axis=0)
     mesh_p = axs[0][i].pcolormesh(xf, zf, avgRp, norm=colors.LogNorm(vmin=1e-2),
                                   cmap='plasma')
     mesh_g = axs[1][i].pcolormesh(xf, zf, avgRg)
@@ -94,5 +92,5 @@ axs[1][0].text(-0.65, 1.31, r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}$',
 axs[0][0].set(ylabel=r'$z/H_\mathrm{g}$')
 axs[1][0].set(ylabel=r'$z/H_\mathrm{g}$')
 plt.subplots_adjust(wspace=0.3)
-plt.savefig(f'figs/{case}_autocorrelations.png', dpi=1000,
+plt.savefig(f'figs/{case}_autocorrelations-avg.png', dpi=1000,
             bbox_inches='tight', pad_inches=0.01)
