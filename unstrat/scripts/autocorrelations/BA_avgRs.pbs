@@ -4,6 +4,5 @@
 #PBS -m abe
 #PBS -N BA_avgRs
 #PBS -q devel
-#PBS -W group_list=s2563
 
-python BA_avgRs.py 2048 99
+python BA_avgRs.py 2048 80

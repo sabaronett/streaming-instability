@@ -35,8 +35,8 @@ for i, Pi in enumerate(Pis):
     path = f'{workdir}/{case}/{Pi}/{res}'
     athinput = athena_read.athinput(f'{path}/athinput.si')
     outputs = sorted(list(Path(f'{path}/athdf').glob(\
-        athinput['job']['problem_id']+'.out2.*.athdf')))
-    dt = athinput['output2']['dt']
+        athinput['job']['problem_id']+'.out1.*.athdf')))
+    dt = athinput['output1']['dt']
     i_sat  = int(t_sat/dt)
     outputs = outputs[i_sat:]
     c_s = athinput['hydro']['iso_sound_speed']
