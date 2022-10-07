@@ -7,7 +7,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-09-28
-# Updated: 2022-10-06
+# Updated: 2022-10-07
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -32,6 +32,7 @@ if len(sys.argv) > 1:
 
 for i, Pi in enumerate(Pis):
     # Collect parameters and plot densities
+    print(f'{case}/{Pi}: Processing...', flush=True)
     path = f'{workdir}/{case}/{Pi}/{res}'
     athinput = athena_read.athinput(f'{path}/athinput.si')
     outputs = sorted(list(Path(f'{path}/athdf').glob(\
@@ -60,7 +61,8 @@ for i, Pi in enumerate(Pis):
         shift = fftpack.fftshift(norm)
         offset = (shift - 1)*1e5
         Rgs[j] = offset
-    
+        print(f'\t{j/len(outputs):.0%}', flush=True)
+
     avgRp = np.average(Rps, axis=0)
     avgRg = np.average(Rgs, axis=0)
     mesh_p = axs[0][i].pcolormesh(xf, zf, avgRp, norm=colors.LogNorm(vmin=1e-2),
@@ -77,6 +79,8 @@ for i, Pi in enumerate(Pis):
     cb_rhog = fig.colorbar(mesh_g, ax=axs[1][i], location='top')
     axs[1][i].text(0.49, 1.51, r'$\times10^{-5}+1$',
                ha='left', va='top', transform=axs[1][i].transAxes)
+    print(f'\tdone.', flush=True)
+
 for ax in axs.flat:
     ax.label_outer()
     ax.minorticks_on()
