@@ -52,20 +52,18 @@ for i, Pi in enumerate(Pis):
         data = athena_read.athdf(output)
         ft = fftpack.fft2(data['rhop'][0])
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
-        norm = ac/ac[0][0]
-        shift = fftpack.fftshift(ac)
-        Rps[j] = shift
+        Rps[j] = ac
         ft = fftpack.fft2(data['rho'][0])
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
-        norm = ac/ac[0][0]
-        shift = fftpack.fftshift(ac)
-        Rgs[j] = shift
+        Rgs[j] = ac
         print(f'\t{j/len(outputs):.0%}', flush=True)
     
     avgRp = np.average(Rps, axis=0)
     avgRg = np.average(Rgs, axis=0)
     avgRp = avgRp/avgRp[0][0]
     avgRg = avgRg/avgRg[0][0]
+    avgRp = fftpack.fftshift(avgRp)
+    avgRg = fftpack.fftshift(avgRg)
     avgRg = (avgRg - 1)*1e5
     mesh_p = axs[0][i].pcolormesh(xf, zf, avgRp, norm=colors.LogNorm(vmin=1e-2),
                                   cmap='plasma')
