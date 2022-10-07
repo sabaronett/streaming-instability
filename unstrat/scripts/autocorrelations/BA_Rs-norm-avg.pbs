@@ -2,6 +2,6 @@
 #PBS -l select=1:ncpus=1:model=rom_ait
 #PBS -l walltime=3:00:00
 #PBS -m abe
-#PBS -N BA_Rs-avg-norm
+#PBS -N BA_Rs-norm-avg
 
-python BA_Rs-avg-norm.py 2048 80
+python BA_Rs-norm-avg.py 2048 80

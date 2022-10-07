@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 #==============================================================================
-# BA_avgRs.py
+# BA_Rs-norm-avg.py
 #
-# Plot time-averaged autocorrelations of snapshots of the dust and gas density
-# fields across a range of radial pressure gradients for case BA.
+# Plot noramlized time-averaged autocorrelations of snapshots of the dust and
+# gas density fields across a range of radial pressure gradients for case BA.
 #
 # Author: Stanley A. Baronett
 # Created: 2022-09-28
@@ -52,22 +52,19 @@ for i, Pi in enumerate(Pis):
         ft = fftpack.fft2(data['rhop'][0])
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
         norm = ac/ac[0][0]
-        shift = fftpack.fftshift(norm)
-        # shift = fftpack.fftshift(ac)
+        shift = fftpack.fftshift(ac)
         Rps[j] = shift
         ft = fftpack.fft2(data['rho'][0])
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
         norm = ac/ac[0][0]
-        shift = fftpack.fftshift(norm)
-        # shift = fftpack.fftshift(ac)
-        offset = (shift - 1)*1e5 # comment out for avg-norm
-        Rgs[j] = offset
+        shift = fftpack.fftshift(ac)
+        Rgs[j] = shift
     
     avgRp = np.average(Rps, axis=0)
     avgRg = np.average(Rgs, axis=0)
-    # avgRp = avgRp/avgRp[0][0]
-    # avgRg = avgRg/avgRg[0][0]
-    # avgRg = (avgRg - 1)*1e5
+    avgRp = avgRp/avgRp[0][0]
+    avgRg = avgRg/avgRg[0][0]
+    avgRg = (avgRg - 1)*1e5
     mesh_p = axs[0][i].pcolormesh(xf, zf, avgRp, norm=colors.LogNorm(vmin=1e-2),
                                   cmap='plasma')
     mesh_g = axs[1][i].pcolormesh(xf, zf, avgRg)
@@ -97,5 +94,5 @@ axs[1][0].text(-0.65, 1.31, r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}$',
 axs[0][0].set(ylabel=r'$z/H_\mathrm{g}$')
 axs[1][0].set(ylabel=r'$z/H_\mathrm{g}$')
 plt.subplots_adjust(wspace=0.3)
-plt.savefig(f'figs/{case}_autocorrelations-avg-norm.png', dpi=1000,
+plt.savefig(f'figs/{case}_autocorrelations-norm-avg.png', dpi=1000,
             bbox_inches='tight', pad_inches=0.01)
