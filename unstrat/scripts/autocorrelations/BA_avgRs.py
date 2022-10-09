@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #==============================================================================
-# BA_Rs-norm-avg.py
+# BA_avgRs.py
 #
-# Plot noramlized time-averaged autocorrelations of snapshots of the dust and
+# Plot time-averaged normalized autocorrelations of snapshots of the dust and
 # gas density fields across a range of radial pressure gradients for case BA.
 #
 # Author: Stanley A. Baronett
@@ -52,19 +52,19 @@ for i, Pi in enumerate(Pis):
         data = athena_read.athdf(output)
         ft = fftpack.fft2(data['rhop'][0])
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
-        Rps[j] = ac
+        norm = ac/ac[0][0]
+        shift = fftpack.fftshift(norm)
+        Rps[j] = shift
         ft = fftpack.fft2(data['rho'][0])
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
-        Rgs[j] = ac
+        norm = ac/ac[0][0]
+        shift = fftpack.fftshift(norm)
+        offset = (shift - 1)*1e5
+        Rgs[j] = offset
         print(f'\t{j/len(outputs):.0%}', flush=True)
-    
+
     avgRp = np.average(Rps, axis=0)
     avgRg = np.average(Rgs, axis=0)
-    avgRp = avgRp/avgRp[0][0]
-    avgRg = avgRg/avgRg[0][0]
-    avgRp = fftpack.fftshift(avgRp)
-    avgRg = fftpack.fftshift(avgRg)
-    avgRg = (avgRg - 1)*1e5
     mesh_p = axs[0][i].pcolormesh(xf, zf, avgRp, norm=colors.LogNorm(vmin=1e-2),
                                   cmap='plasma')
     mesh_g = axs[1][i].pcolormesh(xf, zf, avgRg)
@@ -89,12 +89,12 @@ for ax in axs.flat:
     ax.tick_params(axis='x', labelrotation=45)
 
 # Format and save figure
-axs[0][0].text(-0.65, 1.31, r'$\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}$',
+axs[0][0].text(-0.65, 1.31, r'$\overline{\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}}$',
                ha='left', va='top', transform=axs[0][0].transAxes)
-axs[1][0].text(-0.65, 1.31, r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}$',
+axs[1][0].text(-0.65, 1.31, r'$\overline{\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}}$',
                ha='left', va='top', transform=axs[1][0].transAxes)
 axs[0][0].set(ylabel=r'$z/H_\mathrm{g}$')
 axs[1][0].set(ylabel=r'$z/H_\mathrm{g}$')
 plt.subplots_adjust(wspace=0.3)
-plt.savefig(f'figs/{case}_autocorrelations-norm-avg.png', dpi=1000,
+plt.savefig(f'figs/{case}_avgRs.png', dpi=1000,
             bbox_inches='tight', pad_inches=0.01)
