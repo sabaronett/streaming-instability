@@ -26,6 +26,7 @@ case = 'AB'
 Pis = ['0.01', '0.02', '0.05', '0.10']
 res = '2048'
 vmin_p, vmax_p = 1e-1, 1e1 # default for AB (CPDD > 85%; CPDD < 5%)
+out = 100                  # default for AB (last out)
 
 # Check for and override with user-passed arguments
 if len(sys.argv) > 1:
@@ -33,6 +34,8 @@ if len(sys.argv) > 1:
     res = sys.argv[2]
     vmin_p = float(sys.argv[3])
     vmax_p = float(sys.argv[4])
+    out = int(sys.argv[5])
+
 
 for i, Pi in enumerate(Pis):
     # Collect parameters and plot densities
@@ -41,7 +44,7 @@ for i, Pi in enumerate(Pis):
     c_s = athinput['hydro']['iso_sound_speed']
     Omega = athinput['problem']['omega']
     H_g = c_s/Omega
-    data = athena_read.athdf(f'{path}/athdf/SI.out1.00100.athdf')
+    data = athena_read.athdf(f'{path}/athdf/SI.out1.{out:05}.athdf')
     xf, zf = data['x1f']/H_g, data['x2f']/H_g
     t = data['Time']
     clip = np.clip(data['rhop'][0], vmin_p, vmax_p)

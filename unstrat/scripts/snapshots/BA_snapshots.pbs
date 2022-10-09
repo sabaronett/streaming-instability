@@ -5,4 +5,4 @@
 #PBS -N BA_snapshots
 #PBS -W group_list=s2563
 
-python snapshots.py BA 2048 2e-2 2e0
+python snapshots.py BA 2048 2e-2 2e0 200
