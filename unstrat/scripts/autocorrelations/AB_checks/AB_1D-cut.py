@@ -70,5 +70,5 @@ axs[0].set(ylabel=r'$\log(\int\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}\mathrm
 axs[1].set(xlabel=r'$x/(\eta r)$', xscale='log',
            ylabel=r'$\int\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}\mathrm{d}r\times10^{-8}+1$')
 plt.subplots_adjust(hspace=0)
-plt.savefig(f'figs/{case}_Rs_power-spectrum.png', dpi=1000,
+plt.savefig(f'figs/{case}_1D-cut.png', dpi=1000,
             bbox_inches='tight', pad_inches=0.01)
