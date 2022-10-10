@@ -19,7 +19,7 @@ from pathlib import Path
 from scipy import fftpack
 
 fig, axs = plt.subplots(2, 4, sharex=True, sharey=True, figsize=(7, 4.5))
-workdir = '../..'
+workdir = '../../..'
 case = 'AB'
 Pis = ['0.01', '0.02', '0.05', '0.10']
 res = 2048

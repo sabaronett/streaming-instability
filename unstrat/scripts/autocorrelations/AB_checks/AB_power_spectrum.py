@@ -27,7 +27,7 @@ def norms (xf, zf):
     return rf
 
 fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 4))
-workdir = '../..'
+workdir = '../../..'
 case = 'AB'
 Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
        ['0.05', 'tab:orange'], ['0.10', 'tab:red']]
