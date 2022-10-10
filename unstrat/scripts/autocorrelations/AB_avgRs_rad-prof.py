@@ -86,6 +86,7 @@ for i, Pi in enumerate(Pis):
         shift = fftpack.fftshift(norm)
         offset = (shift - 1)*1e8
         Rgs[j] = offset
+        print(f'\t{j/len(outputs):.0%}', flush=True)
 
     avgRp = np.average(Rps, axis=0)
     avgRg = np.average(Rgs, axis=0)
@@ -93,6 +94,7 @@ for i, Pi in enumerate(Pis):
     Rg_prof = rad_prof(avgRg, [center, center])
     axs[0].plot(rs, Rp_prof, color=Pi[1], label=Pi[0])
     axs[1].plot(rs, Rg_prof, color=Pi[1])
+    print(f'\tdone.', flush=True)
 
 for ax in axs.flat:
     ax.grid()
