@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-09
-# Updated: 2022-10-09
+# Updated: 2022-10-10
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -104,8 +104,7 @@ for ax in axs.flat:
 
 # Format and save figure
 axs[0].legend(title=r'$\Pi$')
-axs[0].set(ylabel=r'$\log(\int\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}\mathrm{d}r)$',
-           title='Radial Profile')
+axs[0].set(ylabel=r'$\log(\int\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}\mathrm{d}r)$')
 axs[1].set(xlabel=r'$x/(\eta r)$', xscale='log',
            ylabel=r'$\int\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}\mathrm{d}r\times10^{-8}+1$')
 plt.subplots_adjust(hspace=0)
