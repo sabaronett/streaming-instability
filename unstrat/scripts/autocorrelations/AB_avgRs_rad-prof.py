@@ -38,7 +38,7 @@ def rad_prof(data, center):
     profile = tbin / nr
     return profile
 
-fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 4), dpi=150)
+fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 4))
 workdir = '../..'
 case = 'AB'
 Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
