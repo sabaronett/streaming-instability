@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import fftpack
 
-fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 4))
+fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 4), dpi=300)
 workdir = '../../..'
 case = 'AB'
 Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
@@ -43,7 +43,7 @@ for i, Pi in enumerate(Pis):
     ac = fftpack.ifft2(ft*np.conjugate(ft)).real
     norm = ac/ac[0][0]
     shift = fftpack.fftshift(norm)
-    offset = (shift - 1)*1e8
+    offset = np.log10(shift)*1e8
 
     axs[0].semilogx(xv/etar, log[z0], color=Pi[1], label=Pi[0])
     axs[1].semilogx(xv/etar, offset[z0], color=Pi[1])
@@ -59,6 +59,6 @@ for ax in axs.flat:
 axs[0].legend(loc='upper right', title=r'$\Pi$')
 axs[0].set(ylabel=r'$\log\left[\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}(z=0)\right]$')
 axs[1].set(xlabel=r'$x/(\eta r)$',
-           ylabel=r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}(z=0)\times10^{-8}+1$')
+           ylabel=r'$\log\left[\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}(z=0)\right]\times10^{-8}$')
 plt.subplots_adjust(hspace=0)
-plt.savefig(f'figs/{case}_Rs-z0.png', bbox_inches='tight', pad_inches=0.01)
+plt.savefig(f'figs/{case}_Rs-z0.pdf', bbox_inches='tight', pad_inches=0.01)
