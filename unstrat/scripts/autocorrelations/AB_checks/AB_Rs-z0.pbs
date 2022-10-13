@@ -2,6 +2,6 @@
 #PBS -l select=1:ncpus=1:model=rom_ait
 #PBS -l walltime=0:15:00
 #PBS -m abe
-#PBS -N AB_1D-cut
+#PBS -N AB_Rs-z0
 
-python AB_1D-cut.py
+python AB_Rs-z0.py

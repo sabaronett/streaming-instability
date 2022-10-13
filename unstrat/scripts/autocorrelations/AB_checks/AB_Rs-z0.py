@@ -1,29 +1,21 @@
 #!/usr/bin/env python3
 #==============================================================================
-# AB_1D-cut.py
+# AB_Rs-z0.py
 #
-# Plot 1D cuts of normalized autocorrelations of snapshots of the dust and gas
-# density fields across a range of radial pressure gradients for case AB.
+# Plot 1D cuts (at z=0) of normalized autocorrelations of snapshots of the dust
+# and gas density fields across a range of radial pressure gradients for case
+# AB.
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-10
-# Updated: 2022-10-10
+# Updated: 2022-10-13
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
 import athena_read
 import matplotlib.pyplot as plt
-import matplotlib.colors as colors
 import numpy as np
 from scipy import fftpack
-
-def norms (xf, zf):
-    size = int(len(zf)*len(xf))
-    rf = np.empty(size)
-    for i,z in enumerate(zf):
-        for j,x in enumerate(zf):
-            rf[i+j] = np.sqrt(x**2 + z**2)
-    return rf
 
 fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 4))
 workdir = '../../..'
@@ -40,21 +32,21 @@ for i, Pi in enumerate(Pis):
     c_s = athinput['hydro']['iso_sound_speed']
     etar = float(Pi[0])*c_s
     data = athena_read.athdf(f'{path}/athdf/SI.out1.00100.athdf')
-    xf = data['x1f']/etar
-    center = int(len(xf)/2)
-    xf = np.delete(xf, center)
+    xv, zv = data['x1v'], data['x2v']
+    z0 = int(len(zv)/2)
     ft = fftpack.fft2(data['rhop'][0])
     ac = fftpack.ifft2(ft*np.conjugate(ft)).real
     norm = ac/ac[0][0]
     shift = fftpack.fftshift(norm)
     log = np.log10(shift)
-    axs[0].semilogx(xf, log[center], color=Pi[1], label=Pi[0])
     ft = fftpack.fft2(data['rho'][0])
     ac = fftpack.ifft2(ft*np.conjugate(ft)).real
     norm = ac/ac[0][0]
     shift = fftpack.fftshift(norm)
     offset = (shift - 1)*1e8
-    axs[1].semilogx(xf, offset[center], color=Pi[1])
+
+    axs[0].semilogx(xv/etar, log[z0], color=Pi[1], label=Pi[0])
+    axs[1].semilogx(xv/etar, offset[z0], color=Pi[1])
     print(f'\tdone.', flush=True)
 
 for ax in axs.flat:
@@ -64,11 +56,9 @@ for ax in axs.flat:
     ax.tick_params(axis='both', which='both', top=True, right=True)
 
 # Format and save figure
-axs[0].legend(title=r'$\Pi$')
-axs[0].set(ylabel=r'$\log(\int\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}\mathrm{d}r)$',
-           title='1D Cut')
-axs[1].set(xlabel=r'$x/(\eta r)$', xscale='log',
-           ylabel=r'$\int\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}\mathrm{d}r\times10^{-8}+1$')
+axs[0].legend(loc='upper right', title=r'$\Pi$')
+axs[0].set(ylabel=r'$\log\left[\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}(z=0)\right]$')
+axs[1].set(xlabel=r'$x/(\eta r)$',
+           ylabel=r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}(z=0)\times10^{-8}+1$')
 plt.subplots_adjust(hspace=0)
-plt.savefig(f'figs/{case}_1D-cut.png', dpi=1000,
-            bbox_inches='tight', pad_inches=0.01)
+plt.savefig(f'figs/{case}_Rs-z0.png', bbox_inches='tight', pad_inches=0.01)
