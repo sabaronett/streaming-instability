@@ -7,7 +7,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-10
-# Updated: 2022-10-10
+# Updated: 2022-10-13
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -59,14 +59,14 @@ for i, Pi in enumerate(Pis):
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
         norm = ac/ac[0][0]
         shift = fftpack.fftshift(norm)
-        offset = (shift - 1)*1e5
+        offset = (shift - 1)*1e9
         Rgs[j] = offset
         print(f'\t{j/len(outputs):.0%}', flush=True)
 
     avgRp = np.average(Rps, axis=0)
     avgRg = np.average(Rgs, axis=0)
     mesh_p = axs[0][i].pcolormesh(xf, zf, avgRp, cmap='plasma',
-                                  norm=colors.LogNorm(vmin=1e-2))
+                                  norm=colors.LogNorm(vmin=0.09))
     mesh_g = axs[1][i].pcolormesh(xf, zf, avgRg)
 
     # Add and format dust color bars, titles, and x-axis labels
@@ -77,7 +77,7 @@ for i, Pi in enumerate(Pis):
 
     # Add and format gas color bars
     cb_rhog = fig.colorbar(mesh_g, ax=axs[1][i], location='top')
-    axs[1][i].text(0.49, 1.51, r'$\times10^{-5}+1$',
+    axs[1][i].text(0.49, 1.51, r'$\times10^{-9}+1$',
                ha='left', va='top', transform=axs[1][i].transAxes)
     print(f'\tdone.', flush=True)
 
@@ -89,9 +89,11 @@ for ax in axs.flat:
     ax.tick_params(axis='x', labelrotation=45)
 
 # Format and save figure
-axs[0][0].text(-0.65, 1.31, r'$\overline{\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}}$',
+axs[0][0].text(-0.65, 1.31,
+               r'$\overline{\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}}$',
                ha='left', va='top', transform=axs[0][0].transAxes)
-axs[1][0].text(-0.65, 1.31, r'$\overline{\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}}$',
+axs[1][0].text(-0.65, 1.31,
+               r'$\overline{\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}}$',
                ha='left', va='top', transform=axs[1][0].transAxes)
 axs[0][0].set(ylabel=r'$z/H_\mathrm{g}$')
 axs[1][0].set(ylabel=r'$z/H_\mathrm{g}$')
