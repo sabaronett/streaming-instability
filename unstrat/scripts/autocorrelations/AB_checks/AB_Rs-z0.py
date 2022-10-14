@@ -43,7 +43,7 @@ for i, Pi in enumerate(Pis):
     ac = fftpack.ifft2(ft*np.conjugate(ft)).real
     norm = ac/ac[0][0]
     shift = fftpack.fftshift(norm)
-    offset = np.log10(shift)*1e8
+    offset = (shift-1)*1e9
 
     axs[0].semilogx(xv/etar, log[z0], color=Pi[1], label=Pi[0])
     axs[1].semilogx(xv/etar, offset[z0], color=Pi[1])
@@ -58,7 +58,7 @@ for ax in axs.flat:
 # Format and save figure
 axs[0].legend(loc='upper right', title=r'$\Pi$')
 axs[0].set(ylabel=r'$\log\left[\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}(z=0)\right]$')
-axs[1].set(xlabel=r'$x/(\eta r)$',
-           ylabel=r'$\log\left[\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}(z=0)\right]\times10^{-8}$')
+axs[1].set(yscale='symlog', xlabel=r'$x/(\eta r)$',
+           ylabel=r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}(z=0)\times10^{-9}+1$')
 plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_Rs-z0.pdf', bbox_inches='tight', pad_inches=0.01)
