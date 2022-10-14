@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-10
-# Updated: 2022-10-13
+# Updated: 2022-10-14
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -68,4 +68,5 @@ axs[0].set(ylabel=r'$\log\left[\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}(r^\pr
 axs[1].set(xlabel=r'$r^\prime/(\eta r)$', xscale='log',
            ylabel=r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}(r^\prime)\times10^{-8}+1$')
 plt.subplots_adjust(hspace=0)
-plt.savefig(f'figs/{case}_Rs_pow-spect.pdf', bbox_inches='tight', pad_inches=0.01)
+plt.savefig(f'figs/{case}_Rs_pow-spect.png', dpi=1000,
+            bbox_inches='tight', pad_inches=0.01)
