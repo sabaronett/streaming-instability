@@ -50,7 +50,7 @@ for i, Pi in enumerate(Pis):
     ac = fftpack.ifft2(ft*np.conjugate(ft)).real
     norm = ac/ac[0][0]
     shift = fftpack.fftshift(norm)
-    offset = (shift - 1)*1e8
+    offset = (shift - 1)*1e11
 
     axs[0].scatter(rv/etar, log, s=0.1, color=Pi[1], label=Pi[0])
     axs[1].scatter(rv/etar, offset, s=0.1, color=Pi[1])
@@ -65,8 +65,8 @@ for ax in axs.flat:
 # Format and save figure
 axs[0].legend(loc='upper right', title=r'$\Pi$')
 axs[0].set(ylabel=r'$\log\left[\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}(r^\prime)\right]$')
-axs[1].set(xlabel=r'$r^\prime/(\eta r)$', xscale='log',
-           ylabel=r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}(r^\prime)\times10^{-8}+1$')
+axs[1].set(yscale='symlog', xscale='log', xlabel=r'$r^\prime/(\eta r)$',
+           ylabel=r'$\left[\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}(r^\prime)-1\right]\times10^{11}$')
 plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_Rs_pow-spect.png', dpi=1000,
             bbox_inches='tight', pad_inches=0.01)
