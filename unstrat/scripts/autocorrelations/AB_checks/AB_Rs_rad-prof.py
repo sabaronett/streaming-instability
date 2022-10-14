@@ -24,7 +24,7 @@ def norms(xv, zv):
             rv[i][j] = np.sqrt(x**2 + z**2)
     return rv
 
-fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 6), dpi=300)
+fig, axs = plt.subplots(3, sharex=True, figsize=(3.15, 6), dpi=300)
 workdir = '../../..'
 case = 'AB'
 Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
