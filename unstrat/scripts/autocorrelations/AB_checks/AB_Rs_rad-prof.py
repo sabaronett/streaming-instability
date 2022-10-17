@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-14
-# Updated: 2022-10-14
+# Updated: 2022-10-17
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -17,11 +17,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import fftpack, stats
 
-def norms(xv, zv):
+def norms(xv, zv, pole):
     rv = np.zeros((len(zv), len(xv)))
     for i, z in enumerate(zv):
         for j, x in enumerate(xv):
-            rv[i][j] = np.sqrt(x**2 + z**2)
+            rv[i][j] = np.sqrt((x - pole[0])**2 + (z - pole[1])**2)
     return rv
 
 fig, axs = plt.subplots(3, sharex=True, figsize=(3.15, 6), dpi=300)
@@ -41,16 +41,18 @@ for i, Pi in enumerate(Pis):
     etar = float(Pi[0])*c_s
     data = athena_read.athdf(f'{path}/athdf/SI.out1.00100.athdf')
     xv, zv = data['x1v'], data['x2v']
-    rv = norms(xv, zv)
+    x0, z0 = int(len(xv)/2), int(len(zv)/2)
+    pole = (xv[x0], zv[z0])
+    rv = norms(xv, zv, pole)
     ft = fftpack.fft2(data['rhop'][0])
     ac = fftpack.ifft2(ft*np.conjugate(ft)).real
     norm = ac/ac[0][0]
     shift = fftpack.fftshift(norm)
     log = np.log10(shift)
-    dust_means, bin_edges, binnumnber = stats.binned_statistic(rv.ravel(), log.ravel(),
-        statistic='mean', bins=bins)
-    dust_stds, bin_edges, binnumnber = stats.binned_statistic(rv.ravel(), log.ravel(),
-        statistic='std', bins=100)
+    dust_means, bin_edges, binnumnber = stats.binned_statistic(rv.ravel(),
+        log.ravel(), statistic='mean', bins=bins)
+    dust_stds, bin_edges, binnumnber = stats.binned_statistic(rv.ravel(),
+        log.ravel(), statistic='std', bins=100)
     dust_highs = dust_means + dust_stds
     dust_lows = dust_means - dust_stds
     ft = fftpack.fft2(data['rho'][0])
@@ -58,20 +60,21 @@ for i, Pi in enumerate(Pis):
     norm = ac/ac[0][0]
     shift = fftpack.fftshift(norm)
     offset = (shift - 1)*1e11
-    gas_means, bin_edges, binnumnber = stats.binned_statistic(rv.ravel(), offset.ravel(),
-        statistic='mean', bins=bins)
-    gas_stds, bin_edges, binnumnber = stats.binned_statistic(rv.ravel(), offset.ravel(),
-        statistic='std', bins=bins)
+    gas_means, bin_edges, binnumnber = stats.binned_statistic(rv.ravel(),
+        offset.ravel(), statistic='mean', bins=bins)
+    gas_stds, bin_edges, binnumnber = stats.binned_statistic(rv.ravel(),
+        offset.ravel(), statistic='std', bins=bins)
     gas_highs = gas_means + gas_stds
     gas_lows = gas_means - gas_stds
-    bin_counts, bin_edges, binnumnber = stats.binned_statistic(rv.ravel(), rv.ravel(),
-        statistic='count', bins=bins)
+    bin_counts, bin_edges, binnumnber = stats.binned_statistic(rv.ravel(),
+        rv.ravel(), statistic='count', bins=bins)
 
-    axs[0].stairs(dust_means, bin_edges/etar, baseline=float('-inf'), color=Pi[1],
-                  lw=1.5, label=Pi[0])
+    axs[0].stairs(dust_means, bin_edges/etar, baseline=float('-inf'),
+                  color=Pi[1], lw=1.5, label=Pi[0])
     axs[0].stairs(dust_highs, bin_edges/etar, baseline=dust_lows, fill=True,
                                  color=Pi[1], alpha=0.2)
-    axs[1].stairs(gas_means, bin_edges/etar, baseline=float('-inf'), color=Pi[1], lw=1.5)
+    axs[1].stairs(gas_means, bin_edges/etar, baseline=float('-inf'),
+                  color=Pi[1], lw=1.5)
     axs[1].stairs(gas_highs, bin_edges/etar, baseline=gas_lows, fill=True,
                                  color=Pi[1], alpha=0.2)
     axs[2].stairs(bin_counts, bin_edges/etar, color=Pi[1], lw=1.5)
