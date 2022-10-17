@@ -67,7 +67,7 @@ for ax in axs.flat:
 # Format and save figure
 axs[0].legend(loc='upper right', title=r'$\Pi$')
 axs[0].set(ylabel=r'$\log\left[\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}(r^\prime)\right]$')
-axs[1].set(yscale='symlog', xscale='log', xlabel=r'$r^\prime/(\eta r)$',
+axs[1].set(xlim=(3e-5, 3e0), xscale='log', yscale='symlog', xlabel=r'$r^\prime/(\eta r)$',
            ylabel=r'$\left[\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}(r^\prime)-1\right]\times10^{11}$')
 plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_Rs_pow-spect.png', dpi=1000,
