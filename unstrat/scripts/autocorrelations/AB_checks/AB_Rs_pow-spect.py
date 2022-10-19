@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-10
-# Updated: 2022-10-17
+# Updated: 2022-10-19
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -37,7 +37,7 @@ for i, Pi in enumerate(Pis):
     path = f'{workdir}/{case}/{Pi[0]}/{res}'
     athinput = athena_read.athinput(f'{path}/athinput.si')
     c_s = athinput['hydro']['iso_sound_speed']
-    etar = float(Pi[0])*c_s
+    # etar = float(Pi[0])*c_s
     data = athena_read.athdf(f'{path}/athdf/SI.out1.00100.athdf')
     xv, zv = data['x1v'], data['x2v']
     x0, z0 = int(len(xv)/2), int(len(zv)/2)
@@ -54,8 +54,8 @@ for i, Pi in enumerate(Pis):
     shift = fftpack.fftshift(norm)
     offset = (shift - 1)*1e11
 
-    axs[0].scatter(rv/etar, log, s=0.1, color=Pi[1], label=Pi[0])
-    axs[1].scatter(rv/etar, offset, s=0.1, color=Pi[1])
+    axs[0].scatter(rv, log, s=0.1, color=Pi[1], label=Pi[0])
+    axs[1].scatter(rv, offset, s=0.1, color=Pi[1])
     print(f'\tdone.', flush=True)
 
 for ax in axs.flat:
@@ -67,7 +67,8 @@ for ax in axs.flat:
 # Format and save figure
 axs[0].legend(loc='upper right', title=r'$\Pi$')
 axs[0].set(ylabel=r'$\log\left[\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}(r^\prime)\right]$')
-axs[1].set(xlim=(3e-5, 3e0), xscale='log', yscale='symlog', xlabel=r'$r^\prime/(\eta r)$',
+axs[1].set(xlim=(4e-5, 0.8), ylim=(-1e5, 0.5), xscale='log', yscale='symlog',
+           xlabel=r'$r^\prime/H_\mathrm{g}$',
            ylabel=r'$\left[\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}(r^\prime)-1\right]\times10^{11}$')
 plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_Rs_pow-spect.png', dpi=1000,
