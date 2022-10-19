@@ -40,6 +40,7 @@ for i, Pi in enumerate(Pis):
     # etar = float(Pi[0])*c_s
     data = athena_read.athdf(f'{path}/athdf/SI.out1.00100.athdf')
     xv, zv = data['x1v'], data['x2v']
+    left, right = xv[-1]/res, np.sqrt(8*xv[-1]**2)
     x0, z0 = int(len(xv)/2), int(len(zv)/2)
     pole = (xv[x0], zv[z0])
     rv = norms(xv, zv, pole)
@@ -67,7 +68,7 @@ for ax in axs.flat:
 # Format and save figure
 axs[0].legend(loc='upper right', title=r'$\Pi$')
 axs[0].set(ylabel=r'$\log\left[\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}(r^\prime)\right]$')
-axs[1].set(xlim=(4e-5, 0.8), ylim=(-1e5, 0.5), xscale='log', yscale='symlog',
+axs[1].set(xlim=(left, right), ylim=(-1e5, 0.5), xscale='log', yscale='symlog',
            xlabel=r'$r^\prime/H_\mathrm{g}$',
            ylabel=r'$\left[\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}(r^\prime)-1\right]\times10^{11}$')
 plt.subplots_adjust(hspace=0)
