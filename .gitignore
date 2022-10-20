@@ -22,13 +22,13 @@ old*/
 tabs/
 test/
 scratch.*
-*.old.*
-*.local.py
+temp.py
 *.code-workspace
+*.local.py
+*.old.*
 
 # VS Code
 .vscode/
-
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
