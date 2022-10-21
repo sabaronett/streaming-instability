@@ -124,5 +124,5 @@ axs[0].set(ylabel=r'$\log\overline{\mathcal{R}_\mathrm{p}}$')
 axs[1].set(yscale='symlog', xscale='log', xlabel=r'$r^\prime/(\eta r))$', 
            ylabel=r'$\left(\overline{\mathcal{R}_\mathrm{g}}-1\right)\times10^{11}$')
 plt.subplots_adjust(hspace=0)
-plt.savefig(f'figs/{case}_avgRs_rad-prof-etar.pdf', bbox_inches='tight',
+plt.savefig(f'figs/{case}_avgRs_rad-prof.pdf', bbox_inches='tight',
             pad_inches=0.01)
