@@ -2,13 +2,14 @@
 #==============================================================================
 # AB_avgRs_rad-prof.py
 #
-# Plot with logarithmically-spaced bins azimuthally-averaged radial profiles of
-# the time-averaged normalized autocorrelations of snapshots of the dust and
-# gas density fields across a range of radial pressure gradients for case AB.
+# Plot with logarithmically-spaced bins azimuthally-averaged radial profiles,
+# scaled by eta r, of the time-averaged normalized autocorrelations of
+# snapshots of the dust and gas density fields across a range of radial
+# pressure gradients for case AB.
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-09
-# Updated: 2022-10-20
+# Updated: 2022-10-21
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -52,7 +53,6 @@ for i, Pi in enumerate(Pis):
     etar = float(Pi[0])*c_s
     data = athena_read.athdf(outputs[0])
     xv, zv = data['x1v'], data['x2v']
-    left, right = xv[-1]/res, 1.32*xv[-1]
     x0, z0 = len(xv)//2, len(zv)//2
     pole = (xv[x0], zv[z0])
     rv = norms(xv, zv, pole).ravel()
@@ -102,13 +102,13 @@ for i, Pi in enumerate(Pis):
     gas_highs = gas_means + gas_stds
     gas_lows = gas_means - gas_stds
     # Plot results
-    axs[0].stairs(dust_means, bin_edges, baseline=float('-inf'),
+    axs[0].stairs(dust_means, bin_edges/etar, baseline=float('-inf'),
                   color=Pi[1], lw=1.5, label=Pi[0])
-    axs[0].stairs(dust_highs, bin_edges, baseline=dust_lows, fill=True,
+    axs[0].stairs(dust_highs, bin_edges/etar, baseline=dust_lows, fill=True,
                 color=Pi[1], alpha=0.2)
-    axs[1].stairs(gas_means, bin_edges, baseline=float('-inf'),
+    axs[1].stairs(gas_means, bin_edges/etar, baseline=float('-inf'),
                   color=Pi[1], lw=1.5)
-    axs[1].stairs(gas_highs, bin_edges, baseline=gas_lows, fill=True,
+    axs[1].stairs(gas_highs, bin_edges/etar, baseline=gas_lows, fill=True,
                   color=Pi[1], alpha=0.2)
     print(f'\tdone.', flush=True)
 
@@ -120,9 +120,9 @@ for ax in axs.flat:
 
 # Format and save figure
 axs[0].legend(title=r'$\Pi$')
-axs[0].set(ylabel=r'$\log\left(\int_0^{2\pi}\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}\mathrm{d}\phi\right)$')
-axs[1].set(xlim=(left, right), xscale='log', yscale='symlog',
-           ylabel=r'$\left(\int_0^{2\pi}\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}\mathrm{d}\phi-1\right)\times10^{11}$')
+axs[0].set(ylabel=r'$\log\mathcal{R}_\mathrm{p}$')
+axs[1].set(yscale='symlog', xscale='log', xlabel=r'$r^\prime/(\eta r))$', 
+           ylabel=r'$\left(\mathcal{R}_\mathrm{g}-1\right)\times10^{11}$')
 plt.subplots_adjust(hspace=0)
-plt.savefig(f'figs/{case}_avgRs_rad-prof.pdf', bbox_inches='tight',
+plt.savefig(f'figs/{case}_avgRs_rad-prof-etar.pdf', bbox_inches='tight',
             pad_inches=0.01)
