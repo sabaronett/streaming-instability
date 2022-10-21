@@ -64,9 +64,9 @@ for i, Pi in enumerate(Pis):
     leftmost_edge = r0/np.sqrt(base)
     num = int(np.sqrt(res))
     bin_edges = leftmost_edge*np.logspace(0, num, num=(num + 1), base=base)
-    rvs = np.empty((len(outputs), res, res))
-    Rps = np.empty((len(outputs), res, res))
-    Rgs = np.empty((len(outputs), res, res))
+    rvs = np.empty((len(outputs), len(rv)))
+    Rps = np.empty((len(outputs), len(rv)))
+    Rgs = np.empty((len(outputs), len(rv)))
 
     for j, output in enumerate(outputs):
         data = athena_read.athdf(output)
