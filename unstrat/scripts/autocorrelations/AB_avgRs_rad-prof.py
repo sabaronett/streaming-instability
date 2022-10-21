@@ -46,7 +46,7 @@ for i, Pi in enumerate(Pis):
     outputs = sorted(list(Path(f'{path}/athdf').glob(
         athinput['job']['problem_id']+'.out1.*.athdf')))
     dt = athinput['output1']['dt']
-    i_sat  = t_sat//dt
+    i_sat  = int(t_sat/dt)
     outputs = outputs[i_sat:]
     c_s = athinput['hydro']['iso_sound_speed']
     etar = float(Pi[0])*c_s
