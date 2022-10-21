@@ -7,7 +7,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-09-28
-# Updated: 2022-10-07
+# Updated: 2022-10-21
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -89,12 +89,14 @@ for ax in axs.flat:
     ax.tick_params(axis='x', labelrotation=45)
 
 # Format and save figure
-axs[0][0].text(-0.65, 1.31, r'$\overline{\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}}$',
+axs[0][0].text(-0.65, 1.31,
+               r'$\overline{\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}}$',
                ha='left', va='top', transform=axs[0][0].transAxes)
-axs[1][0].text(-0.65, 1.31, r'$\overline{\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}}$',
+axs[1][0].text(-0.65, 1.31,
+               r'$\overline{\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}}$',
                ha='left', va='top', transform=axs[1][0].transAxes)
 axs[0][0].set(ylabel=r'$z/H_\mathrm{g}$')
 axs[1][0].set(ylabel=r'$z/H_\mathrm{g}$')
 plt.subplots_adjust(wspace=0.3)
-plt.savefig(f'figs/{case}_avgRs.png', dpi=1000,
-            bbox_inches='tight', pad_inches=0.01)
+plt.savefig(f'figs/{case}_avgRs.png', dpi=1000, bbox_inches='tight',
+            pad_inches=0.01)
