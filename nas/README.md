@@ -1,15 +1,7 @@
 # NAS Workflow
-## Login
-### Pleiades
-```bash
-$ ./scripts/nas
-```
-### Lou
-```bash
-$ ./scripts/lou
-```
 
 ## File Transfers
+
 ### Intra-enclave (between two NAS hosts) with [Shift Transfer Tool](https://www.nas.nasa.gov/hecc/support/kb/shift-transfer-tool-overview_300.html)
 ```bash
 lfeX:~> shiftc --hosts=8 /nobackup/$USERNAME/dir ~/
@@ -59,6 +51,15 @@ lfeX:/nobackup/$USERNAME$ shiftc --hosts=8 --create-tar --index-tar github/.../d
 
 
 ## [PBS](https://www.nas.nasa.gov/hecc/support/kb/running-jobs-with-pbs-121/)
+
+### [Batch Jobs](https://www.nas.nasa.gov/hecc/support/kb/sample-pbs-script-for-pleiades_190.html)
+- See [`sample.pbs`](/nas/sample.pbs).
+- [Continuous restarts](https://www.nas.nasa.gov/hecc/support/kb/commonly-used-qsub-command-options_175.html):
+```bash
+pfeXX:~> qsub -W depend=afterok:[job_id.server_name].nas.nasa.gov [script].pbs
+```
+
+
 ### Interactive Jobs
 Using [VNC Xterm](https://www.nas.nasa.gov/hecc/support/kb/vnc-a-faster-alternative-to-x11_257.html): 
 1. Start VNC server on PFE:
@@ -81,11 +82,9 @@ pfeXX:~> vncserver -kill :XX
 ```
 where `XX` is the ID of the server initiated earlier.
 
-### [Batch Jobs](https://www.nas.nasa.gov/hecc/support/kb/sample-pbs-script-for-pleiades_190.html)
-See [`sample.pbs`](/nas/sample.pbs).
-
 
 ## [Athena++](https://github.com/PrincetonUniversity/athena/wiki)
+
 ### [Configure](https://github.com/PrincetonUniversity/athena/wiki/Configuring)
 1. ```bash
    pfeXX:~> ./configure.py --prob=streaming_instability -p --eos=isothermal --nghost=3 -mpi -hdf5 -h5double --cxx=icpc --mpiccmd="icpc -lmpi -lmpi++" --cflag="-xCORE-AVX512"
@@ -99,6 +98,7 @@ See [`sample.pbs`](/nas/sample.pbs).
 
 
 ### [Compile](https://github.com/PrincetonUniversity/athena/wiki/Compiling)
+
 #### On Compute Node ([Interactive Jobs](#interactive-jobs))
 Parallel compilation on a single Electra Broadwell node takes less than 6 minutes.
 1. Request an interactive node with
@@ -111,12 +111,15 @@ Parallel compilation on a single Electra Broadwell node takes less than 6 minute
    make -j
    ```
 
+
 #### On Pleiades front end (PFE)
 ```bash
 $ make -j 2
 ```
 
+
 ## Local Commands
+
 ### Visit
 - In local directory
   ```bash
