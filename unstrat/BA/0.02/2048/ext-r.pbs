@@ -1,9 +1,8 @@
-#PBS -e /nobackup/sbaronet/github/sabaronett/streaming-instability/unstrat/BA/0.02/2048/monitor
+#PBS -j oe
+#PBS -k oed
 #PBS -l select=103:ncpus=40:mpiprocs=40:model=sky_ele
-#PBS -l walltime=2:00:00
+#PBS -l walltime=120:00:00
 #PBS -m abe
 #PBS -N BA-Pi0.02-2048_ext-r
-#PBS -o /nobackup/sbaronet/github/sabaronett/streaming-instability/unstrat/BA/0.02/2048/monitor
-#PBS -q debug
 
-mpiexec -n 4096 $ATHENA_DUST -i athinput.si -r SI.00013.rst -t 1:50:00
+mpiexec -n 4096 $ATHENA_DUST -i athinput.si -r SI.00013.rst -t 118:00:00
