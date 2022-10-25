@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N BA-Pi0.10-2048_cpdd
 
-python ../../../scripts/cpdd.py 20 # t_sat / T (from DDD)
+python ../../../scripts/cpdd.py 150 # t_sat / T
