@@ -78,6 +78,5 @@ axs[1][0].text(-0.65, 1.31, r'$\rho_\mathrm{g}/\rho_\mathrm{g,0}$', ha='left',
                va='top', transform=axs[1][0].transAxes)
 axs[0][0].set(ylabel=r'$z/H_\mathrm{g}$')
 axs[1][0].set(ylabel=r'$z/H_\mathrm{g}$')
-plt.subplots_adjust(wspace=0.3)
 plt.savefig(f'figs/{case}-{res}_snaps.png', dpi=1000, bbox_inches='tight',
             pad_inches=0.01)
