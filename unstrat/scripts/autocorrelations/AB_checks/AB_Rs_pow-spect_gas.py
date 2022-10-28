@@ -75,5 +75,5 @@ axs[0].set(ylabel=r'$\log\mathcal{R}_\mathrm{p}$')
 axs[1].set(xlim=(left, right), xscale='log', xlabel=r'$r/H_\mathrm{g}$',
            ylabel=r'$\mathcal{R}_\mathrm{g}$')
 plt.subplots_adjust(hspace=0)
-plt.savefig(f'figs/{case}_Rs_pow-spect.png', dpi=1000, bbox_inches='tight',
+plt.savefig(f'figs/{case}_Rs_pow-spect_gas.png', dpi=1000, bbox_inches='tight',
             pad_inches=0.01)
