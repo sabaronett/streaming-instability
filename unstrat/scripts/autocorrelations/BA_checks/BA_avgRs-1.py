@@ -15,7 +15,6 @@ import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
 import athena_read
 import matplotlib.pyplot as plt
-import matplotlib.colors as colors
 import numpy as np
 from pathlib import Path
 from scipy import fftpack
@@ -102,6 +101,6 @@ axs[1][0].text(-0.65, 1.31,
                ha='left', va='top', transform=axs[1][0].transAxes)
 axs[0][0].set(ylabel=r'$z/H_\mathrm{g}$')
 axs[1][0].set(ylabel=r'$z/H_\mathrm{g}$')
-plt.subplots_adjust(wspace=0.3)
+plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_avgRs-1.png', dpi=1000, bbox_inches='tight',
             pad_inches=0.01)
