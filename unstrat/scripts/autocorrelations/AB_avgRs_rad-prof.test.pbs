@@ -1,8 +1,0 @@
-#PBS -e /nobackup/sbaronet/github/sabaronett/streaming-instability/unstrat/scripts/autocorrelations
-#PBS -l select=1:ncpus=1:model=rom_ait
-#PBS -l walltime=8:00:00
-#PBS -m abe
-#PBS -N AB_avgRs_rad-prof
-#PBS -o /nobackup/sbaronet/github/sabaronett/streaming-instability/unstrat/scripts/autocorrelations
-
-python AB_avgRs_rad-prof.py 2048 4
