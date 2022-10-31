@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #==============================================================================
-# AB_Rs-z0.py
+# AB_avgRs-z0-x0.py
 #
 # Plot 1D cuts, at z = 0 and x = 0, of normalized autocorrelations of snapshots
 # of the dust and gas density fields across a range of radial pressure

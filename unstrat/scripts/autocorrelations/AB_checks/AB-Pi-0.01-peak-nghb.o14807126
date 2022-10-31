@@ -1,0 +1,43 @@
+Job 14807126.pbspl1.nas.nasa.gov started on Sun Oct 30 19:21:52 PDT 2022
+The job requested the following resources:
+    ncpus=1
+    place=scatter:excl
+    walltime=01:00:00
+
+PBS set the following environment variables:
+        FORT_BUFFERED = 1
+                   TZ = PST8PDT
+
+On r201c1t3n2:
+Current directory is /nobackup/sbaronet/github/sabaronett/streaming-instability/unstrat/scripts/autocorrelations/AB_checks
+Current directory is /nobackup/sbaronet/github/sabaronett/streaming-instability/unstrat/scripts/autocorrelations/AB_checks
+Loading hdf5/1.8.18_mpt
+  Loading requirement: szip/2.1.1
+AB/0.01: Processing...
+[[0.9319693  0.93651932 0.93231061]
+ [0.9446888  1.         0.9446888 ]
+ [0.93231061 0.93651932 0.9319693 ]]
+	done.
+AB/0.02: Processing...
+	done.
+AB/0.05: Processing...
+	done.
+AB/0.10: Processing...
+	done.
+
+____________________________________________________________________
+Job Resource Usage Summary for 14807126.pbspl1.nas.nasa.gov
+
+    CPU Time Used            : 00:01:44
+    Real Memory Used         : 1118592kb
+    Walltime Used            : 00:29:29
+    Exit Status              : 0
+
+    Number of CPUs Requested : 1
+    Walltime Requested       : 01:00:00
+
+    Execution Queue          : normal
+    Charged To               : s2259
+
+    Job Stopped              : Sun Oct 30 19:51:28 2022
+____________________________________________________________________

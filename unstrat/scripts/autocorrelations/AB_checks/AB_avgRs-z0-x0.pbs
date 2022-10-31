@@ -2,6 +2,6 @@
 #PBS -l select=1:ncpus=1:model=rom_ait
 #PBS -l walltime=8:00:00
 #PBS -m abe
-#PBS -N AB_avgRs-x0-z0
+#PBS -N AB_avgRs-z0-x0
 
-python AB_avgRs-x0-z0.py 2048 5
+python AB_avgRs-z0-x0.py 2048 5
