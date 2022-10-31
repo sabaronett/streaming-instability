@@ -4,4 +4,4 @@
 #PBS -m abe
 #PBS -N AB_avgRs_rad-prof
 
-python AB_avgRs_rad-prof.py 2048 4
+python AB_avgRs_rad-prof.py 2048 5

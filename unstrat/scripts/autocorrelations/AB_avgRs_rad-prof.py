@@ -3,13 +3,13 @@
 # AB_avgRs_rad-prof.py
 #
 # Plot with logarithmically-spaced bins azimuthally-averaged radial profiles,
-# scaled by eta r, of the time-averaged normalized autocorrelations of
-# snapshots of the dust and gas density fields across a range of radial
-# pressure gradients for case AB.
+# scaled by Pi, of the time-averaged normalized autocorrelations of snapshots
+# of the dust and gas density fields across a range of radial pressure
+# gradients for case AB.
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-09
-# Updated: 2022-10-21
+# Updated: 2022-10-30
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -32,7 +32,7 @@ case = 'AB'
 Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
        ['0.05', 'tab:orange'], ['0.10', 'tab:red']]
 res = 2048
-t_sat = 4 # [T]
+t_sat = 5 # [T]
 
 # Check for and override with user-passed arguments
 if len(sys.argv) > 1:
@@ -50,7 +50,6 @@ for i, Pi in enumerate(Pis):
     i_sat  = int(t_sat/dt)
     outputs = outputs[i_sat:]
     c_s = athinput['hydro']['iso_sound_speed']
-    etar = float(Pi[0])*c_s
     data = athena_read.athdf(outputs[0])
     xv, zv = data['x1v'], data['x2v']
     x0, z0 = len(xv)//2, len(zv)//2
@@ -71,6 +70,7 @@ for i, Pi in enumerate(Pis):
     for j, output in enumerate(outputs):
         data = athena_read.athdf(output)
         rvs[j] = rv
+
         # Process dust
         ft = fftpack.fft2(data['rhop'][0])
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
@@ -78,13 +78,14 @@ for i, Pi in enumerate(Pis):
         shift = fftpack.fftshift(norm)
         log = np.log10(shift).ravel()
         Rps[j] = np.delete(log, indices)
+        
         # Process gas
-        ft = fftpack.fft2(data['rho'][0])
+        diff = data['rho'][0] - 1
+        ft = fftpack.fft2(diff)
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
         norm = ac/ac[0][0]
         shift = fftpack.fftshift(norm)
-        offset = (shift.ravel() - 1)*1e11
-        Rgs[j] = np.delete(offset, indices)
+        Rgs[j] = np.delete(shift, indices)
         print(f'\t{j/len(outputs):.0%}', flush=True)
 
     # Bin dust
@@ -94,6 +95,7 @@ for i, Pi in enumerate(Pis):
         Rps.ravel(), statistic='std', bins=bin_edges)
     dust_highs = dust_means + dust_stds
     dust_lows = dust_means - dust_stds
+
     # Bin gas
     gas_means, bin_edges, binnumnber = stats.binned_statistic(rvs.ravel(),
         Rgs.ravel(), statistic='mean', bins=bin_edges)
@@ -101,15 +103,16 @@ for i, Pi in enumerate(Pis):
         Rgs.ravel(), statistic='std', bins=bin_edges)
     gas_highs = gas_means + gas_stds
     gas_lows = gas_means - gas_stds
-    # Plot results
-    axs[0].stairs(dust_means, bin_edges/etar, baseline=float('-inf'),
+
+    # Plot histograms
+    axs[0].stairs(dust_means, bin_edges/float(Pi[0]), baseline=float('-inf'),
                   color=Pi[1], lw=1.5, label=Pi[0])
-    axs[0].stairs(dust_highs, bin_edges/etar, baseline=dust_lows, fill=True,
-                color=Pi[1], alpha=0.2)
-    axs[1].stairs(gas_means, bin_edges/etar, baseline=float('-inf'),
+    axs[0].stairs(dust_highs, bin_edges/float(Pi[0]), baseline=dust_lows,
+                  fill=True, color=Pi[1], alpha=0.2)
+    axs[1].stairs(gas_means, bin_edges/float(Pi[0]), baseline=float('-inf'),
                   color=Pi[1], lw=1.5)
-    axs[1].stairs(gas_highs, bin_edges/etar, baseline=gas_lows, fill=True,
-                  color=Pi[1], alpha=0.2)
+    axs[1].stairs(gas_highs, bin_edges/float(Pi[0]), baseline=gas_lows,
+                  fill=True, color=Pi[1], alpha=0.2)
     print(f'\tdone.', flush=True)
 
 for ax in axs.flat:
@@ -121,8 +124,8 @@ for ax in axs.flat:
 # Format and save figure
 axs[0].legend(title=r'$\Pi$')
 axs[0].set(ylabel=r'$\log\overline{\mathcal{R}_\mathrm{p}}$')
-axs[1].set(yscale='symlog', xscale='log', xlabel=r'$r^\prime/(\eta r)$', 
-           ylabel=r'$\left(\overline{\mathcal{R}_\mathrm{g}}-1\right)\times10^{11}$')
+axs[1].set(xscale='log', xlabel=r'$r/(\Pi H_\mathrm{g})$',
+           ylabel=r'$\overline{\mathcal{R}_\mathrm{g}^\prime}$')
 plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_avgRs_rad-prof.pdf', bbox_inches='tight',
             pad_inches=0.01)
