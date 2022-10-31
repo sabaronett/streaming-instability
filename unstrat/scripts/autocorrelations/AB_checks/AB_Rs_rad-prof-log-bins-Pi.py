@@ -73,6 +73,8 @@ for i, Pi in enumerate(Pis):
     ac = fftpack.ifft2(ft*np.conjugate(ft)).real
     norm = ac/ac[0][0]
     shift = fftpack.fftshift(norm)
+    if Pi[0] == '0.01':
+        print(shift[1023:1026, 1023:1026])
     shift = np.delete(shift, indices)
     gas_means, bin_edges, binnumnber = stats.binned_statistic(rv.ravel(),
         shift.ravel(), statistic='mean', bins=bin_edges)
