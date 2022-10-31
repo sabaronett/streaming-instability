@@ -2,13 +2,13 @@
 #==============================================================================
 # AB_avgRs-z0-x0.py
 #
-# Plot 1D cuts, at z = 0 and x = 0, of normalized autocorrelations of snapshots
-# of the dust and gas density fields across a range of radial pressure
-# gradients for case AB.
+# Plot 1D cuts, at z = 0 and x = 0, of time-averaged, normalized auto-
+# correlations of snapshots of the dust and gas density fields across a range
+# of radial pressure gradients for case AB.
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-30
-# Updated: 2022-10-30
+# Updated: 2022-10-31
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -18,7 +18,7 @@ import numpy as np
 from pathlib import Path
 from scipy import fftpack
 
-fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 4), dpi=300)
+fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 4))
 workdir = '../../..'
 case = 'AB'
 Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
@@ -43,7 +43,6 @@ for i, Pi in enumerate(Pis):
     outputs = outputs[i_sat:]
     c_s = athinput['hydro']['iso_sound_speed']
     Omega = athinput['problem']['omega']
-    epsilon = athinput['problem']['epsilon']
     H_g = c_s/Omega
     data = athena_read.athdf(outputs[0])
     xv, zv = data['x1v']/H_g, data['x2v']/H_g
@@ -85,7 +84,7 @@ for i, Pi in enumerate(Pis):
     ls_dust, = axs[1].semilogx([], [], color='tab:gray', label=r'$\mathcal{R}(z=0$)')
     ls_gas,  = axs[1].semilogx([], [], color='tab:gray', ls='--', label=r'$\mathcal{R}(x=0)$')
     axs[0].legend(loc='upper right', title=r'$\Pi$')
-    axs[1].legend(handles=[ls_dust, ls_gas], loc='upper right')
+    axs[1].legend(handles=[ls_dust, ls_gas], loc='lower left')
     
 for ax in axs.flat:
     ax.grid()
@@ -95,7 +94,7 @@ for ax in axs.flat:
 
 # Format and save figure
 axs[0].set(ylabel=r'$\log\mathcal{R}_\mathrm{p}$')
-axs[1].set(xscale='log', xlabel=r'$x,z/(\Pi H_\mathrm{g})$', 
+axs[1].set(xscale='log', xlabel=r'$(x,z)/H_\mathrm{g}$',
            ylabel=r'$\mathcal{R}_\mathrm{g}^\prime$')
 plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_avgRs-z0-x0.pdf', bbox_inches='tight', pad_inches=0.01)
