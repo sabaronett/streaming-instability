@@ -1,7 +1,0 @@
-#PBS -j oe
-#PBS -l select=1:ncpus=1:model=rom_ait
-#PBS -l walltime=0:15:00
-#PBS -m abe
-#PBS -N AB_Rs-z0
-
-python AB_Rs-z0.py
