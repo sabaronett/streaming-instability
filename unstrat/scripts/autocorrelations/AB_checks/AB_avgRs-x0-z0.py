@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+#==============================================================================
+# AB_Rs-z0.py
+#
+# Plot 1D cuts, at z = 0 and x = 0, of normalized autocorrelations of snapshots
+# of the dust and gas density fields across a range of radial pressure
+# gradients for case AB.
+#
+# Author: Stanley A. Baronett
+# Created: 2022-10-30
+# Updated: 2022-10-30
+#==============================================================================
+import sys
+sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
+import athena_read
+import matplotlib.pyplot as plt
+import numpy as np
+from pathlib import Path
+from scipy import fftpack
+
+fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 4), dpi=300)
+workdir = '../../..'
+case = 'AB'
+Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
+       ['0.05', 'tab:orange'], ['0.10', 'tab:red']]
+res = 2048
+t_sat = 5 # [T]
+
+# Check for and override with user-passed arguments
+if len(sys.argv) > 1:
+    res = int(sys.argv[1])
+    t_sat = float(sys.argv[2])
+
+for i, Pi in enumerate(Pis):
+    # Collect parameters and plot densities
+    print(f'{case}/{Pi[0]}: Processing...', flush=True)
+    path = f'{workdir}/{case}/{Pi[0]}/{res}'
+    athinput = athena_read.athinput(f'{path}/athinput.si')
+    outputs = sorted(list(Path(f'{path}/athdf').glob(\
+        athinput['job']['problem_id']+'.out1.*.athdf')))
+    dt = athinput['output1']['dt']
+    i_sat  = int(t_sat/dt)
+    outputs = outputs[i_sat:]
+    c_s = athinput['hydro']['iso_sound_speed']
+    Omega = athinput['problem']['omega']
+    epsilon = athinput['problem']['epsilon']
+    H_g = c_s/Omega
+    data = athena_read.athdf(outputs[0])
+    xv, zv = data['x1v']/H_g, data['x2v']/H_g
+    x0, z0 = len(xv)//2, len(zv)//2
+    Rps = np.empty((len(outputs), res, res))
+    Rgs = np.empty((len(outputs), res, res))
+
+    for j, output in enumerate(outputs):
+        data = athena_read.athdf(output)
+
+        # Process dust
+        ft = fftpack.fft2(data['rhop'][0])
+        ac = fftpack.ifft2(ft*np.conjugate(ft)).real
+        norm = ac/ac[0][0]
+        shift = fftpack.fftshift(norm)
+        log = np.log10(shift)
+        Rps[j] = log
+
+        # Process gas
+        diff = data['rho'][0] - 1
+        ft = fftpack.fft2(diff)
+        ac = fftpack.ifft2(ft*np.conjugate(ft)).real
+        norm = ac/ac[0][0]
+        shift = fftpack.fftshift(norm)
+        Rgs[j] = shift
+        print(f'\t{j/len(outputs):.0%}', flush=True)
+
+    # Average and plot 1D slices
+    avgRp = np.average(Rps, axis=0)
+    avgRg = np.average(Rgs, axis=0)
+    
+    axs[0].semilogx(xv, avgRp[z0], color=Pi[1], label=Pi[0])
+    axs[0].semilogx(xv, avgRp[:, x0], color=Pi[1], ls='--')
+    axs[1].semilogx(xv, avgRg[x0], color=Pi[1])
+    axs[1].semilogx(xv, avgRg[:, z0], color=Pi[1], ls='--')
+    print(f'\tdone.', flush=True)
+
+    # Plot ghost points for colorless line style and add legends
+    ls_dust, = axs[1].semilogx([], [], color='tab:gray', label=r'$\mathcal{R}(z=0$)')
+    ls_gas,  = axs[1].semilogx([], [], color='tab:gray', ls='--', label=r'$\mathcal{R}(x=0)$')
+    axs[0].legend(loc='upper right', title=r'$\Pi$')
+    axs[1].legend(handles=[ls_dust, ls_gas], loc='upper right')
+    
+for ax in axs.flat:
+    ax.grid()
+    ax.label_outer()
+    ax.minorticks_on()
+    ax.tick_params(axis='both', which='both', top=True, right=True)
+
+# Format and save figure
+axs[0].set(ylabel=r'$\log\mathcal{R}_\mathrm{p}$')
+axs[1].set(xscale='log', xlabel=r'$x,z/(\Pi H_\mathrm{g})$', 
+           ylabel=r'$\mathcal{R}_\mathrm{g}^\prime$')
+plt.subplots_adjust(hspace=0)
+plt.savefig(f'figs/{case}_avgRs-z0-x0.pdf', bbox_inches='tight', pad_inches=0.01)
