@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-30
-# Updated: 2022-10-31
+# Updated: 2022-11-02
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -81,8 +81,10 @@ for i, Pi in enumerate(Pis):
     print(f'\tdone.', flush=True)
 
     # Plot ghost points for colorless line style and add legends
-    ls_dust, = axs[1].semilogx([], [], color='tab:gray', label=r'$\mathcal{R}(z=0$)')
-    ls_gas,  = axs[1].semilogx([], [], color='tab:gray', ls='--', label=r'$\mathcal{R}(x=0)$')
+    ls_dust, = axs[1].semilogx([], [], color='tab:gray',
+                               label=r'$\mathrm{R}_{\rho\rho}(z=0$)')
+    ls_gas,  = axs[1].semilogx([], [], color='tab:gray', ls='--',
+                               label=r'$\mathrm{R}_{\rho\rho}(x=0)$')
     axs[0].legend(loc='upper right', title=r'$\Pi$')
     axs[1].legend(handles=[ls_dust, ls_gas], loc='lower left')
     
@@ -93,8 +95,8 @@ for ax in axs.flat:
     ax.tick_params(axis='both', which='both', top=True, right=True)
 
 # Format and save figure
-axs[0].set(ylabel=r'$\log\mathcal{R}_\mathrm{p}$')
+axs[0].set(ylabel=r'$\log\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}$')
 axs[1].set(xscale='log', xlabel=r'$(x,z)/H_\mathrm{g}$',
-           ylabel=r'$\mathcal{R}_\mathrm{g}^\prime$')
+           ylabel=r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}^\prime$')
 plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_avgRs-z0-x0.pdf', bbox_inches='tight', pad_inches=0.01)
