@@ -1,6 +1,7 @@
 #PBS -j oe
-#PBS -l select=1:ncpus=1:model=rom_ait
-#PBS -l walltime=16:00:00
+#PBS -k oed
+#PBS -l select=1:ncpus=1:model=bro_ele
+#PBS -l walltime=12:00:00
 #PBS -m abe
 #PBS -N max_rhops
 
