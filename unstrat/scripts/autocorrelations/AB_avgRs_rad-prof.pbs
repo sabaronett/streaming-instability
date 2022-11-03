@@ -1,5 +1,5 @@
 #PBS -j oe
-#PBS -l select=1:ncpus=1:model=rom_ait
+#PBS -l select=1:ncpus=1:model=bro_ele
 #PBS -l walltime=4:00:00
 #PBS -m abe
 #PBS -N AB_avgRs_rad-prof

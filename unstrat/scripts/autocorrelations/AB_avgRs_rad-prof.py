@@ -2,14 +2,14 @@
 #==============================================================================
 # AB_avgRs_rad-prof.py
 #
-# Plot with logarithmically-spaced bins azimuthally-averaged radial profiles,
-# scaled by Pi, of the time-averaged normalized autocorrelations of snapshots
-# of the dust and gas density fields across a range of radial pressure
-# gradients for case AB.
+# Plot azimuthally-averaged radial profiles, logarithmically binned and scaled
+# by Pi, of the time-averaged normalized autocorrelations of snapshots of the
+# dust and gas density fields across a range of radial pressure gradients for
+# case AB.
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-09
-# Updated: 2022-10-30
+# Updated: 2022-11-03
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -50,8 +50,11 @@ for i, Pi in enumerate(Pis):
     i_sat  = int(t_sat/dt)
     outputs = outputs[i_sat:]
     c_s = athinput['hydro']['iso_sound_speed']
+    Omega = athinput['problem']['omega']
+    epsilon = athinput['problem']['epsilon']
+    H_g = c_s/Omega
     data = athena_read.athdf(outputs[0])
-    xv, zv = data['x1v'], data['x2v']
+    xv, zv = data['x1v']/H_g, data['x2v']/H_g
     x0, z0 = len(xv)//2, len(zv)//2
     pole = (xv[x0], zv[z0])
     rv = norms(xv, zv, pole).ravel()
@@ -72,12 +75,12 @@ for i, Pi in enumerate(Pis):
         rvs[j] = rv
 
         # Process dust
-        ft = fftpack.fft2(data['rhop'][0])
+        diff = data['rhop'][0] - epsilon
+        ft = fftpack.fft2(diff)
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
         norm = ac/ac[0][0]
         shift = fftpack.fftshift(norm)
-        log = np.log10(shift).ravel()
-        Rps[j] = np.delete(log, indices)
+        Rps[j] = np.delete(shift, indices).ravel()
         
         # Process gas
         diff = data['rho'][0] - 1
@@ -85,22 +88,22 @@ for i, Pi in enumerate(Pis):
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
         norm = ac/ac[0][0]
         shift = fftpack.fftshift(norm)
-        Rgs[j] = np.delete(shift, indices)
+        Rgs[j] = np.delete(shift, indices).ravel()
         print(f'\t{j/len(outputs):.0%}', flush=True)
 
     # Bin dust
-    dust_means, bin_edges, binnumnber = stats.binned_statistic(rvs.ravel(),
-        Rps.ravel(), statistic='mean', bins=bin_edges)
-    dust_stds, bin_edges, binnumnber = stats.binned_statistic(rvs.ravel(),
-        Rps.ravel(), statistic='std', bins=bin_edges)
+    dust_means, bin_edges, binnumnber = stats.binned_statistic(rvs, Rps,
+        statistic='mean', bins=bin_edges)
+    dust_stds, bin_edges, binnumnber = stats.binned_statistic(rvs, Rps,
+        statistic='std', bins=bin_edges)
     dust_highs = dust_means + dust_stds
     dust_lows = dust_means - dust_stds
 
     # Bin gas
-    gas_means, bin_edges, binnumnber = stats.binned_statistic(rvs.ravel(),
-        Rgs.ravel(), statistic='mean', bins=bin_edges)
-    gas_stds, bin_edges, binnumnber = stats.binned_statistic(rvs.ravel(),
-        Rgs.ravel(), statistic='std', bins=bin_edges)
+    gas_means, bin_edges, binnumnber = stats.binned_statistic(rvs, Rgs,
+        statistic='mean', bins=bin_edges)
+    gas_stds, bin_edges, binnumnber = stats.binned_statistic(rvs, Rgs,
+        statistic='std', bins=bin_edges)
     gas_highs = gas_means + gas_stds
     gas_lows = gas_means - gas_stds
 
@@ -122,10 +125,10 @@ for ax in axs.flat:
     ax.tick_params(axis='both', which='both', top=True, right=True)
 
 # Format and save figure
-axs[0].legend(title=r'$\Pi$')
-axs[0].set(ylabel=r'$\log\overline{\mathcal{R}_\mathrm{p}}$')
+axs[0].legend(loc='upper right', title=r'$\Pi$')
+axs[0].set(ylabel=r'$\overline{\mathcal{R}_\mathrm{p}}$')
 axs[1].set(xscale='log', xlabel=r'$r/(\Pi H_\mathrm{g})$',
-           ylabel=r'$\overline{\mathcal{R}_\mathrm{g}^\prime}$')
+           ylabel=r'$\overline{\mathcal{R}_\mathrm{g}}$')
 plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_avgRs_rad-prof.pdf', bbox_inches='tight',
             pad_inches=0.01)
