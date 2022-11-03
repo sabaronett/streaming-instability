@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-30
-# Updated: 2022-11-02
+# Updated: 2022-11-03
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -43,6 +43,7 @@ for i, Pi in enumerate(Pis):
     outputs = outputs[i_sat:]
     c_s = athinput['hydro']['iso_sound_speed']
     Omega = athinput['problem']['omega']
+    epsilon = athinput['problem']['epsilon']
     H_g = c_s/Omega
     data = athena_read.athdf(outputs[0])
     xv, zv = data['x1v']/H_g, data['x2v']/H_g
@@ -54,12 +55,12 @@ for i, Pi in enumerate(Pis):
         data = athena_read.athdf(output)
 
         # Process dust
-        ft = fftpack.fft2(data['rhop'][0])
+        diff = data['rhop'][0] - epsilon
+        ft = fftpack.fft2(diff)
         ac = fftpack.ifft2(ft*np.conjugate(ft)).real
         norm = ac/ac[0][0]
         shift = fftpack.fftshift(norm)
-        log = np.log10(shift)
-        Rps[j] = log
+        Rps[j] = shift
 
         # Process gas
         diff = data['rho'][0] - 1
@@ -95,8 +96,8 @@ for ax in axs.flat:
     ax.tick_params(axis='both', which='both', top=True, right=True)
 
 # Format and save figure
-axs[0].set(ylabel=r'$\log\overline{\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}}$')
+axs[0].set(ylabel=r'$\overline{\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}}$')
 axs[1].set(xscale='log', xlabel=r'$(x,z)/H_\mathrm{g}$',
-           ylabel=r'$\overline{\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}^\prime}$')
+           ylabel=r'$\overline{\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}}$')
 plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_avgRs-z0-x0.pdf', bbox_inches='tight', pad_inches=0.01)
