@@ -126,9 +126,9 @@ for ax in axs.flat:
 
 # Format and save figure
 axs[0].legend(loc='upper right', title=r'$\Pi$')
-axs[0].set(ylabel=r'$\overline{\mathcal{R}_\mathrm{p}}$')
+axs[0].set(ylabel=r'$\mathcal{R}_\mathrm{p}$')
 axs[1].set(xscale='log', xlabel=r'$r/(\Pi H_\mathrm{g})$',
-           ylabel=r'$\overline{\mathcal{R}_\mathrm{g}}$')
+           ylabel=r'$\mathcal{R}_\mathrm{g}$')
 plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_avgRs_rad-prof.pdf', bbox_inches='tight',
             pad_inches=0.01)
