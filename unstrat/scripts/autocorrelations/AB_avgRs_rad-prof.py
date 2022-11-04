@@ -92,17 +92,19 @@ for i, Pi in enumerate(Pis):
         print(f'\t{j/len(outputs):.0%}', flush=True)
 
     # Bin dust
-    dust_means, bin_edges, binnumnber = stats.binned_statistic(rvs, Rps,
+    avgRp = np.average(Rps, axis=0)
+    dust_means, bin_edges, binnumnber = stats.binned_statistic(rvs, avgRp,
         statistic='mean', bins=bin_edges)
-    dust_stds, bin_edges, binnumnber = stats.binned_statistic(rvs, Rps,
+    dust_stds, bin_edges, binnumnber = stats.binned_statistic(rvs, avgRp,
         statistic='std', bins=bin_edges)
     dust_highs = dust_means + dust_stds
     dust_lows = dust_means - dust_stds
 
     # Bin gas
-    gas_means, bin_edges, binnumnber = stats.binned_statistic(rvs, Rgs,
+    avgRg = np.average(Rgs, axis=0)
+    gas_means, bin_edges, binnumnber = stats.binned_statistic(rvs, avgRg,
         statistic='mean', bins=bin_edges)
-    gas_stds, bin_edges, binnumnber = stats.binned_statistic(rvs, Rgs,
+    gas_stds, bin_edges, binnumnber = stats.binned_statistic(rvs, avgRg,
         statistic='std', bins=bin_edges)
     gas_highs = gas_means + gas_stds
     gas_lows = gas_means - gas_stds
