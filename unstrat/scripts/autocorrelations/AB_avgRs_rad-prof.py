@@ -66,13 +66,11 @@ for i, Pi in enumerate(Pis):
     leftmost_edge = r0/np.sqrt(base)
     num = int(np.sqrt(res))
     bin_edges = leftmost_edge*np.logspace(0, num, num=(num + 1), base=base)
-    rvs = np.empty((len(outputs), len(rv)))
     Rps = np.empty((len(outputs), len(rv)))
     Rgs = np.empty((len(outputs), len(rv)))
 
     for j, output in enumerate(outputs):
         data = athena_read.athdf(output)
-        rvs[j] = rv
 
         # Process dust
         diff = data['rhop'][0] - epsilon
@@ -93,18 +91,18 @@ for i, Pi in enumerate(Pis):
 
     # Bin dust
     avgRp = np.average(Rps, axis=0)
-    dust_means, bin_edges, binnumnber = stats.binned_statistic(rvs, avgRp,
+    dust_means, bin_edges, binnumnber = stats.binned_statistic(rv, avgRp,
         statistic='mean', bins=bin_edges)
-    dust_stds, bin_edges, binnumnber = stats.binned_statistic(rvs, avgRp,
+    dust_stds, bin_edges, binnumnber = stats.binned_statistic(rv, avgRp,
         statistic='std', bins=bin_edges)
     dust_highs = dust_means + dust_stds
     dust_lows = dust_means - dust_stds
 
     # Bin gas
     avgRg = np.average(Rgs, axis=0)
-    gas_means, bin_edges, binnumnber = stats.binned_statistic(rvs, avgRg,
+    gas_means, bin_edges, binnumnber = stats.binned_statistic(rv, avgRg,
         statistic='mean', bins=bin_edges)
-    gas_stds, bin_edges, binnumnber = stats.binned_statistic(rvs, avgRg,
+    gas_stds, bin_edges, binnumnber = stats.binned_statistic(rv, avgRg,
         statistic='std', bins=bin_edges)
     gas_highs = gas_means + gas_stds
     gas_lows = gas_means - gas_stds
