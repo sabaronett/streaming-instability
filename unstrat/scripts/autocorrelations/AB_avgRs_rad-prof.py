@@ -9,7 +9,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-09
-# Updated: 2022-11-03
+# Updated: 2022-11-10
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -26,7 +26,7 @@ def norms(xv, zv, pole):
             rv[i][j] = np.sqrt((x - pole[0])**2 + (z - pole[1])**2)
     return rv
 
-fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 4))
+fig, axs = plt.subplots(2, sharex=True, figsize=(4.45, 4.45))
 workdir = '../..'
 case = 'AB'
 Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
@@ -109,11 +109,11 @@ for i, Pi in enumerate(Pis):
 
     # Plot histograms
     axs[0].stairs(dust_means, bin_edges/float(Pi[0]), baseline=float('-inf'),
-                  color=Pi[1], lw=1.5, label=Pi[0])
+                  color=Pi[1], lw=1.5)
     axs[0].stairs(dust_highs, bin_edges/float(Pi[0]), baseline=dust_lows,
                   fill=True, color=Pi[1], alpha=0.2)
     axs[1].stairs(gas_means, bin_edges/float(Pi[0]), baseline=float('-inf'),
-                  color=Pi[1], lw=1.5)
+                  color=Pi[1], lw=1.5, label=Pi[0])
     axs[1].stairs(gas_highs, bin_edges/float(Pi[0]), baseline=gas_lows,
                   fill=True, color=Pi[1], alpha=0.2)
     print(f'\tdone.', flush=True)
@@ -125,9 +125,9 @@ for ax in axs.flat:
     ax.tick_params(axis='both', which='both', top=True, right=True)
 
 # Format and save figure
-axs[0].legend(loc='upper right', title=r'$\Pi$')
-axs[0].set(ylabel=r'$\mathcal{R}_\mathrm{p}$')
-axs[1].set(xscale='log', xlabel=r'$r/(\Pi H_\mathrm{g})$',
+axs[0].set(ylim=(-0.05, 1.05), ylabel=r'$\mathcal{R}_\mathrm{p}$')
+axs[1].legend(loc='upper right', title=r'$\Pi$')
+axs[1].set(ylim=(-0.05, 1.05), xscale='log', xlabel=r'$r/(\Pi H_\mathrm{g})$',
            ylabel=r'$\mathcal{R}_\mathrm{g}$')
 plt.subplots_adjust(hspace=0)
 plt.savefig(f'figs/{case}_avgRs_rad-prof.pdf', bbox_inches='tight',
