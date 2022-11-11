@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-30
-# Updated: 2022-11-03
+# Updated: 2022-11-11
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -18,7 +18,7 @@ import numpy as np
 from pathlib import Path
 from scipy import fftpack
 
-fig, axs = plt.subplots(2, sharex=True, figsize=(3.15, 4))
+fig, axs = plt.subplots(2, sharex=True, figsize=(4.45, 4.32))
 workdir = '../../..'
 case = 'AB'
 Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
@@ -32,7 +32,7 @@ if len(sys.argv) > 1:
     t_sat = float(sys.argv[2])
 
 for i, Pi in enumerate(Pis):
-    # Collect parameters and plot densities
+    # Collect parameters
     print(f'{case}/{Pi[0]}: Processing...', flush=True)
     path = f'{workdir}/{case}/{Pi[0]}/{res}'
     athinput = athena_read.athinput(f'{path}/athinput.si')
@@ -71,23 +71,35 @@ for i, Pi in enumerate(Pis):
         Rgs[j] = shift
         print(f'\t{j/len(outputs):.0%}', flush=True)
 
-    # Average and plot 1D slices
+    # Compute avg., std dev., and plot 1D slices
     avgRp = np.average(Rps, axis=0)
+    stdRp = np.std(Rps, axis=0)
     avgRg = np.average(Rgs, axis=0)
+    stdRg = np.std(Rgs, axis=0)
     
-    axs[0].semilogx(xv, avgRp[z0], color=Pi[1], label=Pi[0])
+    axs[0].semilogx(xv, avgRp[z0], color=Pi[1])
+    axs[0].fill_betweenx(xv, avgRp[z0]/stdRp[z0], avgRp[z0]*stdRp[z0],
+                         color=Pi[1], ec=None, alpha=0.2)
     axs[0].semilogx(xv, avgRp[:, x0], color=Pi[1], ls='--')
-    axs[1].semilogx(xv, avgRg[x0], color=Pi[1])
+    axs[0].fill_betweenx(xv, avgRp[:, x0]/stdRp[:, x0],
+                         avgRp[:, x0]*stdRp[:, x0], color=Pi[1], ec=None,
+                         alpha=0.2)
+    axs[1].semilogx(xv, avgRg[x0], color=Pi[1], label=Pi[0])
+    axs[1].fill_betweenx(xv, avgRg[z0]/stdRg[z0], avgRg[z0]*stdRg[z0],
+                         color=Pi[1], ec=None, alpha=0.2)
     axs[1].semilogx(xv, avgRg[:, z0], color=Pi[1], ls='--')
+    axs[1].fill_betweenx(xv, avgRg[:, x0]/stdRg[:, x0],
+                         avgRg[:, x0]*stdRg[:, x0], color=Pi[1], ec=None,
+                         alpha=0.2)
     print(f'\tdone.', flush=True)
 
     # Plot ghost points for colorless line style and add legends
-    ls_dust, = axs[1].semilogx([], [], color='tab:gray',
-                               label=r'$\overline{\mathrm{R}_{\rho\rho}}(z=0$)')
-    ls_gas,  = axs[1].semilogx([], [], color='tab:gray', ls='--',
-                               label=r'$\overline{\mathrm{R}_{\rho\rho}}(x=0)$')
-    axs[0].legend(loc='upper right', title=r'$\Pi$')
-    axs[1].legend(handles=[ls_dust, ls_gas], loc='lower left')
+    ls_dust, = axs[0].semilogx([], [], color='tab:gray',
+                               label=r'$\mathrm{R}_{\rho\rho}(z=0$)')
+    ls_gas,  = axs[0].semilogx([], [], color='tab:gray', ls='--',
+                               label=r'$\mathrm{R}_{\rho\rho}(x=0)$')
+    axs[0].legend(handles=[ls_dust, ls_gas], loc='upper right')
+    axs[1].legend(loc='lower left', title=r'$\Pi$')
     
 for ax in axs.flat:
     ax.grid()
@@ -96,8 +108,10 @@ for ax in axs.flat:
     ax.tick_params(axis='both', which='both', top=True, right=True)
 
 # Format and save figure
-axs[0].set(ylabel=r'$\overline{\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}}$')
-axs[1].set(xscale='log', xlabel=r'$(x,z)/H_\mathrm{g}$',
-           ylabel=r'$\overline{\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}}$')
+axs[0].set(ylim=(-0.05, 1.05),
+           ylabel=r'$\mathrm{R}_{\rho_\mathrm{p}\rho_\mathrm{p}}$')
+axs[1].set(ylim=(-0.05, 1.05), xscale='log', xlabel=r'$(x,z)/H_\mathrm{g}$',
+           ylabel=r'$\mathrm{R}_{\rho_\mathrm{g}\rho_\mathrm{g}}$')
 plt.subplots_adjust(hspace=0)
-plt.savefig(f'figs/{case}_avgRs-z0-x0.pdf', bbox_inches='tight', pad_inches=0.01)
+plt.savefig(f'figs/{case}_avgRs-z0-x0.pdf', bbox_inches='tight',
+            pad_inches=0.01)
