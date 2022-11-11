@@ -126,7 +126,7 @@ for ax in axs.flat:
 
 # Format and save figure
 axs[0].set(ylim=(-0.05, 1.05), ylabel=r'$\mathcal{R}_\mathrm{p}$')
-axs[1].legend(loc='upper right', title=r'$\Pi$')
+axs[1].legend(loc='lower left', title=r'$\Pi$')
 axs[1].set(ylim=(-0.05, 1.05), xscale='log', xlabel=r'$r/(\Pi H_\mathrm{g})$',
            ylabel=r'$\mathcal{R}_\mathrm{g}$')
 plt.subplots_adjust(hspace=0)
