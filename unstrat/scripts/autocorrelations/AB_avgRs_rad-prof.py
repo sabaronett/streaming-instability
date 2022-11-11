@@ -9,7 +9,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-10-09
-# Updated: 2022-11-10
+# Updated: 2022-11-11
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -26,7 +26,7 @@ def norms(xv, zv, pole):
             rv[i][j] = np.sqrt((x - pole[0])**2 + (z - pole[1])**2)
     return rv
 
-fig, axs = plt.subplots(2, sharex=True, figsize=(4.45, 4.45))
+fig, axs = plt.subplots(2, sharex=True, figsize=(4.45, 4.32))
 workdir = '../..'
 case = 'AB'
 Pis = [['0.01', 'tab:blue'], ['0.02', 'tab:green'],
