@@ -78,17 +78,17 @@ for i, Pi in enumerate(Pis):
     stdRg = np.std(Rgs, axis=0)
     
     axs[0].semilogx(xv, avgRp[z0], color=Pi[1])
-    axs[0].fill_betweenx(xv, avgRp[z0]/stdRp[z0], avgRp[z0]*stdRp[z0],
+    axs[0].fill_between(xv, avgRp[z0]/stdRp[z0], avgRp[z0]*stdRp[z0],
                          color=Pi[1], ec=None, alpha=0.2)
     axs[0].semilogx(xv, avgRp[:, x0], color=Pi[1], ls='--')
-    axs[0].fill_betweenx(xv, avgRp[:, x0]/stdRp[:, x0],
+    axs[0].fill_between(xv, avgRp[:, x0]/stdRp[:, x0],
                          avgRp[:, x0]*stdRp[:, x0], color=Pi[1], ec=None,
                          alpha=0.2)
     axs[1].semilogx(xv, avgRg[x0], color=Pi[1], label=Pi[0])
-    axs[1].fill_betweenx(xv, avgRg[z0]/stdRg[z0], avgRg[z0]*stdRg[z0],
+    axs[1].fill_between(xv, avgRg[z0]/stdRg[z0], avgRg[z0]*stdRg[z0],
                          color=Pi[1], ec=None, alpha=0.2)
     axs[1].semilogx(xv, avgRg[:, z0], color=Pi[1], ls='--')
-    axs[1].fill_betweenx(xv, avgRg[:, x0]/stdRg[:, x0],
+    axs[1].fill_between(xv, avgRg[:, x0]/stdRg[:, x0],
                          avgRg[:, x0]*stdRg[:, x0], color=Pi[1], ec=None,
                          alpha=0.2)
     print(f'\tdone.', flush=True)
