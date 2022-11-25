@@ -38,7 +38,7 @@ for i, output in enumerate(outputs):
     ux_stack.append(uxs)
     uz_stack.append(uzs)
     rho_stack.append(rhos)
-    print(f'  {i/len(outputs):3.0%}', flush=True)
+    print(f'  {(i + 1)/len(outputs):3.0%}', flush=True)
 
 ux_stack, uz_stack = np.asarray(ux_stack), np.asarray(uz_stack)
 print(f'Finding bin edges...', flush=True)
@@ -48,7 +48,7 @@ if np.abs(uz_stack.min()) > edge: edge = np.abs(uz_stack.min())
 if np.abs(uz_stack.max()) > edge: edge = np.abs(uz_stack.max())
 bin_edges = np.linspace(-edge, edge, num=bins)
 
-print(f'  100%\nComputing histograms...', flush=True)
+print(f'  Done.\nComputing histograms...', flush=True)
 for i in range(ux_stack.shape[0]):
     hist, bin_edges = np.histogram(ux_stack[i], bins=bin_edges, density=True,
                                    weights=rho_stack[i])
@@ -56,11 +56,13 @@ for i in range(ux_stack.shape[0]):
     hist, bin_edges = np.histogram(uz_stack[i], bins=bin_edges, density=True,
                                    weights=rho_stack[i])
     uz_hists.append(hist)
-    print(f'  {i/ux_stack.shape[0]:3.0%}', flush=True)
+    print(f'  {(i + 1)/ux_stack.shape[0]:3.0%}', flush=True)
 
-print('  100%\nComputing statistical quantities...', flush=True)
+print('Computing statistics...', flush=True)
 avg_uxs, avg_uzs = np.average(ux_hists, axis=0), np.average(uz_hists, axis=0)
 std_uxs, std_uzs = np.std(ux_hists, axis=0), np.std(uz_hists, axis=0)
+print(f'  Done.\nSaving results...', flush=True)
 
 np.savez_compressed('npz/gas_vel', avg_uxs=avg_uxs, avg_uzs=avg_uzs,
                     std_uxs=std_uxs, std_uzs=std_uzs, bin_edges=bin_edges)
+print(f'  Finished.', flush=True)
