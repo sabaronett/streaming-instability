@@ -38,7 +38,7 @@ for i, output in enumerate(outputs):
     ux_stack.append(uxs)
     uz_stack.append(uzs)
     rho_stack.append(rhos)
-    print('  {3:.0%}'.format(i/len(outputs)), flush=True)
+    print(f'  {i/len(outputs):3.0%}', flush=True)
 
 ux_stack, uz_stack = np.asarray(ux_stack), np.asarray(uz_stack)
 print(f'Finding bin edges...', flush=True)
@@ -56,7 +56,7 @@ for i in range(ux_stack.shape[0]):
     hist, bin_edges = np.histogram(uz_stack[i], bins=bin_edges, density=True,
                                    weights=rho_stack[i])
     uz_hists.append(hist)
-    print('  {3:.0%}'.format(i/ux_stack.shape[0]), flush=True)
+    print(f'  {i/ux_stack.shape[0]:3.0%}', flush=True)
 
 print('  100%\nComputing statistical quantities...', flush=True)
 avg_uxs, avg_uzs = np.average(ux_hists, axis=0), np.average(uz_hists, axis=0)
