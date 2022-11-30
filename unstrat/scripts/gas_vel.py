@@ -54,10 +54,16 @@ for i in range(ux_stack.shape[0]):
     print(f'  {(i + 1)/ux_stack.shape[0]:3.0%}', flush=True)
 
 print('Computing statistics...', flush=True)
-avg_uxs, avg_uzs = np.average(ux_hists, axis=0), np.average(uz_hists, axis=0)
-std_uxs, std_uzs = np.std(ux_hists, axis=0), np.std(uz_hists, axis=0)
-print(f'  Done.\nSaving results...', flush=True)
+avg_uxs, avg_uzs = np.average(ux_stack), np.average(uz_stack)
+std_uxs, std_uzs = np.std(ux_stack), np.std(uz_stack)
+bin_avg_uxs = np.average(ux_hists, axis=0)
+bin_avg_uzs = np.average(uz_hists, axis=0)
+bin_std_uxs = np.std(ux_hists, axis=0)
+bin_std_uzs = np.std(uz_hists, axis=0)
 
-np.savez_compressed('npz/gas_vel', avg_uxs=avg_uxs, avg_uzs=avg_uzs,
-                    std_uxs=std_uxs, std_uzs=std_uzs, bin_edges=bin_edges)
-print(f'  Finished.', flush=True)
+print(f'  Done.\nSaving results...', flush=True)
+np.savez_compressed('npz/gas_vel', bin_edges=bin_edges,
+                    avg_uxs=avg_uxs, avg_uzs=avg_uzs,
+                    std_uxs=std_uxs, std_uzs=std_uzs,
+                    bin_avg_uxs=bin_avg_uxs, bin_avg_uzs=bin_avg_uzs,
+                    bin_std_uxs=bin_std_uxs, bin_std_uzs=bin_std_uzs)
