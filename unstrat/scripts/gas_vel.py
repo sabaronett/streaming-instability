@@ -9,7 +9,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-11-25
-# Updated: 2022-11-25
+# Updated: 2022-11-30
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -20,6 +20,8 @@ from pathlib import Path
 # Collect Athena++ inputs, outputs, and sim constants
 t_sat = float(sys.argv[1])
 bins = int(sys.argv[2])
+ulim = float(sys.argv[3])
+bin_edges = np.linspace(-ulim, ulim, num=bins)
 athinput = athena_read.athinput('athinput.si')
 dt = athinput['output1']['dt']
 c_s = athinput['hydro']['iso_sound_speed']
@@ -40,15 +42,8 @@ for i, output in enumerate(outputs):
     rho_stack.append(rhos)
     print(f'  {(i + 1)/len(outputs):3.0%}', flush=True)
 
-ux_stack, uz_stack = np.asarray(ux_stack), np.asarray(uz_stack)
-print(f'Finding bin edges...', flush=True)
-edge = np.abs(ux_stack.min())
-if np.abs(ux_stack.max()) > edge: edge = np.abs(ux_stack.max())
-if np.abs(uz_stack.min()) > edge: edge = np.abs(uz_stack.min())
-if np.abs(uz_stack.max()) > edge: edge = np.abs(uz_stack.max())
-bin_edges = np.linspace(-edge, edge, num=bins)
-
 print(f'  Done.\nComputing histograms...', flush=True)
+ux_stack, uz_stack = np.asarray(ux_stack), np.asarray(uz_stack)
 for i in range(ux_stack.shape[0]):
     hist, bin_edges = np.histogram(ux_stack[i], bins=bin_edges, density=True,
                                    weights=rho_stack[i])

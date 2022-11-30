@@ -5,4 +5,4 @@
 #PBS -m abe
 #PBS -N AB-Pi0.02-2048_gas_vel
 
-python ../../../scripts/gas_vel.py 5 500 # t_sat / T, no. of bins
+python ../../../scripts/gas_vel.py 5 40 1 # t_sat, bins, ulim
