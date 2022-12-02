@@ -54,8 +54,10 @@ for i in range(vx_stack.shape[0]):
     print(f'  {(i + 1)/vx_stack.shape[0]:3.0%}', flush=True)
 
 print('Computing statistics...', flush=True)
-avg_vxs, avg_vzs = np.average(vx_stack), np.average(vz_stack)
-std_vxs, std_vzs = np.std(vx_stack), np.std(vz_stack)
+avg_vxs = np.average(vx_stack, weights=rhop_stack)
+avg_vzs = np.average(vz_stack, weights=rhop_stack)
+std_vxs = np.sqrt(np.average((vx_stack - avg_vxs)**2, weights=rhop_stack))
+std_vzs = np.sqrt(np.average((vz_stack - avg_vzs)**2, weights=rhop_stack))
 bin_avg_vxs = np.average(vx_hists, axis=0)
 bin_avg_vzs = np.average(vz_hists, axis=0)
 bin_std_vxs = np.std(vx_hists, axis=0)
