@@ -58,6 +58,9 @@ for i in range(vx_stack.shape[0]):
 print(f'  Done.\nComputing density histograms...', flush=True)
 vx_flat, vz_flat = vx_stack.ravel(), vz_stack.ravel()
 rhop_flat = np.asarray(rhop_stack).ravel()
+indices = np.where(rhop_flat == 0)[0]
+vx_flat, vz_flat = np.delete(vx_flat, indices), np.delete(vz_flat, indices)
+rhop_flat = np.delete(rhop_flat, indices)
 bin_avg_rhopxs, bin_edges, binnumnber = stats.binned_statistic(vx_flat,
     rhop_flat, statistic='mean', bins=bin_edges)
 bin_avg_rhopzs, bin_edges, binnumnber = stats.binned_statistic(vz_flat,
