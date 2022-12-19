@@ -4,8 +4,8 @@
 #
 # Computes and saves the total average, standard deviation, and time-averaged
 # probability density function of gas and dust velocities at saturation,
-# including the time variability and binned statistics of the gas or particle
-# density distribution within each bin.
+# including the time variability in logarithmic space and binned statistics of
+# the gas or particle density distribution within each bin.
 # NOTE: Velocities are normalized to the product of the radial pressure
 # gradient and sound speed, Pi*c_s.
 #
@@ -83,6 +83,8 @@ bin_avg_uxs = np.average(ux_hists, axis=0)
 bin_avg_uzs = np.average(uz_hists, axis=0)
 bin_std_uxs = np.std(ux_hists, axis=0)
 bin_std_uzs = np.std(uz_hists, axis=0)
+bin_log_std_uxs = np.exp(np.std(np.log(ux_hists), axis=0))
+bin_log_std_uzs = np.exp(np.std(np.log(uz_hists), axis=0))
 # Dust
 avg_vxs = np.average(vx_stack, weights=rhop_stack)
 avg_vzs = np.average(vz_stack, weights=rhop_stack)
@@ -92,6 +94,8 @@ bin_avg_vxs = np.average(vx_hists, axis=0)
 bin_avg_vzs = np.average(vz_hists, axis=0)
 bin_std_vxs = np.std(vx_hists, axis=0)
 bin_std_vzs = np.std(vz_hists, axis=0)
+bin_log_std_vxs = np.exp(np.std(np.log(vx_hists), axis=0))
+bin_log_std_vzs = np.exp(np.std(np.log(vz_hists), axis=0))
 
 print(f'  Done.\nComputing density statistics within each velocity bin...',
       flush=True)
@@ -163,6 +167,8 @@ np.savez_compressed('npz/velocities', bin_edges=bin_edges,
                     std_uxs=std_uxs, std_uzs=std_uzs,
                     bin_avg_uxs=bin_avg_uxs, bin_avg_uzs=bin_avg_uzs,
                     bin_std_uxs=bin_std_uxs, bin_std_uzs=bin_std_uzs,
+                    bin_log_std_uxs=bin_log_std_uxs,
+                    bin_log_std_uzs=bin_log_std_uzs,
                     bin_avg_rhoxs=bin_avg_rhoxs,
                     bin_avg_rhozs=bin_avg_rhozs,
                     bin_std_rhoxs=bin_std_rhoxs,
@@ -180,6 +186,8 @@ np.savez_compressed('npz/velocities', bin_edges=bin_edges,
                     std_vxs=std_vxs, std_vzs=std_vzs,
                     bin_avg_vxs=bin_avg_vxs, bin_avg_vzs=bin_avg_vzs,
                     bin_std_vxs=bin_std_vxs, bin_std_vzs=bin_std_vzs,
+                    bin_log_std_vxs=bin_log_std_vxs,
+                    bin_log_std_vzs=bin_log_std_vzs,
                     bin_avg_rhopxs=bin_avg_rhopxs,
                     bin_avg_rhopzs=bin_avg_rhopzs,
                     bin_std_rhopxs=bin_std_rhopxs,
