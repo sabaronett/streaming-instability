@@ -44,7 +44,7 @@ for i, output in enumerate(outputs):
     print(f'  {(i + 1)/len(outputs):3.0%}', flush=True)
 
 print(f'  Done.\nComputing velocity histograms...', flush=True)
-uz_stack = np.stack(uz_stack)                              # Change to np.stack
+uz_stack = np.asarray(uz_stack)                              # Change to np.stack
 for i in range(uz_stack.shape[0]):
     hist, bin_edges = np.histogram(uz_stack[i], bins=bin_edges, density=True,
                                    weights=rho_stack[i])
