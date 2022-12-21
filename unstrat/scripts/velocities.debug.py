@@ -22,7 +22,7 @@ from pathlib import Path
 from scipy import stats
 
 # Collect Athena++ inputs, outputs, and sim constants
-last = float(sys.argv[1])  # last no. of snapshots
+last = int(sys.argv[1])  # last no. of snapshots
 bins = int(sys.argv[2])
 lim = float(sys.argv[3])
 bin_edges = np.linspace(-lim, lim, num=(bins + 1))
