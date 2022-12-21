@@ -55,11 +55,11 @@ print('  Done.\nComputing velocity statistics...', flush=True)
 # uz_hists = np.stack(uz_hists)
 bin_avg_uzs = np.average(uz_hists, axis=0)
 bin_std_uzs = np.std(uz_hists, axis=0)
-# bin_log_std_uzs = np.exp(np.std(np.log(uz_hists), axis=0))
 
 print(f'  Done.\nSaving results...', flush=True)
 np.savez_compressed('npz/velocities.debug', bin_edges=bin_edges,
+                    uz_stack=uz_stack,
+                    rho_stack=rho_stack,
                     uz_hists=uz_hists,
                     bin_avg_uzs=bin_avg_uzs,
                     bin_std_uzs=bin_std_uzs,)
-                    # bin_log_std_uzs=bin_log_std_uzs)
