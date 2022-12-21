@@ -22,7 +22,7 @@ from pathlib import Path
 from scipy import stats
 
 # Collect Athena++ inputs, outputs, and sim constants
-last = int(sys.argv[1])  # last no. of snapshots
+last = int(sys.argv[1])                                 # last no. of snapshots
 bins = int(sys.argv[2])
 lim = float(sys.argv[3])
 bin_edges = np.linspace(-lim, lim, num=(bins + 1))
@@ -44,7 +44,7 @@ for i, output in enumerate(outputs):
     print(f'  {(i + 1)/len(outputs):3.0%}', flush=True)
 
 print(f'  Done.\nComputing velocity histograms...', flush=True)
-uz_stack = np.asarray(uz_stack)  # Change to np.stack
+uz_stack = np.stack(uz_stack)                              # Change to np.stack
 for i in range(uz_stack.shape[0]):
     hist, bin_edges = np.histogram(uz_stack[i], bins=bin_edges, density=True,
                                    weights=rho_stack[i])
@@ -52,12 +52,14 @@ for i in range(uz_stack.shape[0]):
     print(f'  {(i + 1)/uz_stack.shape[0]:3.0%}', flush=True)
 
 print('  Done.\nComputing velocity statistics...', flush=True)
+# uz_hists = np.stack(uz_hists)
 bin_avg_uzs = np.average(uz_hists, axis=0)
 bin_std_uzs = np.std(uz_hists, axis=0)
 # bin_log_std_uzs = np.exp(np.std(np.log(uz_hists), axis=0))
 
 print(f'  Done.\nSaving results...', flush=True)
 np.savez_compressed('npz/velocities.debug', bin_edges=bin_edges,
+                    uz_hists=uz_hists,
                     bin_avg_uzs=bin_avg_uzs,
                     bin_std_uzs=bin_std_uzs,)
                     # bin_log_std_uzs=bin_log_std_uzs)
