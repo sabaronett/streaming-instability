@@ -6,4 +6,4 @@
 #PBS -N BA-Pi0.10-2048_gas_densities
 #PBS -W group_list=s2563
 
-python ../../../scripts/gas_densities.py 150 240 0.015 # t_sat, bins, lim
+python ../../../scripts/gas_densities.py 150 320 0.02 # t_sat, bins, lim
