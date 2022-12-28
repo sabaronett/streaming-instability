@@ -11,7 +11,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-12-01
-# Updated: 2022-12-22
+# Updated: 2022-12-28
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -139,6 +139,7 @@ rhop_flat = np.asarray(rhop_stack).ravel()
 indices = np.where(rhop_flat == 0)[0]
 vx_flat, vz_flat = np.delete(vx_flat, indices), np.delete(vz_flat, indices)
 rhop_flat = np.delete(rhop_flat, indices)
+log_rhop_flat = np.log(rhop_flat)
 bin_avg_rhopxs, bin_edges, binnumnber = stats.binned_statistic(vx_flat,
     rhop_flat, statistic='mean', bins=bin_edges)
 bin_avg_rhopzs, bin_edges, binnumnber = stats.binned_statistic(vz_flat,
@@ -147,6 +148,10 @@ bin_std_rhopxs, bin_edges, binnumnber = stats.binned_statistic(vx_flat,
     rhop_flat, statistic='std', bins=bin_edges)
 bin_std_rhopzs, bin_edges, binnumnber = stats.binned_statistic(vz_flat,
     rhop_flat, statistic='std', bins=bin_edges)
+bin_log_std_rhopxs, bin_edges, binnumnber = stats.binned_statistic(vx_flat,
+    log_rhop_flat, statistic='std', bins=bin_edges)
+bin_log_std_rhopzs, bin_edges, binnumnber = stats.binned_statistic(vz_flat,
+    log_rhop_flat, statistic='std', bins=bin_edges)
 bin_med_rhopxs, bin_edges, binnumnber = stats.binned_statistic(vx_flat,
     rhop_flat, statistic='median', bins=bin_edges)
 bin_med_rhopzs, bin_edges, binnumnber = stats.binned_statistic(vz_flat,
@@ -202,6 +207,8 @@ np.savez_compressed('npz/velocities', bin_edges=bin_edges,
                     bin_avg_rhopzs=bin_avg_rhopzs,
                     bin_std_rhopxs=bin_std_rhopxs,
                     bin_std_rhopzs=bin_std_rhopzs,
+                    bin_log_std_rhopxs=bin_log_std_rhopxs,
+                    bin_log_std_rhopzs=bin_log_std_rhopzs,
                     bin_med_rhopxs=bin_med_rhopxs,
                     bin_med_rhopzs=bin_med_rhopzs,
                     bin_cnt_rhopxs=bin_cnt_rhopxs,
