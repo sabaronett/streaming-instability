@@ -1,7 +1,0 @@
-#PBS -j oe
-#PBS -l select=1:ncpus=1:model=bro_ele
-#PBS -l walltime=8:00:00
-#PBS -m abe
-#PBS -N AB_avgRs-z0-x0
-
-python AB_avgRs-z0-x0.py 2048 5
