@@ -1,7 +1,8 @@
 #PBS -j oe
-#PBS -l select=1:ncpus=1:model=sky_ele
-#PBS -l walltime=3:00:00
+#PBS -l select=1:ncpus=1:model=rom_ait
+#PBS -l walltime=8:00:00
 #PBS -m abe
 #PBS -N AB-Pi0.01-2048_diffusion
+#PBS -W group_list=s2563
 
-python ../../../scripts/diffusion/diffusion.py 61 # nout
+python ../../../scripts/diffusion/diffusion.py 51 # nout
