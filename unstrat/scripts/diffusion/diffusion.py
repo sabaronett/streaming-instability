@@ -26,4 +26,4 @@ if sys.argv[1]: nout = int(sys.argv[1])
 # Find the displacement and the diffusion coefficient
 diff = Diffusion(athinput=athinput, nout=nout)
 dpx, dpy, dpz = diff.coefficient()
-np.savez_compressed(f'output/dcoeff', taus=taus, dpx=dpx, dpy=dpy, dpz=dpz)
+np.savez_compressed(f'npz/dcoeff', taus=taus, dpx=dpx, dpy=dpy, dpz=dpz)
