@@ -30,16 +30,19 @@ for dir in dirs:
     dvariances = variances - np.roll(variances, 1)
     dvariances = np.delete(dvariances, 0)
     Ds = dvariances/dt/c_s
+    logDs = np.log(Ds)
     if dir == 'dxp':
-        avgDx = np.average(Ds)
-        stdDx = np.std(Ds)
+        avgDx, stdDx = np.average(Ds), np.std(Ds)
+        avg_logDx, std_logDx = np.average(logDs), np.std(logDs)
     else:
-        avgDz = np.average(Ds)
-        stdDz = np.std(Ds)
+        avgDz, stdDz = np.average(Ds), np.std(Ds)
+        avg_logDz, std_logDz = np.average(logDs), np.std(logDs)
 print(' Done.')
 
 print(f'Saving results...', end='', flush=True)
 kwds = dict(avgDx = avgDx)
 kwds['stdDx'], kwds['avgDz'], kwds['stdDz'] = stdDx, avgDz, stdDz
+kwds['avg_logDx'], kwds['std_logDx'] = avg_logDx, std_logDx
+kwds['avg_logDz'], kwds['std_logDz'] = avg_logDz, std_logDz
 np.savez_compressed('npz/dcoeff_timevar', **kwds)
 print(' Done.')
