@@ -27,7 +27,8 @@ print(' Done.')
 print(f'Copmuting statistics...', end='', flush=True)
 for dir in dirs:
     variances = np.var(disp[dir], axis=1)
-    dvariances = np.delete((vars - np.roll(variances, 1)), 0)
+    dvariances = variances - np.roll(variances, 1)
+    dvariances = np.delete(dvariances, 0)
     Ds = dvariances/dt/c_s
     if dir == 'dxp':
         avgDx = np.average(Ds)
