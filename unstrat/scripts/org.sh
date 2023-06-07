@@ -1,5 +1,14 @@
 #!/bin/bash
+#==============================================================================
+# org.sh
+#
+# Organizes typical Athena++ and post-processing outputs into subdirectories by
+# file format (extension).
 # Reference: https://stackoverflow.com/a/34195247
+#
+# Author: Stanley A. Baronett
+# Updated: 2023-06-07
+#==============================================================================
 
 echo "Organizing..."
 
@@ -11,12 +20,20 @@ if compgen -G "*.athdf" > /dev/null; then
     mv -v *.athdf athdf/
 fi
 
-# Athena++ XDMF files (VisIt/ParaView)
-if compgen -G "*.xdmf" > /dev/null; then
-    if [[ ! -d xdmf ]]; then
-        mkdir xdmf
+# Athena++ Dust particle data
+if compgen -G "*.dat" > /dev/null; then
+    if [[ ! -d dat ]]; then
+        mkdir dat
     fi
-    mv -v *.xdmf xdmf/
+    mv -v *.dat dat/
+fi
+
+# Compressed post-processing outputs
+if compgen -G "*.npz" > /dev/null; then
+    if [[ ! -d npz ]]; then
+        mkdir npz
+    fi
+    mv -v *.npz npz/
 fi
 
 # Athena++ restart files
@@ -32,12 +49,12 @@ if compgen -G "*.rst" > /dev/null; then
     fi
 fi
 
-# Athena++ Dust particle data
-if compgen -G "*.dat" > /dev/null; then
-    if [[ ! -d dat ]]; then
-        mkdir dat
+# Athena++ XDMF files (VisIt/ParaView)
+if compgen -G "*.xdmf" > /dev/null; then
+    if [[ ! -d xdmf ]]; then
+        mkdir xdmf
     fi
-    mv -v *.dat dat/
+    mv -v *.xdmf xdmf/
 fi
 
 # C++ crash memory dumps
