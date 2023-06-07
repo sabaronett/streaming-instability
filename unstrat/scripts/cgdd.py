@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-08-02
-# Updated: 2022-08-03
+# Updated: 2023-06-07
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -30,6 +30,11 @@ print(f'Compiling data...', flush=True)
 
 for i, output in enumerate(sat_outputs):
     data = athena_read.athdf(output)
+    """
+    - compute, export numpy histogram for all snapshots
+    - compute numpy histogram for each snapshot
+    - compute, export std of each bin across snapshots
+    """
     sort = np.sort(data['rho'], axis=None)
     rhogs.append(sort)
     print('  {:.2%}'.format(i/len(sat_outputs)), flush=True)
