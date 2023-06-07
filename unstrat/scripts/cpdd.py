@@ -8,7 +8,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-02-08
-# Updated: 2022-08-02
+# Updated: 2023-06-07
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -34,7 +34,7 @@ for i, output in enumerate(sat_outputs):
     rhops.append(sort)
     print('  {:.2%}'.format(i/len(sat_outputs)), flush=True)
 
-print('  100%\nComputing statistical quantities...', flush=True)
+print('  Done.\nComputing statistical quantities...', flush=True)
 rhops = np.asarray(rhops)
 mins = np.amin(rhops, axis=0)
 maxs = np.amax(rhops, axis=0)
@@ -44,5 +44,6 @@ std_log = np.std(log, axis=0)
 stds = np.exp(std_log)
 cdf = np.linspace(1, 0, avgs.size, endpoint=False)
 
-np.savez_compressed('output/cpdd', cdf=cdf, mins=mins, maxs=maxs, avgs=avgs,
+print(f'  Done.\nSaving results...', flush=True)
+np.savez_compressed('npz/cpdd', cdf=cdf, mins=mins, maxs=maxs, avgs=avgs,
                     stds=stds)
