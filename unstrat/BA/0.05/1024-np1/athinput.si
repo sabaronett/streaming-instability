@@ -1,0 +1,82 @@
+<comment>
+problem         = streaming_instability
+reference       = 
+configure       = --prob=streaming_instability -p --eos=isothermal --nghost=3 -hdf5 -h5double -mpi
+
+<job>
+problem_id      = SI                   # problem ID: output file basename
+
+<outputp>
+file_type       = bin                  # binary data dump
+dt              = 1.0                  # time increment between outputs
+
+<output1>
+file_type       = hdf5                 # HDF5 data dump
+variable        = prim                 # output variables
+dt              = 1.0                  # time increment between outputs
+
+<output2>
+file_type       = hdf5                 # HDF5 data dump
+variable        = rhop                 # output variables
+dt              = 0.05                 # time increment between outputs
+
+<output3>
+file_type       = hst                  # history data dump
+dt              = 0.1                  # time increment between outputs
+
+<output4>
+file_type       = rst                  # restart file
+dt              = 10.0                 # time increment between outputs
+
+<time>
+cfl_number      = 0.4                  # Courant, Friedrichs, & Lewy No.
+nlim            = -1                   # cycle limit
+tlim            = 200                  # time limit / T (orbital period)
+integrator      = vl2                  # time integration algorithm
+ncycle_out      = 50                   # std out timestep
+xorder          = 3                    # spatial reconstruction (3=PPM)
+
+<mesh>
+nx1             = 1024                 # No. zones in X1-dir (x, radial)
+x1min           = -1.0                 # minimum value of X1
+x1max           =  1.0                 # maximum value of X1
+ix1_bc          = periodic             # Inner-X1 boundary condition flag
+ox1_bc          = periodic             # Outer-X1 boundary condition flag
+
+nx2             = 1024                 # No. zones in X2-dir (z, vertical)
+x2min           = -1.0                 # minimum value of X2
+x2max           =  1.0                 # maximum value of X2
+ix2_bc          = periodic             # Inner-X2 boundary condition flag
+ox2_bc          = periodic             # Outer-X2 boundary condition flag
+
+nx3             = 1                    # No. zones in X3-dir (y, azimuthal)
+x3min           = -1.0                 # minimum value of X3
+x3max           =  1.0                 # maximum value of X3
+ix3_bc          = periodic             # Inner-X3 boundary condition flag
+ox3_bc          = periodic             # Outer-X3 boundary condition flag
+
+num_threads     = 1                    # maximum number of OMP threads
+
+<meshblock>
+nx1             = 32                   # No. zones per mesh block in X1-dir
+nx2             = 32                   # No. zones per mesh block in X2-dir
+nx3             = 1                    # No. zones per mesh block in X3-dir
+
+<hydro>
+iso_sound_speed = 6.28318530717958648  # isothermal sound speed
+nu2mesh         = 0.02                 # mesh hyper-diffusion coefficient
+
+<particles>
+cfl_par         = 0.2
+variable_taus   = false
+taus0           = 0.159154943091895336 # friction time, τ_f
+backreaction    = true                 # back reaction to the gas drag
+
+<problem>
+npx1            = 1024                 # Number of particles in X1-dir
+npx2            = 1024                 # Number of particles in X2-dir
+npx3            = 1                    # Number of particles in X3-dir
+omega           = 6.28318530717958648  # local Keplerian angular frequency
+epsilon         = 0.2                  # dust-to-gas density ratio
+duy0            = 0.05                 # radial pressure gradient, Π
+randparpos      = true
