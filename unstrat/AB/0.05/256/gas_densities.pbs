@@ -1,0 +1,8 @@
+#PBS -j oe
+#PBS -k oed
+#PBS -l select=1:ncpus=1:model=rom_ait
+#PBS -l walltime=0:05:00
+#PBS -m abe
+#PBS -N AB-Pi0.05-256_gas_densities
+
+python ../../../scripts/gas_densities.py 5 240 0.015 # t_sat/T, bins, lim
