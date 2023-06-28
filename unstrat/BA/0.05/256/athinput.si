@@ -31,7 +31,7 @@ dt              = 10.0                 # time increment between 10 outputs
 <time>
 cfl_number      = 0.4                  # Courant, Friedrichs, & Lewy No.
 nlim            = -1                   # cycle limit
-tlim            = 100                  # time limit / T (orbital period)
+tlim            = 200                  # time limit / T (orbital period)
 integrator      = vl2                  # time integration algorithm
 ncycle_out      = 50                   # std out timestep
 xorder          = 3                    # spatial reconstruction (3=PPM)
