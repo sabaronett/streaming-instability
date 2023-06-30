@@ -1,8 +1,8 @@
 #PBS -j oe
 #PBS -k oed
 #PBS -l select=1:ncpus=1:model=rom_ait
-#PBS -l walltime=4:00:00
+#PBS -l walltime=0:05:00
 #PBS -m abe
 #PBS -N AB-Pi0.01-1024_avgRs
 
-python ../../../scripts/autocorrelations/avgRs.py 5 # t_sat/T
+python ../../../scripts/autocorrelations/avgRs.py 15 # t_sat/T
