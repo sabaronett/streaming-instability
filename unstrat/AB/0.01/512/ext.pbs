@@ -1,0 +1,8 @@
+#PBS -j oe
+#PBS -k oed
+#PBS -l select=7:ncpus=40:mpiprocs=40:model=cas_ait
+#PBS -l walltime=2:00:00
+#PBS -m abe
+#PBS -N AB-Pi0.01-512_ext
+
+mpiexec -n 256 $ATHENA_DUST -i athinput.si -r SI.final.rst time/tlim=20 -t 1:55:00
