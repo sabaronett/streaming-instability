@@ -6,23 +6,27 @@ configure       = --prob=streaming_instability -p --eos=isothermal --nghost=3 -h
 <job>
 problem_id      = SI                   # problem ID: output file basename
 
+<outputp>
+file_type       = bin                  # binary data dump
+dt              = 1.0                  # time increment between outputs
+
 <output1>
 file_type       = hdf5                 # HDF5 data dump
 variable        = prim                 # output variables
-dt              = 1.0                  # time increment between 100 outputs
+dt              = 1.0                  # time increment between outputs
 
 <output2>
 file_type       = hdf5                 # HDF5 data dump
 variable        = rhop                 # output variables
-dt              = 0.05                 # time increment between 2000 outputs
+dt              = 0.05                 # time increment between outputs
 
 <output3>
 file_type       = hst                  # history data dump
-dt              = 0.1                  # time increment between 1000 outputs
+dt              = 0.1                  # time increment between outputs
 
 <output4>
 file_type       = rst                  # restart file
-dt              = 10.0                 # time increment between 10 outputs
+dt              = 5.0                  # time increment between outputs
 
 <time>
 cfl_number      = 0.4                  # Courant, Friedrichs, & Lewy No.
@@ -33,13 +37,13 @@ ncycle_out      = 50                   # std out timestep
 xorder          = 3                    # spatial reconstruction (3=PPM)
 
 <mesh>
-nx1             = 512                 # No. zones in X1-dir (x, radial)
+nx1             = 512                  # No. zones in X1-dir (x, radial)
 x1min           = -1.0                 # minimum value of X1
 x1max           =  1.0                 # maximum value of X1
 ix1_bc          = periodic             # Inner-X1 boundary condition flag
 ox1_bc          = periodic             # Outer-X1 boundary condition flag
 
-nx2             = 512                 # No. zones in X2-dir (z, vertical)
+nx2             = 512                  # No. zones in X2-dir (z, vertical)
 x2min           = -1.0                 # minimum value of X2
 x2max           =  1.0                 # maximum value of X2
 ix2_bc          = periodic             # Inner-X2 boundary condition flag
