@@ -1,7 +1,7 @@
 #PBS -j oe
 #PBS -k oed
 #PBS -l select=1:ncpus=1:model=rom_ait
-#PBS -l walltime=2:00:00
+#PBS -l walltime=12:00:00
 #PBS -m abe
 #PBS -N BA-Pi0.01-1024_vid
 
