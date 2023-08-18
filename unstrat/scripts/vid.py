@@ -6,7 +6,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-02-08
-# Updated: 2023-07-03
+# Updated: 2023-08-18
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -24,7 +24,7 @@ if athinput['problem']['epsilon'] == 0.2:
     case, vmin, vmax = 'BA', 2e-2, 2e0
 res, dpi = athinput['mesh']['nx1'], 450    # 2160p (4K) default
 if res < 2048: dpi = 225                   # 1080p for lower resolution runs
-elif res == 4096: dpi = 900                # 4320p (8K)
+# elif res == 4096: dpi = 900                # 4320p (8K)
 c_s = athinput['hydro']['iso_sound_speed']
 Omega = athinput['problem']['omega']
 Pi = athinput['problem']['duy0']
