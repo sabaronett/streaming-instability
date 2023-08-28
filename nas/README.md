@@ -87,7 +87,7 @@ where `XX` is the ID of the server initiated earlier.
 
 ### [Configure](https://github.com/PrincetonUniversity/athena/wiki/Configuring)
 1. ```bash
-   pfeXX:~> ./configure.py --prob=streaming_instability -p --eos=isothermal --nghost=3 -mpi -hdf5 -h5double --cxx=icpc --mpiccmd="icpc -lmpi -lmpi++" --cflag="-xCORE-AVX512"
+   pfeXX:~> ./configure.py --prob=streaming_instability -p --eos=isothermal --nghost=3 -mpi -hdf5 -h5double --cxx=icpc --mpiccmd="icpc -lmpi -lmpi++" --cflag="-O3 -axCORE-AVX512,CORE-AVX2 -xAVX"
    ```
 2. Manually remove `-xhost` from `athena/Makefile`, under
    ```Makefile
