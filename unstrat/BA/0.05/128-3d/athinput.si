@@ -8,15 +8,10 @@ problem_id      = SI                   # problem ID: output file basename
 
 <output1>
 file_type       = hdf5                 # HDF5 data dump
-variable        = rho                  # output variables
+variable        = prim                 # output variables
 dt              = 0.05                 # time increment between outputs
 
 <output2>
-file_type       = hdf5                 # HDF5 data dump
-variable        = rhop                 # output variables
-dt              = 0.05                 # time increment between outputs
-
-<output3>
 file_type       = hst                  # history data dump
 dt              = 0.1                  # time increment between outputs
 
