@@ -3,6 +3,7 @@
 ## File Transfers
 
 ### Intra-enclave (between two NAS hosts) with [Shift Transfer Tool](https://www.nas.nasa.gov/hecc/support/kb/shift-transfer-tool-overview_300.html)
+
 ```bash
 lfeX:~> shiftc --hosts=8 /nobackup/$USERNAME/dir ~/
 ```
@@ -13,6 +14,7 @@ lfeX:~> shiftc --hosts=8 --create-tar /nobackup/$USERNAME/../athdf/ ./athdf.tar
 
 
 ### [Secure Unattended Proxy (SUP)](https://www.nas.nasa.gov/hecc/support/kb/entry/145)
+
 1. Start SUP on local (remote) host:
 ```bash
 $ eval `sup -s bash -u $USERNAME -ols=--color=always`
@@ -32,6 +34,7 @@ $ sup shiftc -r lfe:/nobackup/ /mnt/c/Users/xzele/Downloads/sup/
 
 
 ## [Archiving to Lou](https://www.nas.nasa.gov/hecc/support/kb/using-shift-for-transfers-and-tar-operations-between-two-nas-hosts_513.html)
+
 - Check quota status:
 ```bash
 lfs quota -h -u $USERNAME /nobackupp12
@@ -53,6 +56,7 @@ lfeX:/nobackup/$USERNAME$ shiftc --hosts=8 --create-tar --index-tar github/.../d
 ## [PBS](https://www.nas.nasa.gov/hecc/support/kb/running-jobs-with-pbs-121/)
 
 ### [Batch Jobs](https://www.nas.nasa.gov/hecc/support/kb/sample-pbs-script-for-pleiades_190.html)
+
 - See [`sample.pbs`](/nas/sample.pbs).
 - [Continuous restarts](https://www.nas.nasa.gov/hecc/support/kb/commonly-used-qsub-command-options_175.html):
 ```bash
@@ -61,6 +65,7 @@ pfeXX:~> qsub -W depend=afterok:[job_id.server_name].nas.nasa.gov [script].pbs
 
 
 ### Interactive Jobs
+
 Using [VNC Xterm](https://www.nas.nasa.gov/hecc/support/kb/vnc-a-faster-alternative-to-x11_257.html): 
 1. Start VNC server on PFE:
 ```bash
@@ -86,6 +91,9 @@ where `XX` is the ID of the server initiated earlier.
 ## [Athena++](https://github.com/PrincetonUniversity/athena/wiki)
 
 ### [Configure](https://github.com/PrincetonUniversity/athena/wiki/Configuring)
+
+The following compilation command and flags at the end [generate code for any processor type](https://www.nas.nasa.gov/hecc/support/kb/recommended-compiler-options_99.html#:~:text=Generate%20Code%20for%20Any%20Processor%20Type):
+
 1. ```bash
    pfeXX:~> ./configure.py --prob=streaming_instability -p --eos=isothermal --nghost=3 -mpi -hdf5 -h5double --cxx=icpc --mpiccmd="icpc -lmpi -lmpi++" --cflag="-O3 -axCORE-AVX512,CORE-AVX2 -xAVX"
    ```
@@ -99,11 +107,12 @@ where `XX` is the ID of the server initiated earlier.
 
 ### [Compile](https://github.com/PrincetonUniversity/athena/wiki/Compiling)
 
-#### On Compute Node ([Interactive Jobs](#interactive-jobs))
-Parallel compilation on a single Electra Broadwell node takes less than 6 minutes.
+#### In Parallel On a Compute Node ([Interactive Jobs](#interactive-jobs))
+
+Parallel compilation (e.g., on a single Electra Broadwell node):
 1. Request an interactive node with
    ```bash
-   qsub -I -lselect=1:ncpus=28:model=bro_ele,walltime=0:10:00 -q devel
+   qsub -I -lselect=1:ncpus=28:model=bro_ele,walltime=1:00:00 -q devel
    ```
 2. Navigate to Athena++'s root, then
    ```bash
@@ -113,6 +122,7 @@ Parallel compilation on a single Electra Broadwell node takes less than 6 minute
 
 
 #### On Pleiades front end (PFE)
+
 ```bash
 $ make -j 2
 ```
@@ -121,6 +131,7 @@ $ make -j 2
 ## Local Commands
 
 ### Visit
+
 - In local directory
   ```bash
   visit -np 4 -sessionfile <fname>
