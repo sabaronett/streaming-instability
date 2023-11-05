@@ -29,4 +29,4 @@ for i, output in enumerate(outputs):
     print('  {:.2%}'.format(i/len(outputs)), flush=True)
 
 print(f'  Done.\nSaving results...', flush=True)
-np.savez_compressed('npz/rhopmax', rhopmax=rhopmax, t=t)
+np.savez_compressed('npz/time_series_rhopmax', rhopmax=rhopmax, t=t)
