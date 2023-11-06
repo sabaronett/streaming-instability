@@ -6,7 +6,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2023-11-05
-# Updated: 2023-11-05
+# Updated: 2023-11-06
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -24,7 +24,7 @@ print(f'Compiling data...', flush=True)
 
 for i, output in enumerate(outputs):
     athdf = athena_read.athdf(output)
-    rhopmax.append(athdf['rhop'].max)
+    rhopmax.append(np.max(athdf['rhop']))
     t.append(athdf['Time'])
     print('  {:.2%}'.format(i/len(outputs)), flush=True)
 
