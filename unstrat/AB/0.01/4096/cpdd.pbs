@@ -5,4 +5,4 @@
 #PBS -m abe
 #PBS -N AB-Pi0.01-4096_cpdd
 
-python ../../../scripts/cpdd.py 3 # t_sat/T
+python ../../../scripts/cpdd.py 15 # t_sat/T
