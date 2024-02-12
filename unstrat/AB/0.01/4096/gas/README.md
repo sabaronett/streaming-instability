@@ -3,14 +3,14 @@
 |Created| 2024-02-12         |
 |Updated| 2024-02-12         |
 
-# 'AB/0.01/2048'
+# 'AB/0.01/4096'
   - Original parameters from Johansen & Youdin (2007)
     - $\tau_s = 0.1$
     - Dust-to-gas density ratio $\epsilon = 1.0$
     - Radial pressure gradient $\Pi = 0.01$
     - 2D axisymmetric unstratified shearing box
     - $L_x \times L_z = 0.1^2 H_g^2$
-  - Resolution: 2048 x 2048 cells
+  - Resolution: 4096 x 4096 cells
   - Code units:
     - Length:  $H_g$    (gas scale height)
     - Time:    $T$      (orbital period)

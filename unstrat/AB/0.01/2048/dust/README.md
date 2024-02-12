@@ -1,29 +1,28 @@
 |Author | Stanley A. Baronett|
 |-------|--------------------|
-|Created| 2022-06-17         |
-|Updated| 2022-06-17         |
+|Created| 2024-02-12         |
+|Updated| 2024-02-12         |
 
-# Run 'AB/0.05'
-  - Originally run name from Johansen & Youdin (2007)
-    - St = 0.1
-    - Dust-to-gas density ratio, epsilon = 1.0
-    - Radial pressure gradient, Pi = 0.01
-    - 2D (axisymmetric), unstratified shearing box
-    - L_x x L_z = 0.1 H x 0.1 H
+# 'AB/0.01/2048'
+  - Original parameters from Johansen & Youdin (2007)
+    - $\tau_s = 0.1$
+    - Dust-to-gas density ratio $\epsilon = 1.0$
+    - Radial pressure gradient $\Pi = 0.01$
+    - 2D axisymmetric unstratified shearing box
+    - $L_x \times L_z = 0.1^2 H_g^2$
   - Resolution: 2048 x 2048 cells
   - Code units:
-    - Length:  H     (gas scale height)
-    - Time:    T     (orbital period)
-    - Density: rho_g (gas density)
-  - Dust density evolution video: https://youtu.be/J_SZ8LtBH1M
+    - Length:  $H_g$    (gas scale height)
+    - Time:    $T$      (orbital period)
+    - Density: $\rho_g$ (gas density)
 
 ## File Contents
-- 'SI.pout.00001.txt' (ASCII)
-  - Lagrangian particle data snapshot of the dust at t = 10 T (orbits)
+- '/SI.pout.00200.txt' (ASCII)
+  - Lagrangian particle data snapshot
   - Columns:
     1. xp
-    2. yp
-    3. zp
+    2. zp
+    3. yp
     4. vpx
-    5. vpy
-    6. vpz
+    5. vpz
+    6. vpy
