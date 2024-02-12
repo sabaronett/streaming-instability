@@ -1,24 +1,23 @@
 |Author | Stanley A. Baronett|
 |-------|--------------------|
-|Created| 2022-06-06         |
-|Updated| 2022-06-13         |
+|Created| 2024-02-12         |
+|Updated| 2024-02-12         |
 
-# Run 'AB/0.05'
-  - Originally run name from Johansen & Youdin (2007)
-    - St = 0.1
-    - Dust-to-gas density ratio, epsilon = 1.0
-    - Radial pressure gradient, Pi = 0.05
-    - 2D (axisymmetric), unstratified shearing box
-    - L_x x L_z = 0.1 H x 0.1 H
+# 'AB/0.05/2048'
+  - Original parameters from Johansen & Youdin (2007)
+    - $\tau_s = 0.1$
+    - Dust-to-gas density ratio $\epsilon = 1.0$
+    - Radial pressure gradient $\Pi = 0.01$
+    - 2D axisymmetric unstratified shearing box
+    - $L_x \times L_z = 0.1^2 H_g^2$
   - Resolution: 2048 x 2048 cells
   - Code units:
-    - Length:  H     (gas scale height)
-    - Time:    T     (orbital period)
-    - Density: rho_g (gas density)
-  - Dust density evolution video: https://youtu.be/vVN1x2Q-gkU
+    - Length:  $H_g$    (gas scale height)
+    - Time:    $T$      (orbital period)
+    - Density: $\rho_g$ (gas density)
 
 ## File Contents
-The following files are complete grid snapshot of the gas at t = 10 T (orbits)
+The following gas related snapshots are taken at $t = 10T$
 - 'rhog.txt': gas density
 - 'vgx.txt': radial gas velocity
 - 'vgy.txt': azimuthal gas velocity
