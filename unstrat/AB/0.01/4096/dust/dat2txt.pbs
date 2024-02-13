@@ -1,7 +1,0 @@
-#PBS -j oe
-#PBS -l select=1:ncpus=1:model=rom_ait
-#PBS -l walltime=1:00:00
-#PBS -m abe
-#PBS -N AB-Pi0.01-4096_dat2txt
-
-python ../../../../scripts/dat2txt.py ../dat/SI.pout.00200.dat

@@ -1,0 +1,7 @@
+#PBS -j oe
+#PBS -l select=1:ncpus=1:model=rom_ait
+#PBS -l walltime=0:10:00
+#PBS -m abe
+#PBS -N AB-Pi0.01-4096_athdf_dust2txt
+
+python ../../../../scripts/athdf_dust2txt.py ../athdf/SI.out1.00200.athdf
