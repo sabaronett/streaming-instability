@@ -1,7 +1,7 @@
 |Author | Stanley A. Baronett|
 |-------|--------------------|
 |Created| 2024-02-12         |
-|Updated| 2024-02-12         |
+|Updated| 2024-02-13         |
 
 # 'AB/0.05/512'
   - Original parameters from Johansen & Youdin (2007)
@@ -17,8 +17,8 @@
     - Density: $\rho_g$ (gas density)
 
 ## File Contents
-The following gas related snapshots are taken at $t = 10T$
-- 'rhog.txt': gas density
-- 'vgx.txt': radial gas velocity
-- 'vgy.txt': azimuthal gas velocity
-- 'vgz.txt': vertical gas velocity
+The following gas related snapshots are appended with the simulation time at which they were taken (e.g., $t = 20.0T$)
+- 'rhog_20.0T.txt': gas density
+- 'vgx_20.0T.txt': radial gas velocity
+- 'vgy_20.0T.txt': azimuthal gas velocity
+- 'vgz_20.0T.txt': vertical gas velocity

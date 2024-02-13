@@ -1,7 +1,7 @@
 |Author | Stanley A. Baronett|
 |-------|--------------------|
 |Created| 2024-02-12         |
-|Updated| 2024-02-12         |
+|Updated| 2024-02-13         |
 
 # 'AB/0.05/2048'
   - Original parameters from Johansen & Youdin (2007)
@@ -17,7 +17,8 @@
     - Density: $\rho_g$ (gas density)
 
 ## File Contents
-- '/SI.pout.00100.txt' (ASCII)
+The following dust related snapshot is appended with the simulation time at which it was taken (e.g., $t = 20.0T$).
+- 'dust_20.0T.txt' (ASCII)
   - Lagrangian particle data snapshot
   - Columns:
     1. xp
