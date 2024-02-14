@@ -17,13 +17,8 @@
     - Density: $\rho_g$ (gas density)
 
 ## File Contents
-The following dust related snapshot is appended with the simulation time at which it was taken (e.g., $t = 20.0T$).
-- 'dust_20.0T.txt' (ASCII)
-  - Lagrangian particle data snapshot
-  - Columns:
-    1. xp
-    2. zp
-    3. yp
-    4. vpx
-    5. vpz
-    6. vpy
+The following dust related snapshots are appended with the simulation time at which they were taken (e.g., $t = 20.0T$)
+- 'rhop_20.0T.txt': dust density
+- 'vpx_20.0T.txt': radial dust velocity
+- 'vpy_20.0T.txt': azimuthal dust velocity
+- 'vpz_20.0T.txt': vertical dust velocity
