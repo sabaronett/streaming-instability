@@ -22,7 +22,7 @@ old*/
 tabs/
 test/
 scratch.*
-temp.py
+*temp*
 *.code-workspace
 *.local.py
 *.old.*
