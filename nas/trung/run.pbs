@@ -1,7 +1,0 @@
-#PBS -lselect=11:ncpus=24:mpiprocs=24:model=has
-#PBS -m abe
-#PBS -M tha@flatironinstitute.org
-#PBS -N M87_mesh
-#PBS -q devel
-
-mpiexec -n 256 ~/athena-dust/bin/athena.m87_jetclean -i athinput.m87-smr-tst -t 00:05:00
