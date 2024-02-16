@@ -1,8 +1,0 @@
-#PBS -j oe
-#PBS -l select=103:ncpus=40:mpiprocs=40:model=sky_ele
-#PBS -l walltime=0:05:00
-#PBS -m abe
-#PBS -N AB-Pi0.10-2048_rst
-#PBS -q debug
-
-mpiexec -n 4096 $ATHENA_DUST -t 0:04:00 -r SI.final.rst
