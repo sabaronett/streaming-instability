@@ -6,7 +6,6 @@
 
 # Data Analysis
 figs/
-output/
 *.mp4
 *.npz
 *.pdf
@@ -22,10 +21,16 @@ old*/
 tabs/
 test/
 scratch.*
+SI.*.hst
 *temp*
 *.code-workspace
 *.local.py
 *.old.*
+
+# PBS Output
+*.o*
+*.ER
+*.OU
 
 # VS Code
 .vscode/
