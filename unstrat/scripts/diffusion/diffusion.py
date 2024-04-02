@@ -6,13 +6,14 @@
 #
 # Author: Stanley A. Baronett, Chao-Chin Yang
 # Created: 2021-05-10
-# Last Modified: 2023-01-10
+# Last Modified: 2024-04-02
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
 import athena_read
 from dust import Diffusion, MultiSpecies
 import numpy as np
+import os
 
 # Get the stopping times, solid-to-gas ratios, and no. of outputs to process
 athinput = athena_read.athinput('athinput.si')
@@ -26,4 +27,5 @@ if sys.argv[1]: nout = int(sys.argv[1])
 # Find the displacement and the diffusion coefficient
 diff = Diffusion(athinput=athinput, nout=nout)
 dpx, dpy, dpz = diff.coefficient()
+os.makedirs('npz', exist_ok=True)
 np.savez_compressed(f'npz/dcoeff', taus=taus, dpx=dpx, dpy=dpy, dpz=dpz)
