@@ -18,7 +18,7 @@ dt              = 10                   # time increment between outputs
 
 <output3>
 file_type       = vtk                  # VTK data dump
-variable        = rho                  # output variables
+variable        = prim                 # output variables
 dt              = 0.005                # time increment between outputs
 
 <output4>
