@@ -7,7 +7,7 @@
 # Reference: https://stackoverflow.com/a/34195247
 #
 # Author: Stanley A. Baronett
-# Updated: 2023-06-07
+# Updated: 2024-04-15
 #==============================================================================
 
 echo "Organizing..."
@@ -47,6 +47,14 @@ if compgen -G "*.rst" > /dev/null; then
     if compgen -G "*.final.rst" > /dev/null; then
         cp -v *.final.rst rst/
     fi
+fi
+
+# Athena++ VisIt files
+if compgen -G "*.vtk" > /dev/null; then
+    if [[ ! -d vtk ]]; then
+        mkdir vtk
+    fi
+    mv -v *.vtk vtk/
 fi
 
 # Athena++ XDMF files (VisIt/ParaView)
