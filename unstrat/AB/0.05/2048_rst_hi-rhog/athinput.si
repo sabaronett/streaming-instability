@@ -17,7 +17,7 @@ variable        = rhop                 # output variables
 dt              = 10                   # time increment between outputs
 
 <output3>
-file_type       = vtk                  # VTK data dump
+file_type       = hdf5                 # VTK data dump
 variable        = prim                 # output variables
 dt              = 0.005                # time increment between outputs
 
