@@ -23,7 +23,7 @@ t_max = float(sys.argv[2])                   # [orbital period T]
 athinput = athena_read.athinput('athinput.si')
 problem_id = athinput['job']['problem_id']
 dt = athinput[f'output{out_no}']['dt']       # [T]
-i_max = int(t_max / dt)
+i_max = int(t_max/dt) + 1                    # account for initial output
 outputs = sorted(list(Path('athdf').glob(f'{problem_id}.out{out_no}.*.athdf')))
 os.makedirs('npz', exist_ok=True)
 
