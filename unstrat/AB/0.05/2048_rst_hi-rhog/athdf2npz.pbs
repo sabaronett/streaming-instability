@@ -3,6 +3,5 @@
 #PBS -l walltime=7:59:59
 #PBS -m abe
 #PBS -N AB-Pi0.05-2048_rst_hi-rhog_athdf2npz
-#PBS -q devel
 
 python ../../../scripts/athdf2npz.py 3 2 rho vel1 vel2 vel3
