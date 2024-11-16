@@ -3,6 +3,5 @@
 #PBS -l walltime=8:00:00
 #PBS -m abe
 #PBS -N AB-Pi0.01-4096_diffusion
-#PBS -W group_list=s2336
 
 python ../../../scripts/diffusion/diffusion.py 51 # nout
