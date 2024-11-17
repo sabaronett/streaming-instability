@@ -27,9 +27,9 @@ pfeXX:~> touch ~/.meshrc
 ```bash
 pfeXX:~> echo /nobackup/$USERNAME >> ~/.meshrc
 ```
-4. Execute local commands:
+4. Execute local [Shift command options](https://www.nas.nasa.gov/hecc/support/kb/shift-command-options_509.html):
 ```bash
-$ sup shiftc -r lfe:/nobackup/ /mnt/c/Users/xzele/Downloads/sup/
+$ sup shiftc -r --sync lfe:/nobackup/ /mnt/c/Users/xzele/Downloads/sup/
 ```
 
 
