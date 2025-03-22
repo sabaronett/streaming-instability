@@ -1,9 +1,8 @@
 #PBS -j oe
 #PBS -k oed
 #PBS -l select=1:ncpus=1:model=rom_ait
-#PBS -l walltime=12:00:00
+#PBS -l walltime=2:00:00
 #PBS -m abe
 #PBS -N BA-Pi0.01-2048_velocities
-#PBS -W group_list=s2563
 
 python ../../../scripts/velocities.py 150 240 6 # t_sat, bins, lim
