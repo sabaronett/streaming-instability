@@ -236,7 +236,7 @@ bin_max_rhopzs, bin_edges, binnumnber = stats.binned_statistic(vz_flat,
 print(f'  Done.\nSaving results...', flush=True)
 np.savez_compressed('npz/velocities', bin_edges=bin_edges,
                     # Gas
-                    avg_uxs=avg_uxs, avg_uys=avg_uyz, avg_uzs=avg_uzs,
+                    avg_uxs=avg_uxs, avg_uys=avg_uys, avg_uzs=avg_uzs,
                     std_uxs=std_uxs, std_uyz=std_uys, std_uzs=std_uzs,
                     bin_avg_uxs=bin_avg_uxs,
                     bin_avg_uys=bin_avg_uys,
