@@ -1,0 +1,8 @@
+#PBS -j oe
+#PBS -k oed
+#PBS -l select=1:ncpus=1:model=rom_ait
+#PBS -l walltime=1:00:00
+#PBS -m abe
+#PBS -N BA-Pi0.05-1024-np1-pe64_rhopmax
+
+python ../../../scripts/rhopmax.py
