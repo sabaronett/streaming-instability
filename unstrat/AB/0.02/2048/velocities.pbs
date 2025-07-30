@@ -4,5 +4,6 @@
 #PBS -l walltime=2:00:00
 #PBS -m abe
 #PBS -N AB-Pi0.02-2048_velocities
+#PBS -q debug
 
 python ../../../scripts/velocities.py 5 80 2 # t_sat, bins, lim
