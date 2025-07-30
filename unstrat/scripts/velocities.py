@@ -11,7 +11,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-12-01
-# Updated: 2025-03-22
+# Updated: 2025-07-30
 #===============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -118,6 +118,11 @@ bin_std_vzs = np.std(vz_hists, axis=0)
 bin_log_std_vxs = np.exp(np.std(np.log(vx_hists), axis=0))
 bin_log_std_vys = np.exp(np.std(np.log(vy_hists), axis=0))
 bin_log_std_vzs = np.exp(np.std(np.log(vz_hists), axis=0))
+# Center of mass (COM)
+tot_rho_stack = rho_stack + rhop_stack
+avg_com_ux = np.average((rho_stack*ux_stack + rhop_stack*vx_stack)/tot_rho_stack)
+avg_com_uy = np.average((rho_stack*uy_stack + rhop_stack*vy_stack)/tot_rho_stack)
+avg_com_uz = np.average((rho_stack*uz_stack + rhop_stack*vz_stack)/tot_rho_stack)
 
 print(f'  Done.\nComputing density statistics within each velocity bin...',
       flush=True)
@@ -237,7 +242,7 @@ print(f'  Done.\nSaving results...', flush=True)
 np.savez_compressed('npz/velocities', bin_edges=bin_edges,
                     # Gas
                     avg_uxs=avg_uxs, avg_uys=avg_uys, avg_uzs=avg_uzs,
-                    std_uxs=std_uxs, std_uyz=std_uys, std_uzs=std_uzs,
+                    std_uxs=std_uxs, std_uys=std_uys, std_uzs=std_uzs,
                     bin_avg_uxs=bin_avg_uxs,
                     bin_avg_uys=bin_avg_uys,
                     bin_avg_uzs=bin_avg_uzs,
@@ -303,4 +308,8 @@ np.savez_compressed('npz/velocities', bin_edges=bin_edges,
                     bin_min_rhopzs=bin_min_rhopzs,
                     bin_max_rhopxs=bin_max_rhopxs,
                     bin_max_rhopys=bin_max_rhopys,
-                    bin_max_rhopzs=bin_max_rhopzs)
+                    bin_max_rhopzs=bin_max_rhopzs,
+                    # Center of mass (COM)
+                    avg_com_ux=avg_com_ux,
+                    avg_com_uy=avg_com_uy,
+                    avg_com_uz=avg_com_uz)
