@@ -119,7 +119,7 @@ bin_log_std_vxs = np.exp(np.std(np.log(vx_hists), axis=0))
 bin_log_std_vys = np.exp(np.std(np.log(vy_hists), axis=0))
 bin_log_std_vzs = np.exp(np.std(np.log(vz_hists), axis=0))
 # Center of mass (COM)
-tot_rho_stack = rho_stack + rhop_stack
+tot_rho_stack = np.asarray(rho_stack) + np.asarray(rhop_stack)
 avg_com_ux = np.average((rho_stack*ux_stack + rhop_stack*vx_stack)/tot_rho_stack)
 avg_com_uy = np.average((rho_stack*uy_stack + rhop_stack*vy_stack)/tot_rho_stack)
 avg_com_uz = np.average((rho_stack*uz_stack + rhop_stack*vz_stack)/tot_rho_stack)
