@@ -39,6 +39,8 @@ ux_hists, uy_hists, uz_hists = [], [], []
 # Dust
 vx_stack, vy_stack, vz_stack, rhop_stack = [], [], [], []
 vx_hists, vy_hists, vz_hists = [], [], []
+# Center of mass (COM)
+com_ux_stack, com_uy_stack, com_uz_stack = [], [], []
 
 print(f'Stacking outputs...', flush=True)
 for i, output in enumerate(outputs):
@@ -53,6 +55,14 @@ for i, output in enumerate(outputs):
     vy_stack.append(athdf['vp3']/Pi/c_s)
     vz_stack.append(athdf['vp2']/Pi/c_s)
     rhop_stack.append(athdf['rhop'])
+    # Center of mass (COM)
+    mom_x = np.mean(athdf['rho']*athdf['vel1'] + athdf['rhop']*athdf['vp1'])
+    mom_y = np.mean(athdf['rho']*athdf['vel3'] + athdf['rhop']*athdf['vp3'])
+    mom_z = np.mean(athdf['rho']*athdf['vel2'] + athdf['rhop']*athdf['vp2'])
+    tot_rho = np.mean(athdf['rho'] + athdf['rhop'])
+    com_ux_stack.append(mom_x/tot_rho)
+    com_uy_stack.append(mom_y/tot_rho)
+    com_uz_stack.append(mom_z/tot_rho)
     print(f'  {(i + 1)/len(outputs):3.0%}', flush=True)
 
 print(f'  Done.\nComputing velocity histograms...', flush=True)
@@ -118,11 +128,6 @@ bin_std_vzs = np.std(vz_hists, axis=0)
 bin_log_std_vxs = np.exp(np.std(np.log(vx_hists), axis=0))
 bin_log_std_vys = np.exp(np.std(np.log(vy_hists), axis=0))
 bin_log_std_vzs = np.exp(np.std(np.log(vz_hists), axis=0))
-# Center of mass (COM)
-tot_rho_stack = np.asarray(rho_stack) + np.asarray(rhop_stack)
-avg_com_ux = np.average((rho_stack*ux_stack + rhop_stack*vx_stack)/tot_rho_stack)
-avg_com_uy = np.average((rho_stack*uy_stack + rhop_stack*vy_stack)/tot_rho_stack)
-avg_com_uz = np.average((rho_stack*uz_stack + rhop_stack*vz_stack)/tot_rho_stack)
 
 print(f'  Done.\nComputing density statistics within each velocity bin...',
       flush=True)
@@ -310,6 +315,6 @@ np.savez_compressed('npz/velocities', bin_edges=bin_edges,
                     bin_max_rhopys=bin_max_rhopys,
                     bin_max_rhopzs=bin_max_rhopzs,
                     # Center of mass (COM)
-                    avg_com_ux=avg_com_ux,
-                    avg_com_uy=avg_com_uy,
-                    avg_com_uz=avg_com_uz)
+                    com_ux_stack=com_ux_stack,
+                    com_uy_stack=com_uy_stack,
+                    com_uz_stack=com_uz_stack)
