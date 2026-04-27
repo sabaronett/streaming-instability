@@ -1,0 +1,7 @@
+#PBS -j oe
+#PBS -l select=2:ncpus=40:mpiprocs=40:model=cas_ait
+#PBS -l walltime=32:00:00
+#PBS -m abe
+#PBS -N As-np4
+
+mpiexec -n 64 $ATHENA_DUST -t 32:00:00 -i athinput.si
