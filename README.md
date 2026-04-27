@@ -6,7 +6,7 @@ Production input and output files, data analysis and plotting notebooks, and hig
 - [NumPy](https://numpy.org/)
 - [Matplotlib](https://matplotlib.org/)
 
-### Figures from [_Baronett et al. (2024)_](https://ui.adsabs.harvard.edu/abs/2024mnras.529..275b/abstract)
+### Figures from [Baronett et al. (2024)](https://ui.adsabs.harvard.edu/abs/2024mnras.529..275b/abstract)
 This repository contains Jupyter Notebooks under the [/ipynb/](https://github.com/sabaronett/streaming-instability/tree/main/ipynb) subdirectory used for data analysis and to generate most of the figures seen in [Baronett et al. (2024)](https://ui.adsabs.harvard.edu/abs/2024mnras.529..275b/abstract).
 
 ## Data Availability
