@@ -14,11 +14,13 @@ dt              = 10.0                 # time increment between outputs
 file_type       = hdf5                 # HDF5 data dump
 variable        = prim                 # output variables
 dt              = 1.0                  # time increment between outputs
+xdmf            = 0                    # disable XDMF output (VisIt)
 
 <output2>
 file_type       = hdf5                 # HDF5 data dump
 variable        = rhop                 # output variables
 dt              = 0.40                 # time increment between outputs
+xdmf            = 0                    # disable XDMF output (VisIt)
 
 <output3>
 file_type       = hst                  # history data dump
