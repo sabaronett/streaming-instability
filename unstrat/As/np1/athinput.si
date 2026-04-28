@@ -4,7 +4,7 @@ reference       =
 configure       = --prob=streaming_instability -p --eos=isothermal --nghost=3 -hdf5 -h5double -mpi
 
 <job>
-problem_id      = SI                   # problem ID: output file basename
+problem_id      = As                   # problem ID: output file basename
 
 <outputp>
 file_type       = bin                  # binary data dump
