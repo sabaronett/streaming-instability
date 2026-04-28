@@ -22,6 +22,11 @@ athinput = athena_read.athinput('athinput.si')
 case, vmin, vmax = 'AB', 1e-1, 1e1
 if athinput['problem']['epsilon'] == 0.2:
     case, vmin, vmax = 'BA', 2e-2, 2e0
+if athinput['job']['problem_id'] == 'As':
+    case, vmin, vmax = 'As', 1e-1, 1e1
+    npx = int(athinput['problem']['npx1']/athinput['mesh']['nx1'])
+    npz = int(athinput['problem']['npx2']/athinput['mesh']['nx2'])
+    np = npx*npz
 res, dpi = athinput['mesh']['nx1'], 450    # 2160p (4K) default
 if res < 2048: dpi = 225                   # 1080p for lower resolution runs
 # elif res == 4096: dpi = 900                # 4320p (8K)
@@ -67,7 +72,10 @@ def animate(i):
 
 # Compile and save animation
 print('Processing frames...', flush=True)
-title = f'{case}-Pi{Pi:.2f}-{res}'
+if case == 'As':
+    title = f'{case}-{np}'
+else:
+    title = f'{case}-Pi{Pi:.2f}-{res}'
 anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
 metadata = dict(title=(title+' Dust Density'), artist='Stanley A. Baronett')
 plt.rcParams['animation.ffmpeg_path']='/nasa/pkgsrc/sles12/2018Q3/bin/ffmpeg3'
