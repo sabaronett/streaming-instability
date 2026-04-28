@@ -5,4 +5,4 @@
 #PBS -m abe
 #PBS -N As-np4_vid
 
-python ../../../scripts/vid.py
+python ../../scripts/vid.py
