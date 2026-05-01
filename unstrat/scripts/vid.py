@@ -24,9 +24,9 @@ if athinput['problem']['epsilon'] == 0.2:
     case, vmin, vmax = 'BA', 2e-2, 2e0
 if athinput['job']['problem_id'] == 'As':
     case, vmin, vmax = 'As', 1e-1, 1e1
-    npx = int(athinput['problem']['npx1']/athinput['mesh']['nx1'])
-    npz = int(athinput['problem']['npx2']/athinput['mesh']['nx2'])
-    np = npx*npz
+    n_px = int(athinput['problem']['npx1']/athinput['mesh']['nx1'])
+    n_pz = int(athinput['problem']['npx2']/athinput['mesh']['nx2'])
+    n_p = n_px*n_pz
 res, dpi = athinput['mesh']['nx1'], 450    # 2160p (4K) default
 if res < 2048: dpi = 225                   # 1080p for lower resolution runs
 # elif res == 4096: dpi = 900                # 4320p (8K)
@@ -73,7 +73,7 @@ def animate(i):
 # Compile and save animation
 print('Processing frames...', flush=True)
 if case == 'As':
-    title = f'{case}-{np}'
+    title = f'{case}-{n_p}'
 else:
     title = f'{case}-Pi{Pi:.2f}-{res}'
 anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
