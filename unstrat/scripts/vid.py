@@ -73,7 +73,7 @@ def animate(i):
 # Compile and save animation
 print('Processing frames...', flush=True)
 if case == 'As':
-    title = f'{case}-{n_p}'
+    title = f'{case}-np{n_p}-{res}'
 else:
     title = f'{case}-Pi{Pi:.2f}-{res}'
 anim = animation.FuncAnimation(fig, animate, frames=len(times), repeat=False)
