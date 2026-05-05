@@ -19,11 +19,11 @@ from pathlib import Path
 
 # Collect Athena++ I/O, set plotting configurations
 athinput = athena_read.athinput('athinput.si')
-case, vmin, vmax = 'AB', 1e-1, 1e1
+case, vmin, vmax = 'AB', 0.1, 10
 if athinput['problem']['epsilon'] == 0.2:
-    case, vmin, vmax = 'BA', 2e-2, 2e0
+    case, vmin, vmax = 'BA', 0.02, 2
 if athinput['job']['problem_id'] == 'As':
-    case, vmin, vmax = 'As', 1e-1, 1e1
+    case, vmin, vmax = 'As', 0.1, 10
     n_px = int(athinput['problem']['npx1']/athinput['mesh']['nx1'])
     n_pz = int(athinput['problem']['npx2']/athinput['mesh']['nx2'])
     n_p = n_px*n_pz
