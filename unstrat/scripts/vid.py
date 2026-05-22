@@ -6,7 +6,7 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-02-08
-# Updated: 2026-05-04
+# Updated: 2026-05-22
 #==============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
@@ -23,7 +23,7 @@ case, vmin, vmax = 'AB', 0.1, 10
 if athinput['problem']['epsilon'] == 0.2:
     case, vmin, vmax = 'BA', 0.02, 2
 if athinput['job']['problem_id'] == 'As':
-    case, vmin, vmax = 'As', 0.1, 10
+    case, vmin, vmax = 'As', 0.01, 1
     n_px = int(athinput['problem']['npx1']/athinput['mesh']['nx1'])
     n_pz = int(athinput['problem']['npx2']/athinput['mesh']['nx2'])
     n_p = n_px*n_pz
