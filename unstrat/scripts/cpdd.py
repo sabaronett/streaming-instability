@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#==============================================================================
+#===============================================================================
 # cpdd.py
 #
 # Computes and saves the time-averaged cumulative particle density distribution
@@ -8,12 +8,13 @@
 #
 # Author: Stanley A. Baronett
 # Created: 2022-02-08
-# Updated: 2023-06-07
-#==============================================================================
+# Updated: 2026-05-22
+#===============================================================================
 import sys
 sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
 import athena_read
 import numpy as np
+import os
 from pathlib import Path
 
 # Collect Athena++ inputs, outputs, and sim constants
@@ -45,5 +46,7 @@ stds = np.exp(std_log)
 cdf = np.linspace(1, 0, avgs.size, endpoint=False)
 
 print(f'  Done.\nSaving results...', flush=True)
+if not os.path.exists('npz'):
+    os.makedirs('npz')
 np.savez_compressed('npz/cpdd', cdf=cdf, mins=mins, maxs=maxs, avgs=avgs,
                     stds=stds)
