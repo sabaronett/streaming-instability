@@ -2,6 +2,6 @@
 #PBS -l select=1:ncpus=1:model=rom_ait
 #PBS -l walltime=1:00:00
 #PBS -m abe
-#PBS -N As-np4-512_cpdd
+#PBS -N As-np9-512_cpdd
 
 python ../../../scripts/cpdd.py 850 # t_sat / T
