@@ -9,7 +9,7 @@
 # Updated: 2026-08-07
 #===============================================================================
 import sys
-sys.path.insert(0, '/home/stanley/bitbucket/ccyang/athena-dust/vis/python')
+sys.path.insert(0, '/home6/sbaronet/athena-dust/vis/python')
 import athena_read
 from matplotlib import animation
 import matplotlib as mpl
