@@ -21,7 +21,7 @@ from pathlib import Path
 
 # Load data and compute normalization factors
 athinput = athena_read.athinput('athinput.si')
-case, vmin, vmax = 'AB', 0.1, 10
+case, vmin, vmax, drhog = 'AB', 0.1, 10, 1e-3
 if athinput['problem']['epsilon'] == 0.2:
     case, vmin, vmax = 'BA', 0.02, 2
 if athinput['job']['problem_id'] == 'As':
@@ -29,7 +29,6 @@ if athinput['job']['problem_id'] == 'As':
     n_px = int(athinput['problem']['npx1']/athinput['mesh']['nx1'])
     n_pz = int(athinput['problem']['npx2']/athinput['mesh']['nx2'])
     n_p = n_px*n_pz
-    drhog = 1e-3
 res, dpi = athinput['mesh']['nx1'], 450    # 2160p (4K) default
 if res < 2048: dpi = 225                   # 1080p for lower resolution runs
 # elif res == 4096: dpi = 900                # 4320p (8K)
@@ -64,13 +63,13 @@ cb_rhog.set_label(r'$\rho_\mathrm{g}/\rho_\mathrm{g,0}$')
 
 # Dust density field
 img_rhop = axs[1].pcolormesh(xv, zv, np.clip(rhops[0], vmin, vmax),
-                              norm=colors.LogNorm(), cmap='cividis')
+                             norm=colors.LogNorm(), cmap='cividis')
 cb_rhop = fig.colorbar(img_rhop, ax=axs[1], location='top')
 cb_rhop.set_label(r'$\rho_\mathrm{p}/\rho_\mathrm{g,0}$')
 
 # Format plot
-fig.suptitle(rf'Model {case} ({res}$^2$, $n_\mathrm{{p}}=${n_p}),'\
-             +f'$t/T={times[0]:.1f}$')
+fig.suptitle(rf'Model {case} ({res}$^2$, $n_\mathrm{{p}}=${n_p}), '\
+             +f'$t/T={times[0]:.0f}$')
 axs[0].set_xticks([-0.1, -0.05, 0, 0.05, 0.1])
 axs[0].set_yticks([-0.1, -0.05, 0, 0.05, 0.1])
 axs[0].set(ylabel=r'$z/H_\mathrm{g}$')
@@ -86,11 +85,11 @@ def animate(i):
         i : int
             Frame number.
     """
-    fig.suptitle(rf'Model {case} ({res}$^2$, $n_\mathrm{{p}}=${n_p}),'\
-                 +rf'$t/T={times[i]:.1f}$')
+    fig.suptitle(rf'Model {case} ({res}$^2$, $n_\mathrm{{p}}=${n_p}), '\
+                 +rf'$t/T={times[i]:.0f}$')
     img_rhog.set_array(rhogs[i].ravel())
-    img_rhop.set_array(rhops[i].ravel())
-    print(f'  frame {i:4n}', flush=True)
+    img_rhop.set_array(np.clip(rhops[i], vmin, vmax).ravel())
+    print(f'  Frame {i:4n}', flush=True)
 
 # Compile and save animation
 print('Processing frames...', flush=True)
