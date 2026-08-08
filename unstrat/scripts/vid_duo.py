@@ -89,7 +89,6 @@ def animate(i):
                  +rf'$t/T={times[i]:.0f}$')
     img_rhog.set_array(rhogs[i].ravel())
     img_rhop.set_array(np.clip(rhops[i].ravel(), vmin, vmax))
-    img_rhop.set_clim(vmin, vmax)
     print(f'  Frame {i:4n}', flush=True)
 
 # Compile and save animation
