@@ -88,7 +88,8 @@ def animate(i):
     fig.suptitle(rf'Model {case} ({res}$^2$, $n_\mathrm{{p}}=${n_p}), '\
                  +rf'$t/T={times[i]:.0f}$')
     img_rhog.set_array(rhogs[i].ravel())
-    img_rhop.set_array(np.clip(rhops[i], vmin, vmax).ravel())
+    img_rhop.set_array(np.clip(rhops[i].ravel(), vmin, vmax))
+    img_rhop.set_clim(vmin, vmax)
     print(f'  Frame {i:4n}', flush=True)
 
 # Compile and save animation
